@@ -1,8 +1,8 @@
-# Part 3: Build a CRUD App
+# Build a CRUD App
 
 ## Summary
 
-In Part 3 of the assessment, we'll demonstrate our proficiency in building
+In this part of the assessment, we'll demonstrate our proficiency in building
 web-stack applications: user authentication, associations, validations,
 controllers, views, etc. Even a little bit of CSS.
 
@@ -229,6 +229,4 @@ highest of all the bidders.
 
 ## Conclusion
 
-Part-3 wraps up the assessment.  If you haven't already done so, commit your
-changes.  Please wait until the end of the assessment period to submit your
-solution.
+If you haven't already done so, commit your changes.  Please wait until the end of the assessment period to submit your solution.
