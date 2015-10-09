@@ -2,6 +2,8 @@
 ##### INDEX #####
 get '/' do
 
+  @auction_items = Item.all
+
   erb :index
 end
 
@@ -28,7 +30,7 @@ post '/register' do
   user = User.new(params[:user])
   if user.save
     session[:email] = user.email
-    redirect '/'
+    redirect "/profile"
   else
     # session[:error] = user.errors.messages
     redirect '/register'
@@ -42,6 +44,14 @@ post '/logout' do
   redirect '/'
 end
 
+##### PROFILE PAGE #####
+
+get '/profile' do
+
+  erb :profile
+end
+
 ##### CREATE ITEMS #####
+
 
 ##### SET BIDS #####
