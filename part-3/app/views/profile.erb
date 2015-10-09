@@ -1,0 +1,39 @@
+<h1><%= current_user.username%>'s Profile</h1>
+<a href="/add_item">Add Item</a>
+<br>
+<br>
+<ol>
+<% if @items %>
+  <% @items.each do |item| %>
+  <a href="/items/<%=item.id%>/edit">Edit</a>
+    <li><label for="name">Name:</label>
+    <%= item.name %>
+    <br>
+    <label for="Cost">Cost:</label>
+    <%= item.cost %>
+    <br>
+    <label for="descriptioin">Description:</label>
+    <%= item.description %>
+    <br>
+    <label for="start_date">Start Date:</label>
+    <%= item.start_date %>
+    <br>
+    <label for="stop_date">Stop Date:</label>
+    <%= item.stop_date %></li>
+
+    <form method="post" action="/items/<%=item.id%>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete">
+    </form>
+    <br>
+    <br>
+  <% end %>
+<%else%>
+
+  <h4>No items</h4>
+<% end %>
+</ol>
+
+
+
+
