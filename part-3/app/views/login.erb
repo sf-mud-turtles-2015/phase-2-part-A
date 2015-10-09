@@ -1,0 +1,15 @@
+<p> Hello Please Login: </p>
+
+<% if @errors %>
+<p><%=@errors%></p>
+<%end%>
+
+<form action="/login" method="post">
+  User Name:<br>
+  <input type="text" name="name" value="">
+  <br>
+  Password:<br>
+  <input type="password" name="password" value="">
+  <br><br>
+  <input type="submit" value="Submit">
+</form>

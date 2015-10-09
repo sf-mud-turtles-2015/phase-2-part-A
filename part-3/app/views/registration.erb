@@ -1,0 +1,13 @@
+<div class="container">
+<h1>Registration Page</h1>
+
+<% if @errors%>
+<p><%= @errors %></p>
+<% end %>
+
+<form method="post" action="/register">
+  <input type="text" name="name" placeholder="Name">
+  <input type="password" name="password" placeholder="Password">
+  <input type="submit" value="Register">
+</form>
+</div>
