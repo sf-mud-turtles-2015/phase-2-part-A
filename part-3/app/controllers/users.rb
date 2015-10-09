@@ -41,12 +41,10 @@ end
 get '/users/:id' do
   @user = User.find(session[:user_id])
   @items = Item.all
+  @bids = Bid.where(user_id: session[:user_id])
 
   erb :'/users/profile'
 end
-
-
-
 
 get '/logout' do
   session.destroy

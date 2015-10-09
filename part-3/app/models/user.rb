@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6 }
   has_many :items
+  has_many :bids
   include BCrypt
 
   def password

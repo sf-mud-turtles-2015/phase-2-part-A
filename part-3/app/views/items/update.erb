@@ -3,7 +3,8 @@
 <form method="post" action="/items/<%= @item.id %>/update">
   <input name="item[name]" type="text" value="<%= @item.name %>">
   <input name="item[description]" type="text" value="<%= @item.description %>">
-  <input name="item[time]" type="text" value="<%= @item.time %>">
+  <input name="item[start_time]" type="text" value="<%= @item.start_time %>">
+  <input name="item[end_time]" type="text" value="<%= @item.end_time %>">
   <input type="hidden" name="item[user_id]" value="<%= session[:user_id] %>">
   <input type="submit" value="Create">
 </form>

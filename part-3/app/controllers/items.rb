@@ -18,9 +18,9 @@ get '/items/:id/update' do
 end
 
 post '/items/:id/update' do
-  Item.update(params[:item])
+  Item.update_all(params[:item])
 
-  redirect '/items/:id'
+  redirect '/users/:id'
 end
 
 get '/items/:id' do
@@ -28,9 +28,9 @@ get '/items/:id' do
   erb :'/items/item'
 end
 
-
 post '/items' do
   item = Item.create(params[:item])
-
+  p item.start_time
   redirect '/users/:id'
 end
+
