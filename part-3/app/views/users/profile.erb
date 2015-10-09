@@ -3,9 +3,18 @@
   <div class='your-items'>
     <% @your_items.each do |item| %>
     <a href="../items/<%= item.id %>"><%= item.name %></a>
+
       <% if item.user_id == session[:id] %>
+
         <form action='../items/update/<%= item.id %>' method='get'>
           <input type='submit' value='Edit'>
+        </form>
+
+        <form action='../items/<%= item.id %>' method='post'>
+          <input type='hidden' name='_method' value='delete'>
+          <input type='submit' value='Delete'>
+        </form>
+
       <% end %>
     <br>
     <% end %>

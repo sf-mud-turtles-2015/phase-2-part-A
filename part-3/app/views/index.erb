@@ -1,0 +1,9 @@
+<h3> Current Active Items </h3>
+<hr>
+<div>
+  <% @items.each do |item|  %>
+    <% if item.start_date.past? == true && item.end_date.past? == false  %>
+      <a href="../items/<%= item.id %>"><%= item.name %></a>
+    <% end %>
+  <% end %>
+</div>

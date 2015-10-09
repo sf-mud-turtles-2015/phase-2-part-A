@@ -6,6 +6,8 @@ end
 
 get '/items/:id' do
   @item = Item.find(params[:id])
+  @number_bidders = @item.bids.group(:user).count.length
+
   erb :"/items/show"
 end
 
@@ -21,4 +23,10 @@ put '/items/:id' do
   @item.update_attributes(name: params[:name], description: params[:description], start_date: params[:start_date], end_date: params[:end_date])
 
   redirect '../users/profile'
+end
+
+delete '/items/:id' do
+  Item.find(params[:id]).destroy
+
+  redirect '/users/profile'
 end

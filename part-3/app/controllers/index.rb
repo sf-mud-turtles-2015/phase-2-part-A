@@ -1,6 +1,7 @@
 get '/' do
+  @items = Item.all
 
-erb :index
+  erb :index
 
 end
 
