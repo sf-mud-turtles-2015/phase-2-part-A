@@ -30,12 +30,9 @@
         <!-- use is logged in and can bid -->
         <h3>Looks like you can bid on this item</h3>
 
-        <form method="post" action="/bid/item/:id">
+        <form method="post" action="/bid/item/<%= @item.id %>">
           <input type="submit" value="Place Bid">
         </form>
-
-
-
 
         <% else %>
           <a href="/login">Please login to bid</a>
