@@ -1,0 +1,20 @@
+<h3><%= @user.username %>'s Profile</h3>
+
+<a href="/items/new">New Item</a>
+
+
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <a href="/items/<%= item.id %>"><%= item.name %></a>
+      <% if item.user_id == session[:user_id] %>
+        <form method="get" action="/items/<%= item.id %>/delete">
+          <input type="submit" value="Delete">
+        </form>
+        <form method="get" action="/items/<%= item.id %>/update">
+          <input type="submit" value="Update">
+        </form>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

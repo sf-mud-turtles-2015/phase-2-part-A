@@ -1,0 +1,14 @@
+ <div class="container">
+
+  <h1>Welcome to DBC Bidding!</h1>
+
+  <%if not session[:user_id] %>
+    <a href="/users/login">Login</a>
+    <a href="/users/register">Register</a>
+  <% end %>
+
+  <%if session[:user_id] %>
+    <a href="/users/<%= session[:user_id] %>">Your Profile</a>
+  <% end %>
+
+ </div>
