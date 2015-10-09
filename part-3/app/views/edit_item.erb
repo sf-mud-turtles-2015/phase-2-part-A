@@ -1,0 +1,20 @@
+
+<form method="post" action="/items/<%=@item.id%>">
+  <input type="hidden" name="_method" value="put">
+  <label for="name">Name:</label>
+  <input type="text" name="item[name]" value="<%=@item.name%>">
+  <br>
+  <label for="name">Cost:</label>
+  <input type="text" name="item[cost]" value="<%=@item.cost%>">
+  <br>
+  <label for="name">Description:</label>
+  <input type="text" name="item[description]" value="<%=@item.description%>">
+  <br>
+  <label for="name">Start Date:</label>
+  <input type="text" name="item[start_date]" value="<%=@item.start_date%>">
+  <br>
+  <label for="name">Stop Date:</label>
+  <input type="text" name="item[stop_date]" value="<%=@item.stop_date%>">
+  <br>
+  <input type="submit" value="Edit">
+</form>

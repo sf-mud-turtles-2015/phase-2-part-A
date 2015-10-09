@@ -1,0 +1,31 @@
+<h1>Login Page</h1>
+
+<% if @errors %>
+<%= @errors %>
+<% end %>
+<form method="post" action="/index">
+  <input type="text" name="username" placeholder="Username">
+  <input type="password" name="password" placeholder="Password">
+  <input type="submit" value="Login">
+</form>
+
+<a href="/register">Need to register?</a>
+<hr>
+<h3>Log in to participate!</h3>
+<h1>Auctioned Items</h1>
+ <% @items.each do |item| %>
+<li><label for="name">Name:</label>
+    <%= item.name %>
+    <br>
+    <label for="Cost">Cost:</label>
+    <%= item.cost %>
+    <br>
+    <label for="descriptioin">Description:</label>
+    <%= item.description %>
+    <br>
+    <label for="start_date">Start Date:</label>
+    <%= item.start_date %>
+    <br>
+    <label for="stop_date">Stop Date:</label>
+    <%= item.stop_date %></li>
+  <% end %>

@@ -1,0 +1,11 @@
+<h1>Registration</h1>
+<div class="error_message">
+  <%if @errors %>
+    <%= @errors %>
+  <% end %>
+</div>
+  <form method="post" action="/register">
+  <input type="text" name="user[username]" placeholder="Username">
+  <input type="password" name="user[password]" placeholder="Password">
+  <input type="submit" value="Register">
+</form>
