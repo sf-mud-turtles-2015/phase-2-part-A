@@ -1,0 +1,34 @@
+<li>name<%=@item.name%></li>
+<li>description: <%=@item.description%></li>
+<li>Current Bid: <%=@item.bids.maximum('price')%></li>
+<li>bid count: <%=@item.bids.count%></li>
+<li>starting price<%=@item.price%></li>
+<li>username<%=@item.user.username%></li>
+<li>start_date <%=@item.start_date%></li>
+<li>end date <%=@item.end_date%></li>
+<li>active <%=@item.active%></li>
+
+
+<br>
+
+  <%@bids.each do |bid|%>
+  <li>test  <%=bid.price%></li>
+    <%=bid.user.username%>
+    <%=bid.top_bid%>
+  <%end%>
+
+<HR>
+add bid
+
+
+<form action="/<%=@item.id%>/bid/new" method="post">
+    <input type="text" name="price">
+    <input type="hidden" name="username" value=<%=@item.id%>
+    <input type="hidden" name="username" value=<%=@session%>>
+    <input type="submit" value="Submit">
+</form>
+
+
+
+
+

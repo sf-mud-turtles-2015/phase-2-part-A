@@ -1,0 +1,12 @@
+<%@item_list.each do |item|%>
+<hr>
+  <li><a href="items/<%=item.id%>"><%=item.name%></a></li>
+  <li>BIDDING STARTED AT :<%=item.price%></li>
+  <li>BID COUNT :<%=item.bids.count%></li>
+  <li>CURRENT BID: <%=item.bids.maximum('price')%></li>
+  <li>START DATE: <%=item.start_date%></li>
+  <li>END DATE :<%=item.end_date%></li>
+<%end%>
+
+
+
