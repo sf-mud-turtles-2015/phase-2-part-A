@@ -1,0 +1,10 @@
+<h1> Edit your item </h1>
+<form action='/items/<%= @item.id %>' method='post'>
+  <input type='hidden' name='_method' value='put'>
+  <input name="name" type="text" value="<%= @item.name %>">
+  <textarea name= "description" value="<%= @item.description %>"></textarea>
+  <input name= "start_date" type="datetime" value="<%= @item.start_date %>">
+  <input name= "end_date" type="datetime" value="<%= @item.end_date %>">
+  <input  type="Submit" value="Edit item">
+  <br>
+</form>
