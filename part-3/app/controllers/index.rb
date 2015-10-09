@@ -84,11 +84,6 @@ post '/items/:iid/bid' do
   bidder_offer = params[:bid_price]
   @date_now = "#{DateTime.now.year}-#{DateTime.now.month}-#{DateTime.now.day}"
 
-  # pseudocode time
-  # through helper method, compare current @date_now with the auction ending time
-  # If ending time has reached, @won = true
-  # no one will be able to put more bid
-
   if item.bid_price.to_i < bidder_offer.to_i
     item.update(bid_price: bidder_offer, bidder_id: session[:user_id])
     redirect "profiles/#{session[:user_id]}"

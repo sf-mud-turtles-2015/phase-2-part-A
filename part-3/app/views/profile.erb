@@ -22,8 +22,15 @@
 
 
 <!-- pseudocode time:
-if @won = true, list out the winner, stop further bids and editings
-else show the highest bidder, edit/delete buttons for seller, and bid button for login-ed users
+-at each refresh, compare current @date_now with the auction ending time through helper method
+
+-If ending time has reached, @won = true
+
+-if @won = true, list out the winner, stop further bids and editings
+
+-no one will be able to put more bid
+
+-else show the highest bidder, edit/delete buttons for seller, and bid button for login-ed users
  -->
 
     <% if @won %>
