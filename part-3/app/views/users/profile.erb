@@ -20,18 +20,18 @@
     <% end %>
   </div>
 
-<hr>
+  <hr>
 
-<form action='../items' method='post'>
-  <input name="name" type="text" placeholder="Name of item">
-  <textarea name= "description" placeholder="Description"></textarea>
-  <input name= "start_date" type="datetime" placeholder="YYYY-MM-DD">
-  <input name= "end_date" type="datetime" placeholder="YYYY-MM-DD">
-  <input  type="Submit" value="Add item">
-  <br>
-</form>
+  <form action='../items' method='post'>
+    <input name="name" type="text" placeholder="Name of item">
+    <textarea name= "description" placeholder="Description"></textarea>
+    <input name= "start_date" type="datetime" placeholder="YYYY-MM-DD">
+    <input name= "end_date" type="datetime" placeholder="YYYY-MM-DD">
+    <input  type="Submit" value="Add item">
+    <br>
+  </form>
 
-<hr>
+  <hr>
 
   <div class='all-items'>
     <h2> All items </h2>
@@ -39,5 +39,13 @@
       <a href="../items/<%= item.id %>"><%= item.name %></a><br>
       <% end %>
   <div>
+
+  <hr>
+
+  <h1>Your win history</h1>
+
+  <% @won_items.each do |won_item| %>
+    <a href="../items/<%= won_item.id %>"><%= won_item.name %></a>
+  <% end %>
 
 </div>

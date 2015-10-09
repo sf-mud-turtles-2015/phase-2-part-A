@@ -30,3 +30,15 @@ delete '/items/:id' do
 
   redirect '/users/profile'
 end
+
+post '/items/:id/bids/new' do
+
+  bid = Bid.new(user_id: session[:id], item_id: params[:id], bid_amount: params[:bid_amount])
+  post_id = params[:id]
+
+  if bid.save
+    session[:bid] = 1
+  end
+
+  redirect "/items/#{post_id}"
+end

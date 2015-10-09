@@ -37,5 +37,26 @@ end
 get '/users/profile' do
   @items = Item.all
   @your_items = Item.where(user_id: session[:id])
+  @won_items = []
+  bids = User.find(session[:id]).bids
+
+  # Need to make a helper method for below _-----_
+  bids.each do |bid|
+    if bid.item.end_date.past?
+      p 'hello'
+      item = Item.find(bid.item.id)
+      p item
+      max_bid = item.bids.order("bid_amount DESC").first
+
+      if max_bid.user_id == session[:id]
+        @won_items << Item.find(max_bid.item_id)
+      end
+      p "*" * 100
+      p @won_items
+      p "*" * 100
+    end
+  end
+   # Need to make a helper method for above _-----_
+
   erb :"/users/profile"
 end
