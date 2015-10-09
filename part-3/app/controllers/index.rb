@@ -1,5 +1,5 @@
 enable :sessions
-# => HOMEPAGE
+# => homepage
 get '/' do
   redirect '/index'
 end
@@ -8,13 +8,13 @@ get '/index' do
   erb :index
 end
 
-# => LOG OUT
+# => log out
 post '/index' do
   session[:user_id] = nil
   redirect '/index'
 end
 
-# => LOGIN PAGE
+# => login
 get '/login' do
   @error = nil
   erb :login
@@ -31,7 +31,7 @@ post '/login' do
   end
 end
 
-# => SIGNUP PAGE
+# => sign up
 get '/register' do
   @error = nil
   erb :register
@@ -48,4 +48,38 @@ post '/register' do
   end
 end
 
-# =>
+# => user profile
+get '/profiles/:pid' do
+  @user_name = User.find_by(id: session[:user_id]).user
+  erb :profile
+end
+
+# => create an item for bidding from profile
+post '/profiles/:pid' do
+  @item = Item.create(name: params[:name], bid_price: params[:bid_price], description: params[:description], start: params[:start], end: params[:end], seller_id: session[:user_id], bidder_id: 0 )
+  redirect "profiles/#{params[:pid]}"
+end
+
+# => edit an item by owner
+
+get '/items/:iid/edit' do
+  @item = Item.find(params[:iid])
+  erb :edit
+end
+
+post '/items/:iid/edit' do
+  Item.find(params[:iid]).update(name: params[:name], bid_price: params[:bid_price], description: params[:description], end: params[:end])
+  redirect "profiles/#{session[:user_id]}"
+end
+
+# => remove an item
+post '/items/:iid/delete' do
+  Item.find(params[:iid]).destroy
+  redirect "profiles/#{session[:user_id]}"
+end
+
+# => bid an item
+post '/items/:iid/bid' do
+  redirect "profiles/#{session[:user_id]}"
+end
+

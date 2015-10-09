@@ -4,7 +4,9 @@
   <form method='post' action='/index'>
     <input type='submit' value='logout'>
   </form>
+
+  <a href="/profiles/<%= session[:user_id] %>"><button>profile page</button></a>
 <% else %>
-  <a href="/login"><button>login</button></a>
-  <a href="/register"><button>register</button></a>
+  <a href='/login'><button>login</button></a>
+  <a href='/register'><button>register</button></a>
 <% end %>

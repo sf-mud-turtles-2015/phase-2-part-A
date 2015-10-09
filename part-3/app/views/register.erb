@@ -1,8 +1,10 @@
 <h2>Please signup to get more awesome access</h2>
 
+<a href='/index'><button>home</button></a>
+
 <form method='post' action='/register'>
-  <input type='text' name='user'>
-  <input type='password' name='password'>
+  <input type='text' name='user' placeholder='user name'>
+  <input type='password' name='password' placeholder='password: min length 6`'>
   <input type='submit' value='signup!'>
 </form>
 <%= @error %>

@@ -1,0 +1,41 @@
+<h3>Welcome to your profile page, <%= @user_name%></h3>
+
+<a href='/index'><button>home</button></a>
+
+<form method='post' action='/profiles/<%= session[:user_id]%>'>
+  <input type='text' name='name' placeholder='item name'>
+  <input type='text' name='bid_price' placeholder='bid price'>
+  <input type='text' name='description' placeholder='item description'>
+  <input type='text' name='start' placeholder='start: YYYY-MM-DD'>
+  <input type='text' name='end' placeholder='end: YYYY-MM-DD'>
+  <input type='submit' value='put it up for auction!'>
+</form>
+
+<% Item.all.each do |item| %>
+  <p>
+    <b>Name</b>: <%= item.name %>
+    <b>Bid Price</b>: $<%= item.bid_price %>
+    <b>Description</b>: <%= item.description %>
+    <b>Start Time</b>: <%= item.start %>
+    <b>End Time</b>: <%= item.end %>
+    <b>Seller</b>: <%= User.find(item.seller_id).user %>
+    <b>Current Highest Bidder</b>:
+      <% if item.bidder_id == 0 %>
+        <%= 'none' %>
+      <% else %>
+        <%= User.find(item.bidder_id).user %>
+      <% end %>
+  </p>
+
+  <% if item.seller_id == session[:user_id]  %>
+    <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
+    <form method='post' action= "/items/<%= item.id %>/delete">
+      <input type='submit' value='delete'>
+    </form>
+  <% else %>
+    <form method='post' action= "/items/<%= item.id %>/bid">
+      <input type='text' name='bid_price' placeholder='bid price'>
+      <input type='submit' value='bid'>
+    </form>
+  <% end %>
+<% end %>
