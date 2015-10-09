@@ -2,18 +2,44 @@
 <p>Description: <%= @item.description %> </p>
 <p>Date Start: <%= @item.date_start %> </p>
 <p>Date End: <%= @item.date_end %> </p>
+<p>Current number of bidders: </p>
 <hr>
 
-<h3>Edit <%= @item.name %></h3>
-    <form method="post" action="/item/<%= session[:user_id] %>">
-      <input type="text" name="name" placeholder="Name">
-        <br><br>
-      <input type="text" name="description" placeholder="Description">
-        <br><br>
-      <input type="text" name="date_start" placeholder="YYY-MM-DD">
-        <br><br>
-      <input type="text" name="date_end" placeholder="YYY-MM-DD">
-        <br><br>
-      <input type = "submit" value="Create New Item">
-        <br><br>
-  </form>
+<% if session[:user_id] == @item.user_id%>
+
+  <h3>Edit <%= @item.name %></h3>
+
+      <form method="post" action="/item/<%= @item.id %>">
+        <input type="hidden" name="_method" value="put">
+        <input type="text" name="item[name]" placeholder="Name">
+          <br><br>
+        <input type="text" name="item[description]" placeholder="Description">
+          <br><br>
+        <input type="text" name="item[date_start]" placeholder="YYY-MM-DD">
+          <br><br>
+        <input type="text" name="item[date_end]" placeholder="YYY-MM-DD">
+          <br><br>
+        <input type = "submit" value="Edit Item">
+          <br><br>
+    </form>
+
+    <% else%>
+
+      <% if session[:user_id] != nil && session[:user_id] != @item.user_id %>
+
+        <!-- use is logged in and can bid -->
+        <h3>Looks like you can bid on this item</h3>
+
+        <form method="post" action="/bid/item/:id">
+          <input type="submit" value="Place Bid">
+        </form>
+
+
+
+
+        <% else %>
+          <a href="/login">Please login to bid</a>
+
+      <% end %>
+
+  <% end %>

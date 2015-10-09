@@ -8,3 +8,17 @@
   <a href="/login">Login</a>
   <a href="/signup">Signup</a>
 <% end %>
+
+<hr>
+
+<h1>Here are all the items to bid on</h1>
+
+<% @item.each do |item| %>
+
+<!-- some logic here to display only ones within time limit.. Datetime.new -->
+
+  <a href="/item/<%= item.id %>"> <%= item.name %> </a>
+  <br>
+  <br>
+
+ <% end %>

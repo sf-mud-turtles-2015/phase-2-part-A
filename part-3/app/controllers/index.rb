@@ -1,7 +1,7 @@
 enable :sessions
 
 get '/' do
-  erb :homepage
+  redirect '/items/all'
 end
 
 #login page route...
@@ -17,7 +17,7 @@ end
 #logout
 get '/logout' do
   session.clear()
-  redirect '/'
+  redirect '/items/all'
 
 end
 
@@ -28,7 +28,7 @@ post '/user' do
     password: params[:password]
     )
     if user.save
-      redirect '/'
+      redirect '/items/all'
     else
       @errors = user.errors.messages
       erb :signup
@@ -41,17 +41,20 @@ get '/user' do
 
   if @user && params[:password] == @user.password
     session[:user_id] = @user.id
-    erb :homepage
+    redirect '/'
   else
-    @errors = @user.errors.messages
+    # was getting an error with this....
+    # @errors = @user.errors.messages
     erb :signup
   end
 end
 
-#signout
-
 #list new items
+get '/items/all' do
+  @item = Item.all
 
-#place bid on item
+  erb :homepage
+end
 
-#have profile showing bidding activity
+
+

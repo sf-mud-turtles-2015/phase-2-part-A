@@ -44,10 +44,16 @@ put '/item/:id' do
   user_id = session[:user_id]
 
   item = Item.find(params[:id])
-  item.update_attributes()
+  item.update_attributes(params[:item])
+  redirect "/profile/#{session[:user_id]}"
 end
 
+#Individual item bidding page
 
+get '/item/:id/bid' do
+
+  erb :item_bid
+end
 
 
 
