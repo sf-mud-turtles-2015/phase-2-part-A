@@ -32,10 +32,13 @@ The required functionality of the site will be described in more detail in the
 
 ### Completing the App
 
-Complete as much of this CRUD app as possible in the time allowed.  If time is
-running out and it looks like the app will not be completed, continue to work
-through the releases in order and complete as much as possible. Be sure to ask
-questions, if you find yourself stuck.
+Complete as much of this CRUD app as possible in the time allowed. The priority is well-designed functioning code. You have until lunch (12:30 pm) then another 90 minutes after lunch (until 3:30) before we go over the problem as a group. Please don't work during lunch. Be sure to ask questions if you find yourself stuck.
+
+Push your first solution at 3:30 PM today. 
+
+Pay close attention to the overview of the CRUD app. Then over the weekend, refactor your code to meet those standards. The phase 2 teachers will meet with you on Monday to discuss your refactored solution. 
+
+All code should be pushed by 9 AM on Monday. 
 
 ## Releases
 ### Pre-release:  Setup
