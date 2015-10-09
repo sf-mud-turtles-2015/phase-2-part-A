@@ -28,6 +28,7 @@ APP_NAME = APP_ROOT.basename.to_s
 configure do
   # By default, Sinatra assumes that the root is the file that calls the configure block.
   # Since this is not the case for us, we set it manually.
+  enable :sessions
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
