@@ -1,0 +1,20 @@
+  My items
+
+  <ul>
+    <% @items.each do |item| %>
+      <% if item.owner_id == session[:owner_id] %>
+        <li><%= item.title %> ||
+          <a href='/items/<%=item.id%>'>See item details</a> ||
+          <a href='/items/<%=item.id%>/edit'>Edit item</a> ||
+
+          <form method="post" action="/items/<%= item.id %>"> <!-- Make this less gross/formify the others -->
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete item">
+          </form>
+      <% else %>
+        <li><%= item.title %> || <a href='/items/<%=item.id%>'>See item details</a></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <h3><a href='items/new'>Add a new item</a></h3>

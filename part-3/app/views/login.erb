@@ -1,0 +1,18 @@
+<% if @user && @user.errors.any? %>
+  <div class="errors">
+  <% @user.errors.full_messages.each do |message| %>
+    <div><%= message%></div>
+  <% end %>
+  </div>
+<% end %> <!-- TO DO: errors not displaying -->
+
+<h3>Log in to your existing account below</h3>
+<br>
+<br>
+<form action='/session' method='post'>
+  <label for="email">Email</label>
+  <input type='text' name='email'><br>
+  <label for="password">Password</label>
+  <input type='password' name='password'><br>
+  <input type='submit' value='Log in'>
+</form>

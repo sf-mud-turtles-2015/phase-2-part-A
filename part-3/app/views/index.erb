@@ -1,0 +1,9 @@
+<h1>Welcome to the homepage for the super awesome bidding site!<br>Using the navigation bar above, you may register, login, or browse all items.</h1>
+<% if session[:owner_id] %>
+  <a href='/profile'>See my items</a>
+<% end %>
+
+<h2>Active items</h2>
+<% @available_items.each do |item| %>
+  <li><a href='/items/<%=item.id%>'><%= item.title %></a></li>
+<% end %>
