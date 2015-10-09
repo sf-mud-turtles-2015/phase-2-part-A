@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<% if @errors %>
+  <%= @errors %>
+  <% end %>
+<form method="post" action "/register">
+  Username:<br>
+  <input type="text" name="username">
+  <br>
+  Password:<br>
+  <input type="password" name="password">
+<input type="submit" value="Enter">
+</form>
+
+</body>
+</html>
