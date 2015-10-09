@@ -18,12 +18,20 @@
   <title>Steven's Auction App</title>
 </head>
 <header>
-  <h1>Steve's Auction App</h1>
+  <h1>
+    Steve's Auction App
+  </h1>
    <% if session[:email] %>
-    <h1> Welcome back <%= session[:email] %> </h1>
+    <h1>
+      Welcome back <%= session[:email] %>
+    </h1>
+    <h2>
+      <a href="/profile">Your Profile</a>
+    </h2>
     <form method="post" action="/logout">
       <input type="submit" value="Logout">
     </form>
+
   <% else %>
     <form method="post" action="/login">
       <input type="text" name="user[email]" placeholder="email">
@@ -32,7 +40,9 @@
     </form>
     <h3>or <a href="/register">Register</a></h3>
   <% end %>
+  <h2><a href="/">Auction Home</a></h2>
 </header>
+
 <body>
   <%= yield %>
 </body>

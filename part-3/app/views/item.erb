@@ -1,0 +1,19 @@
+<div class="container">
+
+  <ul>
+    <li>Item: <%= @item.title %></li>
+    <li>Description: <%= @item.description %></li>
+    <li>Bidding start date: <%= @item.start_bid %></li>
+    <li>Bidding end date: <%= @item.end_bid %></li>
+    <li>Starting price: $<%= @item.initial_price %></li>
+    <li>Owner: <%= @owner.name %></li>
+  </ul>
+
+#### need to finish up the place bid button
+#####
+
+  <form action="/set_bid" method="post">
+    <input type="hidden" value="<%= @user.id %>">
+    <input type="submit" value="Place bid!">
+  </form>
+</div>

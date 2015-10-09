@@ -1,0 +1,18 @@
+<div class="container">
+
+  <form action="/auction_item" method="post">
+    Item name:
+    <input type="text" name="item[title]"><br>
+    Description:
+    <input type="text" name="item[description]"><br>
+    Start bid date:
+    <input type="date" name="item[start_bid]"><br>
+    End bid date:
+    <input type="date" name="item[end_bid]"><br>
+    Initial price:
+    <input type="text" name="item[initial_price]"><br>
+    <input type="hidden" name= "item[user_id]" value="<%= @user.id %>">
+    <input type="submit" value="Create auction for item">
+  </form>
+
+</div>

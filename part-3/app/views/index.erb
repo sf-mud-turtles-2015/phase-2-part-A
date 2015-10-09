@@ -1,8 +1,17 @@
 <div class="container">
-<% @auction_items.each do |item| %>
-<ul>
-  <li><%= item.title %></li>
-</ul>
-<% end %>
+
+  <% if current_user %>
+    <form action="/auction_item" method="get">
+      <input type="submit" value="Auction new item">
+    </form>
+  <% end %>
+
+  <% @auction_items.each do |item| %>
+  <ul>
+    <li>
+      <a href="/items/<%= item.id %>"><%= item.title %></a>
+    </li>
+  </ul>
+  <% end %>
 
 </div>
