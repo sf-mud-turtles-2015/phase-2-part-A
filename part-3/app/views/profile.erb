@@ -1,0 +1,24 @@
+<%if session[:id]%>
+<p>Your Items</p>
+<% @items.each do |item| %>
+
+<li>
+  <a href="/"><%=item.name%></a>
+  <a href="/items/<%=item.id%>/edit">
+    <button>edit item</button>
+  </a>
+  <form action="/items/<%=item.id%>" method="get">
+    <input type="submit" value="delete">
+  </form>
+  <br><br><br>
+</li>
+
+
+<%end%>
+
+<a href="/items/new">Create New Item</p></a>
+
+<%else%>
+<p>Go Login</p>
+<%end%>
+
