@@ -19,7 +19,18 @@
     <b>Start Time</b>: <%= item.start %>
     <b>End Time</b>: <%= item.end %>
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
-    <b>Current Highest Bidder</b>:
+
+
+<!-- pseudocode time:
+if @won = true, list out the winner, stop further bids and editings
+else show the highest bidder, edit/delete buttons for seller, and bid button for login-ed users
+ -->
+
+    <% if @won %>
+      <b>Winner</b>:
+
+    <% else %>
+      <b>Current Highest Bidder</b>:
       <% if item.bidder_id == 0 %>
         <%= 'none' %>
       <% else %>
@@ -27,18 +38,19 @@
       <% end %>
   </p>
 
-  <% if item.seller_id == session[:user_id]  %>
-    <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
-    <form method='post' action= "/items/<%= item.id %>/delete">
-      <input type='submit' value='delete'>
-    </form>
-  <% else %>
-    <form method='post' action= "/items/<%= item.id %>/bid">
-      <input type='text' name='bid_price' placeholder='bid price'>
-      <input type='submit' value='bid'>
-    </form>
-    <% if @bid_error %>
-    <%= @bid_error %>
+    <% if item.seller_id == session[:user_id]  %>
+      <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
+      <form method='post' action= "/items/<%= item.id %>/delete">
+        <input type='submit' value='delete'>
+      </form>
+    <% else %>
+      <form method='post' action= "/items/<%= item.id %>/bid">
+        <input type='text' name='bid_price' placeholder='bid price'>
+        <input type='submit' value='bid'>
+      </form>
+      <% if @bid_error %>
+      <%= @bid_error %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
