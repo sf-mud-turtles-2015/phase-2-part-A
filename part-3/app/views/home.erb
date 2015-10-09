@@ -1,0 +1,12 @@
+<h1>Welcome <%= user.username %></h1>
+<h3>These are you're current listings</h3>
+  <% user.listed_items.each do |item| %>
+    <a href="/items/<%= item.id %>"><%= item.title %></a>
+  <% end %>
+
+<h3>These are your current bids</h3>
+  <% user.bidded_items.each do |item| %>
+    <a href="/bids/<%= item.id %>"><%= item.title %></a><br>
+  <% end %>
+
+

@@ -1,0 +1,13 @@
+<h1>Welcome</h1>
+
+<% unless session[:user_id] %>
+  <div class="log-sign-btns">
+    <a href="/users/signup"><button id="register_btn" type="button">Create an account</button></a>
+    <a href="/users/login"><button id="login_btn" type="button">Login</button></a>
+  </div>
+<% end %>
+
+<% items.each do |item| %>
+  <a href="/items/<%= item.id %>"><%= item.title %></a><br>
+<% end %>
+

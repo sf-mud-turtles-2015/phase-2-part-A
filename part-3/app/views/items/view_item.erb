@@ -1,0 +1,12 @@
+<h3><%= item.title %></h3>
+  <ul>
+    <li><strong>Posted by:</strong> <%= item.user.username %></li>
+    <li><strong>Posted on:</strong> <%= item.end_date %></li>
+    <li><strong>Condition:</strong> <%= item.condition %></li>
+    <li><strong>Details: </strong><%= item.detail %></li>
+  </ul>
+
+<h3>Bidders: </h3>
+<% item.bids.each do |bid| %>
+<a href="/users/<%= bid.user.id %>"><%= bid.user.username %></a><br>
+<% end %>
