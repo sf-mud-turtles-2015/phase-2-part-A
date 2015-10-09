@@ -1,0 +1,10 @@
+<h1>This is the homepage</h1>
+
+<% if session[:user_id] != nil %>
+  <a href="/logout">Logout</a>
+  <a href="/profile/<%= session[:user_id] %>">View profile</a>
+
+<% else %>
+  <a href="/login">Login</a>
+  <a href="/signup">Signup</a>
+<% end %>

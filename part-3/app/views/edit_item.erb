@@ -1,0 +1,19 @@
+<h3>Name: <%= @item.name %> </h3>
+<p>Description: <%= @item.description %> </p>
+<p>Date Start: <%= @item.date_start %> </p>
+<p>Date End: <%= @item.date_end %> </p>
+<hr>
+
+<h3>Edit <%= @item.name %></h3>
+    <form method="post" action="/item/<%= session[:user_id] %>">
+      <input type="text" name="name" placeholder="Name">
+        <br><br>
+      <input type="text" name="description" placeholder="Description">
+        <br><br>
+      <input type="text" name="date_start" placeholder="YYY-MM-DD">
+        <br><br>
+      <input type="text" name="date_end" placeholder="YYY-MM-DD">
+        <br><br>
+      <input type = "submit" value="Create New Item">
+        <br><br>
+  </form>

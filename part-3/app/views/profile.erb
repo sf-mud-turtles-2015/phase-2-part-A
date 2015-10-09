@@ -1,0 +1,40 @@
+<h1>Welcome <%= @user.user_name %> </h1>
+
+<div class = "new_item">
+  <h3>Create New item</h3>
+    <form method="post" action="/item/<%= @user.id %>">
+      <input type="text" name="name" placeholder="Name">
+        <br><br>
+      <input type="text" name="description" placeholder="Description">
+        <br><br>
+      <input type="text" name="date_start" placeholder="YYY-MM-DD">
+        <br><br>
+      <input type="text" name="date_end" placeholder="YYY-MM-DD">
+        <br><br>
+      <input type = "submit" value="Create New Item">
+        <br><br>
+  </form>
+</div>
+
+<h3>Hey Here are all your items...</h3>
+
+<% @items.each do |item| %>
+  <div class="all_items" style= "border: 2px solid black">
+  <!-- item name -->
+    <%= item.name %>
+
+    <!-- Update Item -->
+    <a href="/item/<%= item.id %>">Update</a>
+
+    <!-- delete Item -->
+    <form method="post" action="/item/<%= item.id %>">
+      <input type= "hidden" name="_method" value="delete">
+      <input type="submit" value="delete">
+    </form>
+  </div>
+
+  <br><br>
+
+<% end %>
+
+

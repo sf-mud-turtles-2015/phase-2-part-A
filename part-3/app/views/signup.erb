@@ -1,0 +1,21 @@
+
+<!-- Create New User -->
+
+<div class = "signup">
+  <h3>Sign up</h3>
+  <% if @errors %>
+      <%= @errors %>
+    <% else %>
+    <% end %>
+  <form method="post" action="/user">
+    <input type="text" name="user_name" placeholder="User Name">
+    <br><br>
+    <input type="text" name="password" placeholder="Password">
+    <br><br>
+    <input type="submit" value="create">
+  </form>
+  <a href="/login">Already have an account?</a>
+</div>
+
+<hr>
+
