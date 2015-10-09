@@ -1,0 +1,10 @@
+Name: <%= @item.name %><br>
+Description: <%= @item.description %><br>
+Auction Start: <%= @item.start %><br>
+Auction Finish: <%= @item.finish %><br>
+<br>
+<form method="post" action="/item/<%= @item.id %>/bid">
+  <input type='text' name='amount' placeholder='Amount'>
+  <input type='submit' value="Place Bid">
+</form>
+<!-- print the bid count, should be easy if my associations work -->
