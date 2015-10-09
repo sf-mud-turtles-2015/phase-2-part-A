@@ -2,17 +2,6 @@ get '/' do
   erb :login
 end
 
-post '/login' do
-  p params
-  @user = User.find_by(username: params[:username])
-  if @user == nil
-    redirect  '/'
-  elsif @user.password == params[:password]
-    redirect "/profile/#{@user.id}"
-  else
-    redirect '/'
-  end
-end
 
 get '/profile/:user_id' do
   @bid_list = Bid.where(user_id: params[:user_id])
@@ -32,12 +21,41 @@ get '/items/:item_id' do
   erb :item_profile
 end
 
-# post '/item/new' do
-# end
+get '/item/new' do
+  if session[:user_id] == nil
+    redirect '/items'
+  else
+     erb :item_new
+  end
+
+end
+
+post '/item/new' do
+  Item.create(name: params[:name], description: params[:description], price: params[:price], start_date: params[:start_date], end_date: params[:end_date], user_id: session[:user_id])
+  redirect '/items'
+end
 
  post '/:item_id/bid/new' do
-  # p session[:user_id]
-   @id = params[:item_id]
-   p params
+    @id = params[:item_id]
+    p @checker = Item.find(params[:item_id]).user_id
+  if session[:user_id] == @checker
+    redirect '/'
+  else
+    new_bid = Bid.new(price: params[:price], item_id: params[:item_id], user_id: session[:user_id])
+    new_bid.save
+  end
   redirect "/items/#{@id}"
  end
+
+# RAN OUT OF TIME TO IMPLEMENT THIS FULLY
+delete 'items/delete' do
+  @item_to_destroy = Item.find(params[:item_id])
+  @item_to_destroy.destroy
+end
+
+put 'items/delete' do
+    @item_to_edit = Item.find(params[:item_id])
+    # @item_to_edit.update
+end
+
+

@@ -22,9 +22,8 @@ add bid
 
 
 <form action="/<%=@item.id%>/bid/new" method="post">
-    <input type="text" name="price">
-    <input type="hidden" name="username" value=<%=@item.id%>
-    <input type="hidden" name="username" value=<%=@session%>>
+    PRICE : <input type="text" name="price">
+    <input type="hidden" name="item_id" value="<%=@item.id%>">
     <input type="submit" value="Submit">
 </form>
 
