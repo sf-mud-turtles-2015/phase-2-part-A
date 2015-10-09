@@ -1,0 +1,19 @@
+<%if @password_error%>
+  <h5><%=@password_error%><h5>
+<%end%>
+
+<%if @username_error%>
+  <h5><%=@username_error%><h5>
+<%end%>
+
+<form action="/register" method="post">
+  Your New Username:<br>
+  <input type="text" name="username" value="">
+  <br>
+  Your New Password : <br>
+  <input type="password" name="password" value="">
+  <br><br>
+  <input type="submit" value="Register">
+</form>
+
+

@@ -1,0 +1,8 @@
+<h1>Welcome to the Front Page</h1>
+
+<p>All the items</p>
+
+
+<% @items.each do |item| %>
+<li><a href="/"><%=item.name%></a></li>
+<%end%>
