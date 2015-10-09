@@ -14,7 +14,7 @@
 <% Item.all.each do |item| %>
   <p>
     <b>Name</b>: <%= item.name %>
-    <b>Bid Price</b>: $<%= item.bid_price %>
+    <b>Current Bid Price</b>: $<%= item.bid_price %>
     <b>Description</b>: <%= item.description %>
     <b>Start Time</b>: <%= item.start %>
     <b>End Time</b>: <%= item.end %>
@@ -37,5 +37,8 @@
       <input type='text' name='bid_price' placeholder='bid price'>
       <input type='submit' value='bid'>
     </form>
+    <% if @bid_error %>
+    <%= @bid_error %>
+    <% end %>
   <% end %>
 <% end %>
