@@ -1,0 +1,11 @@
+<h2>Please Login before proceeding</h2>
+
+<form method='post' action='/login'>
+  <input type='text' name='user'>
+  <input type='password' name='password'>
+  <input type='submit' value='login!'>
+</form>
+
+<% if @error %>
+  <h4>Username or password incorrect! Please try again.</h4>
+<% end %>

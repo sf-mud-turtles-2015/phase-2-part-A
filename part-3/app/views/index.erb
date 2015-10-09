@@ -1,0 +1,10 @@
+<h2>Come to bid all your moneyyyyyy</h2>
+
+<% if session[:user_id] %>
+  <form method='post' action='/index'>
+    <input type='submit' value='logout'>
+  </form>
+<% else %>
+  <a href="/login"><button>login</button></a>
+  <a href="/register"><button>register</button></a>
+<% end %>
