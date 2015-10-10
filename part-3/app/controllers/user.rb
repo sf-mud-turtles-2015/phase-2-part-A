@@ -37,7 +37,7 @@ end
 
 post '/users/login' do
   @user = User.find_by(username: params[:user][:username])
-  if @user && @user.password == params[:password]
+  if @user && @user.password == params[:user][:password]
     session[:id] = @user.id
   else
     flash[:error] = "The username or password you entered is invalid." #not sure if using correctly
@@ -56,7 +56,7 @@ get '/users/profile' do
   # Need to make a helper method for below _-----_
   bids.each do |bid|
     if bid.item.end_date.past?
-      p 'hello'
+      # p 'hello'
       item = Item.find(bid.item.id)
       p item
       max_bid = item.bids.order("bid_amount DESC").first

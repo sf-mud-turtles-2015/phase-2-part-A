@@ -8,30 +8,32 @@ body {
   width: 70%;
   min-width: 400px;
   margin: auto;
-  border: 1px solid #6f5499;
+  text-align: center;
+/*  border: 1px solid #6f5499;*/
 }
 
 .container {
-  color: rgb(61, 70, 77);
-  position: relative;
-  text-align: center;
+  color: #3D464D;
   padding: 1.2em, 0, 1.2em, 0;
-  width: 70%;
-  min-width: 400px;
+/*  width: 70%;
+  min-width: 400px;*/
   margin: auto;
 }
 
 .item-container {
-  padding-bottom: .6em;
+  padding: .6em;
   list-style: none;
-
+  display: block;
 }
 
 .item-link{
   text-decoration: none;
-  color: rgb(85, 85, 85);
+  color: #555555;
   font-family: 'Roboto', Verdana, sans-serif;
   font-weight: 300;
+  display: block;
+  width: 100%;
+  padding-bottom: .2em;
 }
 
 .page-headers{
@@ -56,5 +58,50 @@ hr {
 .nav-links{
   text-decoration: none;
   font-weight: 900;
+  color: #6f5499;
 
+}
+
+.form-island {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.input-field{
+  margin-bottom: 1em;
+  width: 400px;
+  text-align: center;
+}
+
+.submit-button{
+  width: 300px;
+  padding: 10px 15px;
+  background: #6f5499;
+  color: #FFF;
+}
+
+.your-items{
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  color: #555555;
+  font-family: 'Roboto', Verdana, sans-serif;
+  font-weight: 300;
+}
+
+.text-button {
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-size: .7em;
+}
+
+textarea {
+  resize: none;
+}
+
+.error-message{
+  font-size: .75em;
+  color: #FF6E6C;
 }

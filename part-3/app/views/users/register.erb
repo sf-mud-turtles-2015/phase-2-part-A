@@ -1,13 +1,16 @@
 <div class='container'>
 
-  <form method="post" action="/users">
-    <input type="text" name="user[username]" placeholder="Username">
-    <input type="password" name="user[password]" placeholder="Password">
-    <input type="submit" value="Create">
+  <form method="post" action="/users" class='form-island'>
+    <input class='input-field' type="text" name="user[username]" placeholder="Username">
+    <br>
+    <input class='input-field' type="password" name="user[password]" placeholder="Password">
+    <br>
+    <input class='submit-button hvr-grow' type="submit" value="Create">
+    <br>
   </form>
 
   <% if flash[:error] %>
-    <%= flash[:error] %>
+    <span class='error-message hvr-buzz-out'><%= flash[:error] %></span>
     <% flash[:error] = nil %>
   <% end %>
 

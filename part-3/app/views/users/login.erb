@@ -1,14 +1,21 @@
 <div class='container'>
 
-  <form method="post" action="/users/login">
-    <input type="text" name="user[username]" placeholder="Username">
-    <input type="password" name="user[password]" placeholder="Password">
-    <input type="submit" value="Login">
-  </form>
+  <div class='form-island '>
 
-  <% if flash[:error] %>
-    <%= flash[:error] %>
-    <% flash[:error] = nil %>
-  <% end %>
+    <form method="post" action="/users/login">
+      <input class='input-field' type="text" name="user[username]" placeholder="Username">
+      <br>
+      <input class='input-field' type="password" name="user[password]" placeholder="Password">
+      <br>
+      <input class='submit-button hvr-wobble-vertical' type="submit" value="Login">
+    </form>
 
+    <br>
+
+    <% if flash[:error] %>
+      <span class='error-message hvr-buzz-out'><%= flash[:error] %></span>
+      <% flash[:error] = nil %>
+    <% end %>
+
+  </div>
 </div>
