@@ -39,30 +39,30 @@ get '/register' do
 end
 
 post '/register' do
-  @user = User.create(user: params[:user], password_hash: params[:password])
-  if @user.id.nil?
+  user = User.create(user: params[:user], password_hash: params[:password])
+  if user.id.nil?
     @error = true
     erb :register
   else
-    session[:user_id] = @user.id
+    session[:user_id] = user.id
     redirect '/index'
   end
 end
 
 # => user profile
-get '/profiles/:pid' do
+get '/profile' do
   @user_name = User.find_by(id: session[:user_id]).user
-
+  @items = Item.all
   session[:date_now] = "#{DateTime.now.year}#{DateTime.now.month}#{DateTime.now.day}".to_i
   erb :profile
 end
 
 # => create an item for bidding from profile
-post '/profiles/:pid' do
+post '/profile' do
   start_int = params[:start].scan(/\d/).join.to_i
   end_int = params[:end].scan(/\d/).join.to_i
   User.find(session[:user_id]).items.create(name: params[:name], bid_price: params[:bid_price], description: params[:description], start: start_int, end: end_int)
-  redirect "profiles/#{session[:user_id]}"
+  redirect "profile"
 end
 
 # => edit an item by owner
@@ -74,13 +74,13 @@ end
 
 post '/items/:iid/edit' do
   Item.find(params[:iid]).update(name: params[:name], bid_price: params[:bid_price], description: params[:description], end: params[:end])
-  redirect "profiles/#{session[:user_id]}"
+  redirect "profile/#{session[:user_id]}"
 end
 
 # => remove an item
 post '/items/:iid/delete' do
   Item.find(params[:iid]).destroy
-  redirect "profiles/#{session[:user_id]}"
+  redirect "profile/#{session[:user_id]}"
 end
 
 # => bid an item
@@ -89,7 +89,7 @@ post '/items/:iid/bid' do
   bidder_offer = params[:bid_price]
   if item.bid_price.to_i < bidder_offer.to_i
     item.update(bid_price: bidder_offer, bidder_id: session[:user_id])
-    redirect "profiles/#{session[:user_id]}"
+    redirect "profile/#{session[:user_id]}"
   else
     @bid_error = 'Your bid must be higher than the current bid!'
     erb :profile

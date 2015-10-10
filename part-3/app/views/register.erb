@@ -7,7 +7,8 @@
   <input type='password' name='password' placeholder='password: min length 6`'>
   <input type='submit' value='signup!'>
 </form>
+
 <%= @error %>
 <% if @error %>
-  <h4>Someone has already used this username or password length incorrect! Please try again.</h4>
+  <h4>Someone has already used this username or password not met minimum length! Please try again.</h4>
 <% end %>

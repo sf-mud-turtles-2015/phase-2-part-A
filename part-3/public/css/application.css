@@ -1,0 +1,31 @@
+.html {
+  font-family: sans-serif;
+}
+
+.items {
+  border: 1px solid gray;
+  width: 500px;
+  font-family: serif;
+  padding: 1em;
+  margin: auto;
+  position: relative;
+  display: inline-block;
+}
+
+form input[type=submit], button {
+  color: blue;
+  border: 1px dotted blue;
+  border-radius: 0.5em;
+  background-color: gold;
+  text-decoration: none;
+  margin: 0.2em;
+}
+
+form {
+  display: inline-block;
+}
+
+.container {
+  width: 1600px;
+  margin: auto;
+}

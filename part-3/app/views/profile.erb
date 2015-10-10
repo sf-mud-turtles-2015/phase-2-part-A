@@ -1,8 +1,9 @@
-<h3>Welcome to your profile page, <%= @user_name%></h3>
+<body class='container'>
+<h3>Welcome, <%= @user_name%></h3>
 
 <a href='/index'><button>home</button></a>
 
-<form method='post' action='/profiles/<%= session[:user_id]%>'>
+<form method='post' action='/profile'>
   <input type='text' name='name' placeholder='item name'>
   <input type='text' name='bid_price' placeholder='bid price'>
   <input type='text' name='description' placeholder='item description'>
@@ -11,22 +12,21 @@
   <input type='submit' value='put it up for auction!'>
 </form>
 
-<% Item.all.each do |item| %>
+<% @items.each do |item| %>
 
-  <p id="item<%= item.id %>">
-    <b>Name</b>: <%= item.name %>
-    <b>Current Bid Price</b>: $<%= item.bid_price %>
-    <b>Description</b>: <%= item.description %>
+  <section id="item<%= item.id %>" class="items">
+    <b>Name</b>: <%= item.name %></br>
+    <b>Current Bid Price</b>: $<%= item.bid_price %></br>
+    <b>Description</b>: <%= item.description %></br>
       <% start = item.start.to_s %>
-    <b>Start Time</b>: <%= start[0..3] + '-' + start[4..5] + '-' + start[6..7] %>
+    <b>Start Time</b>: <%= start[0..3] + '-' + start[4..5] + '-' + start[6..7] %></br>
       <% ending = item.end.to_s %>
-    <b>End Time</b>: <%= ending[0..3] + '-' + ending[4..5] + '-' + ending[6..7] %>
-    <b>Seller</b>: <%= User.find(item.seller_id).user %>
+    <b>End Time</b>: <%= ending[0..3] + '-' + ending[4..5] + '-' + ending[6..7] %></br>
+    <b>Seller</b>: <%= User.find(item.seller_id).user %></br>
 
-<!-- Auction not Started, seller can edit/delete -->
-
+<!-- Before Auction Started, Seller can Edit/Delete -->
     <% if session[:date_now] < item.start %>
-      <b>Status</b>: DUDE, THIS AUCTION HAS NOT STARTED</br>
+      <b>Status</b>: auction has not started</br>
         <% if item.seller_id == session[:user_id] %>
           <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
           <form method='post' action= "/items/<%= item.id %>/delete">
@@ -38,29 +38,30 @@
     <% elsif session[:date_now] >= item.end %>
       <b>Status</b>:
       <% if item.bidder_id.nil? %>
-        <%= 'Auction has ended' %>
+        <%= 'auction has ended' %>
       <% else %>
-        <%= User.find(item.bidder_id).user %> Won the auction!
+        <%= User.find(item.bidder_id).user %> won the auction!
       <% end %>
 
-<!-- Auction Ongoing, bidders(non-seller) can bid -->
+<!-- Auction Ongoing, Bidders(non-seller) Can Bid -->
     <% else session[:date_now] < item.end %>
       <b>Status</b>:
       <% if item.bidder_id.nil? %>
-        <%= 'No one has placed a bid yet' %>
+        <%= 'no one has placed a bid yet' %>
       <% else %>
         The current highest bidder is <%= User.find(item.bidder_id).user %>
+        The current highest bidder is <%= User.find(item.bidder_id).user %>
       <% end %>
-        <% unless item.seller_id == session[:user_id] %>
-          <form method='post' action= "/items/<%= item.id %>/bid">
-            <input type='text' name='bid_price' placeholder='bid price'>
-            <input type='submit' value='bid'>
-          </form>
-        <% end %>
+      <% unless item.seller_id == session[:user_id] %>
+        <form method='post' action= "/items/<%= item.id %>/bid">
+          <input type='text' name='bid_price' placeholder='bid price'>
+          <input type='submit' value='bid'>
+        </form>
+      <% end %>
       <% if @bid_error %>
         <%= @bid_error %>
       <% end %>
     <% end %>
-  </p>
-
+  </section>
 <% end %>
+</body>
