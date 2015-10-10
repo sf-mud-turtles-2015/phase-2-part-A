@@ -57,7 +57,9 @@ end
 
 # => create an item for bidding from profile
 post '/profiles/:pid' do
-  Item.create(name: params[:name], bid_price: params[:bid_price], description: params[:description], start: params[:start], end: params[:end], seller_id: session[:user_id], bidder_id: 0 )
+  start_int = params[:start].scan(/\d/).join.to_i
+  end_int = params[:end].scan(/\d/).join.to_i
+  User.find(session[:user_id]).items.create(name: params[:name], bid_price: params[:bid_price], description: params[:description], start: start_int, end: end_int)
   redirect "profiles/#{session[:user_id]}"
 end
 

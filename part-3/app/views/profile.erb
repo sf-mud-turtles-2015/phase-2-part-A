@@ -13,9 +13,6 @@
 
 <% Item.all.each do |item| %>
 
-  <% item_start_int = item.start.scan(/\d/).join.to_i %>
-  <% item_end_int = item.end.scan(/\d/).join.to_i %>
-
   <p id="item<%= item.id %>">
     <b>Name</b>: <%= item.name %>
     <b>Current Bid Price</b>: $<%= item.bid_price %>
@@ -24,20 +21,20 @@
     <b>End Time</b>: <%= item.end %>
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
 
-    <% if @date_now_int < item_start_int %>
+    <% if @date_now_int < item.start %>
       <b>Status</b>: DUDE, THIS AUCTION HAS NOT STARTED
 
-    <% elsif @date_now_int >= item_end_int %>
+    <% elsif @date_now_int >= item.end %>
       <b>Status</b>:
-      <% if item.bidder_id == 0 %>
+      <% if item.bidder_id %>
         <%= 'No bid' %>
       <% else %>
         <%= User.find(item.bidder_id).user %> Won the auction!
       <% end %>
 
-    <% else @date_now_int < item_end_int %>
+    <% else @date_now_int < item.end %>
       <b>Status</b>:
-      <% if item.bidder_id == 0 %>
+      <% if item.bidder_id %>
         <%= 'No one has placed a bid yet' %>
       <% else %>
         The current highest bidder is <%= User.find(item.bidder_id).user %>

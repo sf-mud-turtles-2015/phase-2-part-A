@@ -2,7 +2,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   # include BCrypt
   # Remember to create a migration!
-  has_many :items
+  has_many :items, class_name: :Item, foreign_key: :seller_id
 
   validates :user, presence: true, uniqueness: true
 # =>  validation works without bcrypt, not working with bcrypt, skip bcrypt
