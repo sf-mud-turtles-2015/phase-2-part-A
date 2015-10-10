@@ -1,0 +1,35 @@
+<% if @signed_in %>
+  <form method='post' action='/user/<%= @user.id %>/auction'>
+    <input type='text' name='name' placeholder='Item Name'>
+    <input type='text' name='description' placeholder='description'>
+    <input type='text' name='start' placeholder='Start Time'>
+    <input type='text' name='finish' placeholder='End Time'>
+    <input type="submit" value='Post'>
+  </form>
+<% end %>
+
+<h3><%= @user.username %>'s Items</h3>
+ <% @items.each do |item| %>
+  <%= item.name %>
+
+  <% if @signed_in %>
+    <a href="/user/<%= @user.id %>/auction/<%= item.id %>/edit">Edit</a>
+  <form method='post' action='/user/<%= @user.id %>/auction/<%= item.id %>'>
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+  <% end %>
+  <br>
+ <% end %>
+
+<% if @signed_in %>
+<h3>Bid History</h3>
+  <% @bids.each do |bid| %>
+    <%= bid.item.name %>: <%= bid.amount %><br>
+  <% end %>
+
+<h3>Auctions Won</h3>
+  <% @user.auctions_won.each do |item| %>
+    <%= item.name %>
+  <% end %>
+<% end %>

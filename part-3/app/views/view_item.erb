@@ -1,0 +1,14 @@
+Name: <%= @item.name %><br>
+Description: <%= @item.description %><br>
+Auction Start: <%= @item.start %><br>
+Auction Finish: <%= @item.finish %><br>
+Number of bids: <%= @item.bids.count %>
+<br>
+<% if !@bid_placed %>
+  <form method="post" action="/item/<%= @item.id %>/bid">
+    <input type='text' name='amount' placeholder='Amount'>
+    <input type='submit' value="Place Bid">
+  </form>
+<% else %>
+  <%= @bid_placed %>
+<% end %>

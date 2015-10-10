@@ -1,0 +1,24 @@
+<a href="/user/<%= @user_id %>">Profile</a>
+
+<% if !@signed_in %>
+  <h1>Sign Up</h1>
+  <form method='post' action='/signup'>
+    <input type='text' name='username' placeholder='Username'>
+    <input type='password' name='password' placeholder='Password'>
+    <input type='submit' value='Register'>
+  </form><br>
+  <% if @register_error %>
+    <p>Invalid information</p>
+  <% end %>
+  <br>
+  <a href="/login">Login</a>
+
+<% else %>
+  <a href="/logout">Logout</a>
+  <br>
+  <br>
+  <h1>Active Auctions</h1>
+  <% @active.each do |item| %>
+      <a href="/item/<%= item.id %>"><%= item.name %></a><br>
+  <% end %>
+<% end %>
