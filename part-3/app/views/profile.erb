@@ -25,17 +25,22 @@
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
 
     <% if @date_now_int < item_start_int %>
-      <b>AUCTION HAS NOT STARTED</b>
+      <b>Status</b>: DUDE, THIS AUCTION HAS NOT STARTED
 
     <% elsif @date_now_int >= item_end_int %>
-      <b>Winner: </b>
+      <b>Status</b>:
+      <% if item.bidder_id == 0 %>
+        <%= 'No bid' %>
+      <% else %>
+        <%= User.find(item.bidder_id).user %> Won the auction!
+      <% end %>
 
     <% else @date_now_int < item_end_int %>
-      <b>Current Highest Bidder</b>:
+      <b>Status</b>:
       <% if item.bidder_id == 0 %>
-        <%= 'none' %>
+        <%= 'No one has placed a bid yet' %>
       <% else %>
-        <%= User.find(item.bidder_id).user %>
+        The current highest bidder is <%= User.find(item.bidder_id).user %>
       <% end %>
   </p>
 
