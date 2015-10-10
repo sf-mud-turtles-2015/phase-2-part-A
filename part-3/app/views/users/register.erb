@@ -1,7 +1,14 @@
 <div class='container'>
-<form method="post" action="/users">
-  <input type="text" name="user[username]" placeholder="Username">
-  <input type="password" name="user[password]" placeholder="Password">
-  <input type="submit" value="Create">
-</form>
+
+  <form method="post" action="/users">
+    <input type="text" name="user[username]" placeholder="Username">
+    <input type="password" name="user[password]" placeholder="Password">
+    <input type="submit" value="Create">
+  </form>
+
+  <% if flash[:error] %>
+    <%= flash[:error] %>
+    <% flash[:error] = nil %>
+  <% end %>
+
 </div>

@@ -6,11 +6,20 @@ end
 
 post '/users' do
   @user = User.new(params[:user])
-  if @user.save
+  if @user.save && (params[:user][:password].length >= 6)
     session[:id] = @user.id
     redirect '/'
   else
+
+    if @user.errors[:username].any?
+      flash[:error] = 'That username is already in use or invalid'
+    elsif params[:user][:password].length < 6 #Need to fix, not working with bcrypt
+      flash[:error] = 'Your password must be 6 characters or longer'
+    else
+      flash[:error] = 'There was an error in your registration. Please try again.'
+    end
     redirect '/users/new'
+
   end
 end
 
@@ -31,7 +40,7 @@ post '/users/login' do
   if @user && @user.password == params[:password]
     session[:id] = @user.id
   else
-    flash[:error] = "The username or password you entered is invalid."
+    flash[:error] = "The username or password you entered is invalid." #not sure if using correctly
     redirect '/users/login'
   end
 
