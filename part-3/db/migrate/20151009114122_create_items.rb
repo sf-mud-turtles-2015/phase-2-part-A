@@ -3,8 +3,8 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name
       t.string :description
-      t.string :date_start
-      t.string :date_end
+      t.datetime :start_date
+      t.datetime :end_date
       t.integer :user_id
     end
   end

@@ -3,14 +3,14 @@
 
 <div class = "signup">
   <h3>Sign up</h3>
-  <% if @errors %>
-      <%= @errors %>
-    <% else %>
-    <% end %>
+  <!-- error message helper-->
+    <%= error_message(@errors) %>
+
+    <!-- signup_form partial -->
   <form method="post" action="/user">
-    <input type="text" name="user_name" placeholder="User Name">
+    <input type="text" name="user[user_name]" placeholder="User Name">
     <br><br>
-    <input type="text" name="password" placeholder="Password">
+    <input type="password" name="user[password]" placeholder="Password">
     <br><br>
     <input type="submit" value="create">
   </form>

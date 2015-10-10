@@ -1,0 +1,16 @@
+
+<!-- Create new Item Form -->
+
+<form method="post" action="/item/<%= @user.id %>">
+  <input type="hidden" name="item[user_id]" value="<%= session[:user_id] %>">
+  <input type="text" name="item[name]" placeholder="Name">
+    <br><br>
+  <input type="text" name="item[description]" placeholder="Description">
+    <br><br>
+  <input type="datetime-local" name="item[start_date]" placeholder="YYY-MM-DD">
+    <br><br>
+  <input type="datetime-local" name="item[end_date]" placeholder="YYY-MM-DD">
+    <br><br>
+  <input type = "submit" value="Sell Item">
+    <br><br>
+</form>

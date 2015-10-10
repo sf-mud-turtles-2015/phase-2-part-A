@@ -14,11 +14,10 @@
 <h1>Here are all the items to bid on</h1>
 
 <% @item.each do |item| %>
-
-<!-- some logic here to display only ones within time limit.. Datetime.new -->
-
-  <a href="/item/<%= item.id %>"> <%= item.name %> </a>
-  <br>
-  <br>
+<!-- if Time.now is between start_date and end_date -->
+<!-- .to_i turns a time into an int and I can compare!!! -->
+  <% if (@time > item.start_date.to_i) && (@time < item.end_date.to_i) %>
+    <a href="/item/<%= item.id %>"> <%= item.name %> -by: NAME NEEDED </a><br><br>
+  <% end %>
 
  <% end %>

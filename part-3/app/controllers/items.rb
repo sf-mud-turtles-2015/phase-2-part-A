@@ -15,13 +15,7 @@ end
 #create a new item
 post '/item/:u_id' do
   #there must be a better way to do this....
-  Item.create(
-    name: params[:name],
-    description: params[:description],
-    date_start: params[:date_start],
-    date_end: params[:date_end],
-    user_id: params[:u_id]
-    )
+  Item.create(params[:item])
   redirect "/profile/#{params[:u_id]}"
 end
 

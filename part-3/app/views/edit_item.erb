@@ -1,33 +1,23 @@
 <h3>Name: <%= @item.name %> </h3>
 <p>Description: <%= @item.description %> </p>
-<p>Date Start: <%= @item.date_start %> </p>
-<p>Date End: <%= @item.date_end %> </p>
+<p>Date Start: <%= @item.start_date %> </p>
+<p>Date End: <%= @item.end_date %> </p>
 <p>Current number of bidders: </p>
+<p>session id: <%= session[:user_id] %> </p>
 <hr>
 
-<% if session[:user_id] == @item.user_id%>
+<!-- If the user created this item they can edit AND the user cannot be nil -->
+<% if session[:user_id] == @item.user_id && session[:user_id] != nil %>
 
   <h3>Edit <%= @item.name %></h3>
-
-      <form method="post" action="/item/<%= @item.id %>">
-        <input type="hidden" name="_method" value="put">
-        <input type="text" name="item[name]" placeholder="Name">
-          <br><br>
-        <input type="text" name="item[description]" placeholder="Description">
-          <br><br>
-        <input type="text" name="item[date_start]" placeholder="YYY-MM-DD">
-          <br><br>
-        <input type="text" name="item[date_end]" placeholder="YYY-MM-DD">
-          <br><br>
-        <input type = "submit" value="Edit Item">
-          <br><br>
-    </form>
+    <!-- Partial for Edit form... -->
+      <%= erb :_edit_form %>
 
     <% else%>
 
       <% if session[:user_id] != nil && session[:user_id] != @item.user_id %>
 
-        <!-- use is logged in and can bid -->
+        <!-- user is logged in and can bid -->
         <h3>Looks like you can bid on this item</h3>
 
         <form method="post" action="/bid/item/<%= @item.id %>">

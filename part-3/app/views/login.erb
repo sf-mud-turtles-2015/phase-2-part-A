@@ -5,10 +5,10 @@
       <%= @errors %>
     <% else %>
     <% end %>
-  <form method="get" action="/user">
+  <form method="post" action="/login">
     <input type="text" name="user_name" placeholder="User Name">
     <br><br>
-    <input type="text" name="password" placeholder="Password">
+    <input type="password" name="password" placeholder="Password">
     <br><br>
     <input type="submit" value="Login">
   </form>
