@@ -5,6 +5,7 @@ get '/' do
 end
 
 get '/index' do
+  @items = Item.all
   erb :index
 end
 
@@ -51,7 +52,8 @@ end
 # => user profile
 get '/profiles/:pid' do
   @user_name = User.find_by(id: session[:user_id]).user
-  @date_now_int = "#{DateTime.now.year}#{DateTime.now.month}#{DateTime.now.day}".to_i
+
+  session[:date_now] = "#{DateTime.now.year}#{DateTime.now.month}#{DateTime.now.day}".to_i
   erb :profile
 end
 

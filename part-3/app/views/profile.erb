@@ -22,7 +22,8 @@
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
 
 <!-- Auction not Started, seller can edit/delete -->
-    <% if @date_now_int < item.start %>
+
+    <% if session[:date_now] < item.start %>
       <b>Status</b>: DUDE, THIS AUCTION HAS NOT STARTED</br>
         <% if item.seller_id == session[:user_id] %>
           <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
@@ -32,7 +33,7 @@
         <% end %>
 
 <!-- Auction Ends -->
-    <% elsif @date_now_int >= item.end %>
+    <% elsif session[:date_now] >= item.end %>
       <b>Status</b>:
       <% if item.bidder_id.nil? %>
         <%= 'Auction has ended' %>
@@ -41,7 +42,7 @@
       <% end %>
 
 <!-- Auction Ongoing, bidders(non-seller) can bid -->
-    <% else @date_now_int < item.end %>
+    <% else session[:date_now] < item.end %>
       <b>Status</b>:
       <% if item.bidder_id.nil? %>
         <%= 'No one has placed a bid yet' %>

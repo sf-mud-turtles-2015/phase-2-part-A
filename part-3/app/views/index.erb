@@ -10,3 +10,19 @@
   <a href='/login'><button>login</button></a>
   <a href='/register'><button>register</button></a>
 <% end %>
+
+<% if session[:user_id] %>
+  <h4>Your Items</h4>
+    <% @items.each do |item| %>
+      <% if item.seller_id == session[:user_id] %>
+        <%= item.name %></br>
+      <% end %>
+    <% end %>
+
+  <h4>Your Bids</h4>
+    <% @items.each do |item| %>
+      <% if item.bidder_id == session[:user_id] %>
+        <%= item.name %></br>
+      <% end %>
+    <% end %>
+<% end %>
