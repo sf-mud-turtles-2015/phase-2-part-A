@@ -12,7 +12,11 @@
 </form>
 
 <% Item.all.each do |item| %>
-  <p>
+
+  <% item_start_int = item.start.scan(/\d/).join.to_i %>
+  <% item_end_int = item.end.scan(/\d/).join.to_i %>
+
+  <p id="item<%= item.id %>">
     <b>Name</b>: <%= item.name %>
     <b>Current Bid Price</b>: $<%= item.bid_price %>
     <b>Description</b>: <%= item.description %>
@@ -20,23 +24,13 @@
     <b>End Time</b>: <%= item.end %>
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
 
+    <% if @date_now_int < item_start_int %>
+      <b>AUCTION HAS NOT STARTED</b>
 
-<!-- pseudocode time:
--at each refresh, compare current @date_now with the auction ending time through helper method
+    <% elsif @date_now_int >= item_end_int %>
+      <b>Winner: </b>
 
--If ending time has reached, @won = true
-
--if @won = true, list out the winner, stop further bids and editings
-
--no one will be able to put more bid
-
--else show the highest bidder, edit/delete buttons for seller, and bid button for login-ed users
- -->
-
-    <% if @won %>
-      <b>Winner</b>:
-
-    <% else %>
+    <% else @date_now_int < item_end_int %>
       <b>Current Highest Bidder</b>:
       <% if item.bidder_id == 0 %>
         <%= 'none' %>

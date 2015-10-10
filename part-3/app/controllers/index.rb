@@ -51,13 +51,14 @@ end
 # => user profile
 get '/profiles/:pid' do
   @user_name = User.find_by(id: session[:user_id]).user
+  @date_now_int = "#{DateTime.now.year}#{DateTime.now.month}#{DateTime.now.day}".to_i
   erb :profile
 end
 
 # => create an item for bidding from profile
 post '/profiles/:pid' do
   Item.create(name: params[:name], bid_price: params[:bid_price], description: params[:description], start: params[:start], end: params[:end], seller_id: session[:user_id], bidder_id: 0 )
-  redirect "profiles/#{params[:pid]}"
+  redirect "profiles/#{session[:user_id]}"
 end
 
 # => edit an item by owner
@@ -82,8 +83,6 @@ end
 post '/items/:iid/bid' do
   item = Item.find(params[:iid])
   bidder_offer = params[:bid_price]
-  @date_now = "#{DateTime.now.year}-#{DateTime.now.month}-#{DateTime.now.day}"
-
   if item.bid_price.to_i < bidder_offer.to_i
     item.update(bid_price: bidder_offer, bidder_id: session[:user_id])
     redirect "profiles/#{session[:user_id]}"
