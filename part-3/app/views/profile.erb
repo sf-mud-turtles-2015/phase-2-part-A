@@ -21,39 +21,43 @@
     <b>End Time</b>: <%= item.end %>
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
 
+<!-- Auction not Started, seller can edit/delete -->
     <% if @date_now_int < item.start %>
-      <b>Status</b>: DUDE, THIS AUCTION HAS NOT STARTED
+      <b>Status</b>: DUDE, THIS AUCTION HAS NOT STARTED</br>
+        <% if item.seller_id == session[:user_id] %>
+          <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
+          <form method='post' action= "/items/<%= item.id %>/delete">
+            <input type='submit' value='delete'>
+          </form>
+        <% end %>
 
+<!-- Auction Ends -->
     <% elsif @date_now_int >= item.end %>
       <b>Status</b>:
-      <% if item.bidder_id %>
-        <%= 'No bid' %>
+      <% if item.bidder_id.nil? %>
+        <%= 'Auction has ended' %>
       <% else %>
         <%= User.find(item.bidder_id).user %> Won the auction!
       <% end %>
 
+<!-- Auction Ongoing, bidders(non-seller) can bid -->
     <% else @date_now_int < item.end %>
       <b>Status</b>:
-      <% if item.bidder_id %>
+      <% if item.bidder_id.nil? %>
         <%= 'No one has placed a bid yet' %>
       <% else %>
         The current highest bidder is <%= User.find(item.bidder_id).user %>
       <% end %>
-  </p>
-
-    <% if item.seller_id == session[:user_id]  %>
-      <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
-      <form method='post' action= "/items/<%= item.id %>/delete">
-        <input type='submit' value='delete'>
-      </form>
-    <% else %>
-      <form method='post' action= "/items/<%= item.id %>/bid">
-        <input type='text' name='bid_price' placeholder='bid price'>
-        <input type='submit' value='bid'>
-      </form>
+        <% unless item.seller_id == session[:user_id] %>
+          <form method='post' action= "/items/<%= item.id %>/bid">
+            <input type='text' name='bid_price' placeholder='bid price'>
+            <input type='submit' value='bid'>
+          </form>
+        <% end %>
       <% if @bid_error %>
-      <%= @bid_error %>
+        <%= @bid_error %>
       <% end %>
     <% end %>
-  <% end %>
+  </p>
+
 <% end %>
