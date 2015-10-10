@@ -8,7 +8,7 @@ post '/users' do
   @user = User.new(params[:user])
   if @user.save && (params[:user][:password].length >= 6)
     session[:id] = @user.id
-    redirect '/'
+    redirect '/index'
   else
 
     if @user.errors[:username].any?
@@ -32,7 +32,7 @@ end
 get '/users/logout' do
 
   session.destroy
-  redirect '/'
+  redirect '/index'
 end
 
 post '/users/login' do
@@ -44,7 +44,7 @@ post '/users/login' do
     redirect '/users/login'
   end
 
-  redirect '/'
+  redirect '/index'
 end
 
 get '/users/profile' do
