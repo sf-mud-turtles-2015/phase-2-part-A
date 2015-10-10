@@ -18,5 +18,6 @@ class User < ActiveRecord::Base
         winner << item
       end
     end
+    winner.uniq
   end
 end

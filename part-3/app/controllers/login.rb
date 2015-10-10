@@ -15,11 +15,9 @@ get '/' do
       @active << item
     end
   end
-
   erb :home
 end
 
-#needs errors
 post '/signup' do
   user = User.new(params)
   if user.save
@@ -36,7 +34,6 @@ get '/login' do
 end
 
 post '/login' do
-  p params
   user = User.find_by(username: params[:username])
   if user == nil || user.password != params[:password]
     @login_error = true
