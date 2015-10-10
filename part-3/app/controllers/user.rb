@@ -5,6 +5,7 @@ get '/user/:id' do
   if session[:user_id]
     @signed_in = true
   end
+
   erb :profile
 end
 

@@ -23,4 +23,8 @@
   <% @bids.each do |bid| %>
     <%= bid.item.name %>: <%= bid.amount %><br>
   <% end %>
+<h3>Auctions Won</h3>
+  <% @user.auctions_won.each do |item| %>
+    <%= item.name %>
+  <% end %>
 <% end %>
