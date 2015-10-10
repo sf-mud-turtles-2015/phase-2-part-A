@@ -19,7 +19,7 @@
 
     <p> To place a bid please <a href="/users/login">login</a> or <a href="/users/new">register</a>. </p>
 
-  <% elsif session[:id] != @item.user_id %>
+  <% elsif session[:id] != @item.user_id && @item.end_date.past? == false %>
 
     <div>
       <form action='<%= @item.id %>/bids/new' method='post'>

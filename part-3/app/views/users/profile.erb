@@ -6,7 +6,7 @@
     <% @your_items.each do |item| %>
      <a class='your-items' href="../items/<%= item.id %>"><%= item.name %></a>
 
-      <% if item.user_id == session[:id] %>
+      <% if item.user_id == session[:id] && item.end_date.past? == false %>
 
         <form class='your-items' action='../items/update/<%= item.id %>' method='get'>
           <input class='text-button' type='submit' value='Edit'>
