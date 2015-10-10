@@ -8,9 +8,7 @@ get '/users/login' do
 end
 
 post '/users/login' do
-  p params
   @user = User.find_by(username: params[:username])
-  p @user
 
   if @user && @user.password == params[:password]
     auth_login(@user)

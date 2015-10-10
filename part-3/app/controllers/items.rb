@@ -1,7 +1,12 @@
+post '/items' do
+  item = Item.new(params[:item])
+  p item
+end
+
 get '/items/:id' do
-  user = User.find(session[:user_id])
   listed_item = Item.find(params[:id])
   if session[:user_id]
+    user = User.find(session[:user_id])
     erb :"/items/view_item", locals: {user: user, item: listed_item}
   else
     @bid_error = "Please login or signup to view listings"

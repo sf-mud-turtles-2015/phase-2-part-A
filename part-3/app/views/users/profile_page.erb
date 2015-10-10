@@ -1,3 +1,5 @@
+<%= erb :"items/_new_item_form" %>
+
 <h1>Listings made by <%= user.username %>: </h1>
   <% user.listed_items.each do |item| %>
     <a href="/items/<%= item.id %>"><%= item.title %></a></br>
