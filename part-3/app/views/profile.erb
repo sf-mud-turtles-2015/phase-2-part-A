@@ -17,8 +17,10 @@
     <b>Name</b>: <%= item.name %>
     <b>Current Bid Price</b>: $<%= item.bid_price %>
     <b>Description</b>: <%= item.description %>
-    <b>Start Time</b>: <%= item.start %>
-    <b>End Time</b>: <%= item.end %>
+      <% start = item.start.to_s %>
+    <b>Start Time</b>: <%= start[0..3] + '-' + start[4..5] + '-' + start[6..7] %>
+      <% ending = item.end.to_s %>
+    <b>End Time</b>: <%= ending[0..3] + '-' + ending[4..5] + '-' + ending[6..7] %>
     <b>Seller</b>: <%= User.find(item.seller_id).user %>
 
 <!-- Auction not Started, seller can edit/delete -->
