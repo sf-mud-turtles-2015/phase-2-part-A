@@ -8,6 +8,7 @@
   -->
   <link rel="stylesheet" href="/css/normalize.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <!-- Add hover.css animation "framework"? -->
   <link href="/css/hover.css" rel="stylesheet" media="all">
   <!--
@@ -18,11 +19,12 @@
   <script src="/js/jquery.js"></script>
   <script src="/js/application.js"></script>
 
-  <title></title>
+  <title>ePay</title>
 </head>
 <body>
 
   <div class='nav-bar'>
+    <a href="/"><span class='web-name'>ePay</span></a>
     <a class='nav-links' href="/index">Home</a>
     <% if session[:id] %>
       <a class='nav-links' href="/users/profile">Profile</a>

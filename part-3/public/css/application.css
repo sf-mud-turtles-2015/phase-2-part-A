@@ -106,12 +106,15 @@ textarea {
   color: #FF6E6C;
 }
 
-.logo {
-  border: 1px solid;
+
+.web-name {
   text-align: left;
-  width: auto;
-  height: 100px;
+  font-family: 'Lobster', cursive;
+  display: inline-block;
+  float: left;
+  color: #555555;
 }
+
 
 /* splat animation for logo*/
 
@@ -195,4 +198,3 @@ textarea {
   83.61% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
-
