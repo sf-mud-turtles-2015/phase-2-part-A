@@ -1,4 +1,5 @@
 class Bid < ActiveRecord::Base
-  has_many :items
-  has_many :bidders, class_name: "User"
+  belongs_to :item
+  belongs_to :bidder, class_name: "User", foreign_key: :user_id
+  # belongs_to :user
 end

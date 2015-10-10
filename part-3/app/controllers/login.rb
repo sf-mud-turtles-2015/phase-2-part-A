@@ -1,14 +1,21 @@
 enable :sessions
 
 get '/' do
-  p session
   if session[:user_id]
     @signed_in = true
     @user_id = session[:user_id]
   else
     @signed_in = false
   end
-  @items = Item.all
+  today = Date.today.to_s.scan(/\d/).join.to_i
+  items = Item.all
+  @active = []
+  items.each do |item|
+    if item.start < today && item.finish > today
+      @active << item
+    end
+  end
+
   erb :home
 end
 

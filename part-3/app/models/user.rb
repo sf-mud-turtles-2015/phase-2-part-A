@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   has_many :items
   has_many :bids
-  has_many :potential_items, through: :bids, class_name: "Item"
+  has_many :potential_items, through: :bids, source: :item
 end

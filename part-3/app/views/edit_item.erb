@@ -1,8 +1,8 @@
 <form method="post" action="/user/<%= @user.id %>/auction/<%= @item.id %>">
   <input type="hidden" name="_method" value="put">
-  <input type='text' name='name' placeholder='Item Name'>
-  <input type='text' name='description' placeholder='description'>
-  <input type='text' name='start' placeholder='Start Time'>
-  <input type='text' name='finish' placeholder='End Time'>
+  <input type='text' name='name' value='<%= @item.name %>'>
+  <input type='text' name='description' value='<%= @item.description %>'>
+  <input type='text' name='start' value='<%= @item.start %>'>
+  <input type='text' name='finish' value='<%= @item.finish %>'>
   <input type="submit" value='Edit'>
 </form>

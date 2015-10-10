@@ -3,8 +3,8 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name
       t.string :description
-      t.string :start
-      t.string :finish
+      t.integer :start
+      t.integer :finish
       t.integer :user_id
     end
   end

@@ -4,5 +4,8 @@ get '/item/:i_id' do
 end
 
 post "/item/:i_id/bid" do
-  #make a bid item
+  bid = Bid.create(amount: params[:amount], item_id: params[:i_id], user_id: session[:user_id])
+  @item = Item.find(params[:i_id])
+  @bid_placed = "Thank you for your bid of #{bid.amount}. Good luck!"
+  erb :view_item
 end

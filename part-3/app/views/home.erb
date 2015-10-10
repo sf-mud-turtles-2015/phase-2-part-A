@@ -15,9 +15,8 @@
   <a href="/logout">Logout</a>
   <br>
   <br>
-  <% @items.each do |item| %>
+  <h1>Active Auctions</h1>
+  <% @active.each do |item| %>
       <a href="/item/<%= item.id %>"><%= item.name %></a><br>
   <% end %>
 <% end %>
-
-
