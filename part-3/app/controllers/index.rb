@@ -41,5 +41,11 @@ post '/login' do
   end
 end
 
+get '/home' do
+  @active_items = Item.where(["start_date < ? AND end_date > ?", Time.now, Time.now])
+  @inactive_items = Item.where(["start_date > ? OR end_date < ?", Time.now, Time.now])
+  erb :home
+end
+
 
 

@@ -1,1 +1,42 @@
-item_info_page.erb
+
+
+<div>
+
+<h1><%=@item.name%></h1><br>
+<%=@item.description%><br>
+<b>auction start date:</b> <%=@item.start_date%><br>
+<b>auction end date:</b> <%=@item.end_date%><br>
+
+</div>
+
+<h1>Bid History</h1>
+<ul>
+  <%@bids.each do |bid|%>
+  <li>
+    <%=bid.value%>
+  </li>
+  <%end%>
+</ul>
+
+<br><br><br><br><br>
+
+<%if @completed_bid%>
+<%=@completed_bid%>
+<%end%>
+<%if session[:id] != @item.user.id && @item.active? %>
+<h3>Place a Bid</h3>
+<div>
+<form action="/bids" method="post">
+  Value of Your Bid:<br>
+  <input type="text" name="value" placeholder="$$$$$$$$$">
+  <br>
+  <input type="hidden" name="item_id" value="<%=@item.id%>">
+  <input type="submit" value="Bid!">
+  <br>
+</form>
+</div>
+<%else%>
+<h5>This is your item, you cannot bid</h5>
+<%end%>
+
+

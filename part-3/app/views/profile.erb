@@ -1,5 +1,7 @@
-<%if session[:id]%>
+
+
 <p>Your Items</p>
+
 <% @items.each do |item| %>
 
 <li>
@@ -7,18 +9,30 @@
   <a href="/items/<%=item.id%>/edit">
     <button>edit item</button>
   </a>
-  <form action="/items/<%=item.id%>" method="get">
+  <form action="/items/delete/<%=item.id%>" method="get">
     <input type="submit" value="delete">
   </form>
   <br><br><br>
 </li>
 
+<%end%>
+<a href="/items/new">Create New Item</a>
+<br><br><br>
+
+
+<p><b>Your Bid History</b></p>
+
+<% @bids.each do |bid| %>
+
+<li>
+  $<%=bid.value%> for <a href="/items/<%=bid.item.id%>"><%=bid.item.name%></a>
+  <br><br><br>
+</li>
 
 <%end%>
 
-<a href="/items/new">Create New Item</p></a>
 
-<%else%>
-<p>Go Login</p>
-<%end%>
+
+
+
 

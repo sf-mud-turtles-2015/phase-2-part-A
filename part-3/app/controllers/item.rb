@@ -1,3 +1,6 @@
+require 'bcrypt'
+enable :sessions
+
 post '/items/new' do
   Item.create(name: params[:name], user_id: session[:id])
   redirect "/users/#{session[:id]}/profile"
@@ -28,7 +31,7 @@ post '/items/:i_id/edit' do
   #what happens if I user does not fill in all edit forms?
   #add item attributes here
  if session[:id]
-   Item.find(params[:i_id]).update_attributes(name: params[:name])
+   Item.find(params[:i_id]).update_attributes(name: params[:name], start_date: params[:start_date], end_date: params[:end_date])
    redirect "/users/#{session[:id]}/profile"
  else
    redirect '/'
@@ -36,7 +39,7 @@ post '/items/:i_id/edit' do
 end
 
 #tough time with delete route -> restless
-get '/items/:i_id' do
+get '/items/delete/:i_id' do
   if session[:id]
      Item.find(params[:i_id]).destroy
      redirect "/users/#{session[:id]}/profile"
@@ -45,14 +48,32 @@ get '/items/:i_id' do
   end
 end
 
-get 'items/info/:i_id' do
+get '/items/:i_id' do
   if session[:id]
-     Item.find(params[:i_id]).destroy
-     redirect "/users/#{session[:id]}/profile"
+     @item = Item.find(params[:i_id])
+     @bids = Bid.where(item_id: params[:i_id])
+     erb :item_info_page
   else
-    erb :item_info_page #make this
+    redirect "/" #make this
   end
 end
+
+post '/bids' do
+  if session[:id]
+    #remember to rest instance variables before sending back to erb
+    @item = Item.find(params[:item_id])
+    @bids = Bid.where(item_id: params[:item_id])
+    Bid.create(value: params[:value], user_id: session[:id], item_id: params[:item_id])
+    @completed_bid = "Looks like you bidded! Good Luck!"
+    erb :item_info_page
+  else
+    redirect "/" #make this
+  end
+end
+
+
+
+
 
 
 

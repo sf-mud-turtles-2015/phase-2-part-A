@@ -21,6 +21,7 @@ helpers do
 end
 ```
 
+
 ## Reloading
 
 After you create new files containing helpers, you must restart the web server

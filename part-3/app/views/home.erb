@@ -1,8 +1,15 @@
 <h1>Welcome to the Front Page</h1>
 
-<p>All the items</p>
+<p>All Active Items</p>
 
 
-<% @items.each do |item| %>
-<li><a href="/"><%=item.name%></a></li>
+<% @active_items.each do |item| %>
+<li><a href="/items/<%=item.id%>"><%=item.name%></a></li>
+<%end%>
+
+<p>All Current Inactive Items, Cannot Bid</p>
+
+
+<% @inactive_items.each do |item| %>
+<li><%=item.name%></li>
 <%end%>

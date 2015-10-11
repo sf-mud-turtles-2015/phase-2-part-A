@@ -3,6 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
 
   has_many :items
+  has_many :bids
 
   validates :username, presence: true, uniqueness: true
 
