@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>Profile Page</title>
+</head>
+<body>
+
+<h3>Add an item for auction</h3>
+<% if @errors %>
+   ERRORS: <br>
+   Name: <%= @errors[:name] %> <br>
+   Category: <%=  @errors[:category] %> <br>
+   Minimum Bid: <%=  @errors[:minimum_bid] %> <br>
+<% end %>
+  <form action="/items" method="post">
+    <input placeholder="Item name" name="name">
+    <input placeholder="Category" name="category">
+    <input placeholder="Minimum Bid" type="number" name="minimum_bid">
+    <input placeholder="Start date" type="date" name="start_date">
+    <input placeholder="End date" type="date" name="end_date">
+    <input type="submit">
+  </form>
+
+<h3>Your items for sale</h3>
+<% @items.each do |item| %>
+  <% if @user.id == item.user_id %>
+    <a href="/<%= item.id %>"><%= item.name %></a>, in category: <%= item.category %>, for sale by <%= item.user.username %>
+    <br>
+    <form action="/items/<%= item.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="DELETE">
+  <% end %>
+  <br><br>
+
+<% end %>
+
+<h3>All items for sale</h3>
+<% @items.each do |item| %>
+  <% if @user.id == item.user_id %>
+    <a href="/<%= item.id %>"><%= item.name %></a>
+  <% else %>
+    <%= item.name %>
+  <% end %>, in category: <%= item.category %>, for sale by <%= item.user.username %>
+  <br>
+<% end %>
+<br><br>
+
+<h3>Items you've bid on</h3>
+<br>
+<% Bid.where(user_id: session[:user_id]).find_each do |bid| %>
+  <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
+<% end %>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<h1>Item View</h1>
+
+<% if @user.id == @item.user_id %>
+
+  <h3>Edit your item for auction</h3>
+    <form action="/items/<%= @item.id %>" method="post">
+      <input type="hidden" name="_method" value="put">
+      <input placeholder="Item name" name="name" value="<%= @item.name %>">
+      <input placeholder="Category" name="category" value="<%= @item.category %>">
+      <input placeholder="Minimum Bid" type="number" name="minimum_bid" value="<%= @item.minimum_bid %>">
+      <input placeholder="Start date" type="date" name="start_date" value="<%= @item.start_date %>">
+      <input placeholder="End date" type="date" name="end_date" value="<%= @item.end_date %>">
+      <input type="submit">
+    </form>
+    <br>
+    Current number of bidders: <%= @item.bids.length %>
+    <br><br>
+<% else %>
+
+Name: <%= @item.name %><br>
+For sale by: <%= @item.user.username %><br>
+Category: <%= @item.category %><br>
+Minimum Bid: <%= @item.minimum_bid %><br>
+Start date: <%= @item.start_date %><br>
+End date: <%= @item.end_date %><br>
+Current number of bidders: <%= @item.bids.length %>
+<br><br>
+<% end %>
+
+Place bid:
+<form action="/bid/<%= @item.id %>" method="post">
+  <input placeholder="Bid value" name="value">
+  <input type="submit" value="Place Bid">
+</form>
+
+<%= @placed_text %>
+
+<h3> Current bids on item </h3>
+
+<% if @item.bids.where(user_id: @user.id).blank? %>
+    You haven't bid on this item!
+<% else %>
+  <% Bid.where(item_id: @item.id).find_each do |bid| %>
+    <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
+  <% end %>
+<% end %>
+
+<h3> Highest/Winning bid </h3>
+
+<%= Item.last.bids.order("value DESC").first.user.username %> bid $ <%= Item.last.bids.order("value DESC").first.value %>
