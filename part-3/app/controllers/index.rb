@@ -5,14 +5,19 @@ get '/' do
 end
 
 get '/users' do
-  erb :users
+  # session.destroy
+  if current_user
+    erb :'users/users'
+  else
+    redirect '/'
+  end
 end
 
 post '/login' do
   user = User.find_by(email: params[:email])
   if user && user.password == params[:password]
     session[:user_id] = user.id
-    redirect '/users'
+    redirect '/users/users'
   else
     redirect '/'
   end
@@ -24,7 +29,7 @@ post '/signup' do
   if user.save
     "*" * 80
     session[:user_id] = user.id
-    redirect '/users'
+    redirect '/users/users'
   else
     @errors = user.errors.full_messages
     p @errors
@@ -33,9 +38,23 @@ post '/signup' do
 end
 
 get '/users/:user_id' do
-  @user = User.find(session[:user_id])
-  @items = Item.all
-  erb :profile
+  if current_user
+    @user = User.find(session[:user_id])
+    @items = Item.all
+    redirect '/items'
+  else
+    redirect '/'
+  end
+end
+
+get '/items' do
+  if current_user
+    @user = User.find(session[:user_id])
+    @items = Item.all
+    erb :'items/items'
+  else
+    redirect '/'
+  end
 end
 
 post '/logout' do
@@ -53,17 +72,14 @@ end
 get '/users/:user_id/items/:item_id/edit' do
   p params[:item_id]
   @item = Item.find(params[:item_id])
-  erb :edit_item
+  erb :'items/edit_item'
 end
 
 put '/users/:user_id/items/:item_id' do
-  "hi"
-  # p params
-  # item = Item.find_by(id: params[:item_id])
-  # p item
-
-  # item.update_attributes(title: params[:title])
-  # redirect "/users/#{session[:user_id]}"
+  item = Item.find(params[:item_id])
+  p params[:item]
+  item.update_attributes(params[:item])
+  redirect '/items'
 end
 
 delete '/users/:user_id/items/:item_id' do
@@ -76,12 +92,24 @@ end
 get '/users/:user_id/items/:item_id' do
   @item = Item.find(params[:item_id])
   @bidders = @item.bids.count
-  erb :show_item
+  erb :'items/show_item'
 end
 
 post '/users/:user_id/items/:item_id/bid' do
   item = Item.find(params[:item_id])
-  Bid.create(value: 1, item_id: item.id)
-  erb :bid
+  p params
+  p "*" * 80
+  p params[:b]
+  no = params[:b]
+  p "%" * 80
+  p no
+  bid = Bid.create(amount: no, item_id: item.id, user_id: session[:user_id] )
+  if request.xhr?
+    {bidder: User.find(bid.user_id).email, amount: bid.amount }.to_json
+  else
+    redirect "/users/#{session[:user_id]}/items/#{item.id}"
+  end
 end
+
+
 

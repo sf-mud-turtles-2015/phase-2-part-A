@@ -1,0 +1,10 @@
+<h1>Edit your item: <%= @item.title %></h1>
+<form action="/users/<%= session[:user_id] %>/items/<%= @item.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="item[title]" placeholder="title">
+  <input type="text" name="item[description]" placeholder="description">
+  <input type="text" name="item[start_date]" placeholder="start date">
+  <input type="text" name="item[end_date]" placeholder="end date">
+  <input type="submit" value="edit">
+</form>
+
