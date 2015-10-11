@@ -6,7 +6,7 @@ p "in the seed file"
 end
 
 30.times do
-  Item.create(name: Faker::App.author, description: Faker::Name, bid: rand(0..50), auction_begin: Faker::Time.forward(23, :morning), auction_end: Faker::Time.forward(23, :evening))
+  Item.create(name: Faker::App.author, description: Faker::Name, bid: rand(0..50), auction_begin: Faker::Time.forward(23, :morning), auction_end: Faker::Time.forward(23, :evening), user_id: rand(1..30))
 end
 
 

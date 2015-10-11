@@ -1,10 +1,11 @@
 enable :sessions
 
 get '/' do
-  # if user
-    # @user = User.find(params[:id])
-  # end
-  @items = Item.all
+  if session[:user_id]
+    @user = User.find(params[:id])
+  else
+    redirect '/register'
+  end
   erb :index
 end
 
@@ -13,34 +14,47 @@ get '/register' do
 end
 
 post '/register' do
-  p params
   @user = User.new(params[:user])
+  # session[:user_id] = @user.id
+  # p "session user_id"
+  # p session[:user_id]
   if @user.save
     redirect '/'
     p sessions
   else
     @errors = @user.errors.messages
     p @errors
-     erb :register
+    erb :register
   end
 end
 
 get '/login' do
-
   erb :login
+end
+
+post '/login' do
+
+    @user = User.find_by(username: params[:username])
+    session[:user_id] = @user.id
+    p session[:user_id]
+    redirect '/users/homepage'
 end
 
 # change to user id
 
 get '/users/homepage' do
-  # @user = User.find(:id)
-  @items = Item.all
-  erb :homepage
+  @user = User.find_by(params[:id])
+  if @user && @user[:password] == @user.password && session[:user_id] = @user.id
+    @items = Item.all
+    erb :homepage
+  else
+    redirect '/register'
+  end
 end
 
 
 get '/logout' do
-  session.clear
+  session[:user_id] = nil
   redirect '/login'
 end
 
@@ -62,7 +76,7 @@ post "/users/homepage/items/new" do
   redirect '/users/homepage'
 end
 
-get "/items/#{item.id}" do
-  @item = Item.find(params[:id])
-  erb :item
-end
+# get "/items/#{item.id}" do
+#   # @item = Item.find(params[:id])
+#   erb :item
+# end

@@ -2,8 +2,13 @@
 <head>
   Welcome to your homepage
 
+Your username is <%= @user.username %>
+Your session is <%= session[:user_id] %>
 
-
+<% @items.each do |item| %><br><br>
+<%= item.name %><br>
+<% end %>
+<br><br><br>
   <title></title>
 </head>
 <body>

@@ -3,8 +3,15 @@
   <title></title>
 </head>
 <body>
-  You are on the login page
 
+<form method="post" action "/login">
+  Username:<br>
+  <input type="text" name="user[username]">
+  <br>
+  Password:<br>
+  <input type="password" name="user[password]">
+<input type="submit" value="Login">
+</form>
 
 </body>
 </html>
