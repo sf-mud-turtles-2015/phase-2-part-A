@@ -3,7 +3,9 @@
 }
 
 .items {
-  border: 1px solid gray;
+  color: #CC0066;
+  border: 2px solid #3366CC;
+  border-radius: 1em;
   width: 300px;
   height: 150px;
   font-family: serif;
@@ -13,20 +15,26 @@
   display: inline-block;
 }
 
-form input[type=submit], button {
-  color: blue;
-  border: 1px dotted blue;
-  border-radius: 0.5em;
-  background-color: gold;
-  text-decoration: none;
-  margin: 0.3em;
-}
-
 form {
   display: inline-block;
 }
 
+form input {
+  border: 1.5px solid blue;
+  border-radius: 0.5em;
+  margin: 0.3em;
+}
+
+form input[type=submit], button {
+  color: white;
+  border-radius: 0.5em;
+  background-color: #3366CC;
+  margin: 0.3em;
+}
+
+
 .container {
   width: 1400px;
   margin: auto;
+  color: #CC0066;
 }
