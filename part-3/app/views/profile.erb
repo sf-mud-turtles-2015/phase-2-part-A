@@ -8,7 +8,20 @@
 
 </div>
 
-<h3>Hey Here are all your items...</h3>
+<!-- Items you have won -->
+<h4> Items you have won!</h4>
+ <% @bid_items.each do |bid| %>
+    <li> <%= bid.item.find_max(session[:user_id]) %> </li>
+ <% end %>
+
+<!-- Items you have bid on -->
+<h4>Items you bid on</h4>
+
+  <% @bid_items.each do |bid| %>
+    <li><a href="/item/<%= bid.item.id %>"> <%= bid.item.name %> </a>-- For: $<%= bid.amount %></li>
+  <% end %>
+
+<h4>Your Items for sale</h4>
 
 <% @items.each do |item| %>
   <div class="all_items" style= "border: 2px solid black">
