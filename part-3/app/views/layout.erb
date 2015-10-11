@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
   <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="/js/jquery.js"></script>
   <script src="/js/application.js"></script>
 
   <title></title>
+    <%if session[:owner_id] %>
+      Welcome, <%= session[:user_name]%> | <a href="/">Home</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a>
+    <% end %>
+    <%if not session[:owner_id] %>
+      <a href="/">Home</a> | <a href="/login">Log in</a> | <a href="/register">Register</a>
+    <% end %>
+    <hr>
 </head>
 <body>
-  <%= yield %>
+  <div class='container'>
+    <%= yield %>
+  </div>
 </body>
 </html>

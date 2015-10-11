@@ -1,0 +1,17 @@
+<h1>Add an item to the auction site</h1>
+
+<form method= 'post' action = '/items'>
+  <label for="item[title]">Title</label>
+  <input type = 'text' name = 'item[title]'><br>
+
+  <label for="item[description]">Description</label>
+  <input type = 'text' name = 'item[description]'><br>
+
+  <label for="item[open]">Start date/time <em>(format YYYY-MM-DD HH:MM:SS)</em></label>
+  <input type = 'text' name = 'item[open]'><br>
+
+  <label for="item[close]">End date/time <em>(format YYYY-MM-DD HH:MM:SS)</em></label>
+  <input type = 'text' name = 'item[close]'><br>
+
+  <input type='submit' value="Submit">
+</form>
