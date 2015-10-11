@@ -7,12 +7,14 @@ end
 
 # Item Creation
 post '/items' do
+  @items = Item.all
+  @bids = Bid.all
   @user = User.find(session[:user_id])
   @item = Item.create({name: params[:name], category: params[:category], minimum_bid: params[:minimum_bid], status: "for_sale", start_date: params[:start_date],end_date: params[:end_date], user_id: @user.id})
-  if @item.errors
+  if @item.errors.any?
     @errors = @item.errors.messages
-    redirect '/profile'
   end
+  erb :profile
 end
 
 # Item Update

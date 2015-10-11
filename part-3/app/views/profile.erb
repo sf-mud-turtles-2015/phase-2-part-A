@@ -3,11 +3,14 @@
   <title>Profile Page</title>
 </head>
 <body>
-    <% if @errors %>
-      <%= @errors %>
-    <% end %>
 
 <h3>Add an item for auction</h3>
+<% if @errors %>
+   ERRORS: <br>
+   Name: <%= @errors[:name] %> <br>
+   Category: <%=  @errors[:category] %> <br>
+   Minimum Bid: <%=  @errors[:minimum_bid] %> <br>
+<% end %>
   <form action="/items" method="post">
     <input placeholder="Item name" name="name">
     <input placeholder="Category" name="category">
@@ -22,8 +25,6 @@
   <% if @user.id == item.user_id %>
     <a href="/<%= item.id %>"><%= item.name %></a>, in category: <%= item.category %>, for sale by <%= item.user.username %>
     <br>
-  <% end %>
-  <% if @user.id == item.user_id %>
     <form action="/items/<%= item.id %>" method="post">
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="DELETE">
