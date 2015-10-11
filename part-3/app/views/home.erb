@@ -1,12 +1,31 @@
 <h1>Welcome <%= user.username %></h1>
+
+<h3>list a new item</h3>
+
+<div class="new-item-form">
+  <form action="/items" method="post">
+    <input type="text" placeholder="title" name="title"><br>
+    <input type="text" placeholder="details" name="detail"><br>
+    <input type="text" placeholder="condition" name="condition"><br>
+    <input type="text" placeholder="start date" name="start_date"><br>
+    <input type="text" placeholder="end date" name="end_date"><br>
+    <input type="submit" value="submit">
+  </form>
+</div>
+
 <h3>These are you're current listings</h3>
   <% user.listed_items.each do |item| %>
-    <a href="/items/<%= item.id %>"><%= item.title %></a>
+    <a href="/items/<%= item.id %>"><%= item.title %></a><br>
   <% end %>
 
 <h3>These are your current bids</h3>
   <% user.bidded_items.each do |item| %>
     <a href="/bids/<%= item.id %>"><%= item.title %></a><br>
   <% end %>
+<h3>These are current public listings on our site<h3>
+
+<% items.each do |item| %>
+  <a href="/items/<%= item.id %>"><%= item.title %></a><br>
+<% end %>
 
 

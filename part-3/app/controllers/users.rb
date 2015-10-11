@@ -8,9 +8,7 @@ get '/users/login' do
 end
 
 post '/users/login' do
-  p params
   @user = User.find_by(username: params[:username])
-  p @user
 
   if @user && @user.password == params[:password]
     auth_login(@user)
@@ -41,7 +39,8 @@ end
 
 get '/home' do
   user = User.find(session[:user_id])
-  erb :home, locals: {user: user}
+  items = Item.all
+  erb :home, locals: {user: user, items: items}
 end
 
 get '/users/:id' do

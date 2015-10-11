@@ -4,4 +4,17 @@ $(document).ready(function() {
   // when we try to bind to them
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  // $('.new-item-form form').submit(function(e){
+
+  //   var path = $(".new-item-form form").attr("action");
+  //   console.log(path)
+
+  //   $.ajax({
+  //     url: path,
+  //     method: 'post'
+  //   })
+
+  // })
+
+
 });
