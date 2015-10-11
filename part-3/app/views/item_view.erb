@@ -1,0 +1,24 @@
+<h1>Item View</h1>
+
+<% if @user.id == @item.user_id %>
+
+  <h3>Edit your item for auction</h3>
+    <form action="/items/<%= @item.id %>" method="post">
+      <input type="hidden" name="_method" value="put">
+      <input placeholder="Item name" name="name" value="<%= @item.name %>">
+      <input placeholder="Category" name="category" value="<%= @item.category %>">
+      <input placeholder="Minimum Bid" type="number" name="minimum_bid" value="<%= @item.minimum_bid %>">
+      <input placeholder="Start date" type="date" name="start_date" value="<%= @item.start_date %>">
+      <input placeholder="End date" type="date" name="end_date" value="<%= @item.end_date %>">
+      <input type="submit">
+    </form>
+<% else %>
+
+Name: <%= @item.name %>
+For sale by: <%= @item.user.username %>
+Category: <%= @item.category %>
+Minimum Bid: <%= @item.minimum_bid %>
+Start date: <%= @item.start_date %>
+End date: <%= @item.end_date %>
+
+<% end %>
