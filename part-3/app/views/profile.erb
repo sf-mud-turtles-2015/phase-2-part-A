@@ -1,0 +1,67 @@
+<body class='container'>
+<h3>Welcome, <%= @user_name%></h3>
+
+<a href='/index'><button>home</button></a>
+
+<form method='post' action='/profile'>
+  <input type='text' name='name' placeholder='item name'>
+  <input type='text' name='bid_price' placeholder='bid price'>
+  <input type='text' name='description' placeholder='item description'>
+  <input type='text' name='start' placeholder='start: YYYY-MM-DD'>
+  <input type='text' name='end' placeholder='end: YYYY-MM-DD'>
+  <input type='submit' value='put it up for auction!'>
+</form>
+
+<% @items.each do |item| %>
+
+  <section id="item<%= item.id %>" class="items">
+    <b>Name</b>: <%= item.name %></br>
+    <b>Current Bid Price</b>: $<%= item.bid_price %></br>
+    <b>Description</b>: <%= item.description %></br>
+      <% start = item.start.to_s %>
+    <b>Start Time</b>: <%= start[0..3] + '-' + start[4..5] + '-' + start[6..7] %></br>
+      <% ending = item.end.to_s %>
+    <b>End Time</b>: <%= ending[0..3] + '-' + ending[4..5] + '-' + ending[6..7] %></br>
+    <b>Seller</b>: <%= User.find(item.seller_id).user %></br>
+
+<!-- Before Auction Started, Seller can Edit/Delete -->
+    <% if session[:date_now] < item.start %>
+      <b>Status</b>: auction has not started</br>
+        <% if item.seller_id == session[:user_id] %>
+          <a href="/items/<%= item.id %>/edit"><button>edit</button></a>
+          <form method='post' action= "/items/<%= item.id %>/delete">
+            <input type='submit' value='delete'>
+          </form>
+        <% end %>
+
+<!-- Auction Ends -->
+    <% elsif session[:date_now] >= item.end %>
+      <b>Status</b>:
+      <% if item.bidder_id.nil? %>
+        <%= 'auction has ended' %>
+      <% else %>
+        <%= User.find(item.bidder_id).user %> won the auction!
+      <% end %>
+
+<!-- Auction Ongoing, Bidders(non-seller) Can Bid -->
+    <% else session[:date_now] < item.end %>
+      <b>Status</b>:
+      <% if item.bidder_id.nil? %>
+        <%= 'no one has placed a bid yet' %>
+      <% else %>
+        The current highest bidder is <%= User.find(item.bidder_id).user %>
+        The current highest bidder is <%= User.find(item.bidder_id).user %>
+      <% end %>
+      <% unless item.seller_id == session[:user_id] %>
+        <form method='post' action= "/items/<%= item.id %>/bid">
+          <input type='text' name='bid_price' placeholder='bid price'>
+          <input type='submit' value='bid'>
+        </form>
+      <% end %>
+      <% if @bid_error %>
+        <%= @bid_error %>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
+</body>

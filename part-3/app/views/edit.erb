@@ -1,0 +1,7 @@
+<form method='post' action="/items/<%= @item.id %>/edit">
+  <input type='text' name='name' value= <%= @item.name %>>
+  <input type='text' name='bid_price' placeholder= 'new price'>
+  <input type='text' name='description' value= <%= @item.description %>>
+  <input type='text' name='end' placeholder= 'end: YYYY-MM-DD'>
+  <input type='submit' value='make the changes!'>
+</form>

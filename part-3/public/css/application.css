@@ -1,0 +1,40 @@
+.html {
+  font-family: sans-serif;
+}
+
+.items {
+  color: #CC0066;
+  border: 2px solid #3366CC;
+  border-radius: 1em;
+  width: 300px;
+  height: 150px;
+  font-family: serif;
+  padding: 1em;
+  margin: auto;
+  position: relative;
+  display: inline-block;
+}
+
+form {
+  display: inline-block;
+}
+
+form input {
+  border: 1.5px solid blue;
+  border-radius: 0.5em;
+  margin: 0.3em;
+}
+
+form input[type=submit], button {
+  color: white;
+  border-radius: 0.5em;
+  background-color: #3366CC;
+  margin: 0.3em;
+}
+
+
+.container {
+  width: 1400px;
+  margin: auto;
+  color: #CC0066;
+}

@@ -1,0 +1,38 @@
+<body class='container'>
+<h2>Come to bid all your moneyyyyyy</h2>
+
+<% if session[:user_id] %>
+  <form method='post' action='/index'>
+    <input type='submit' value='logout'>
+  </form>
+
+  <a href="/profile"><button>Start Bidding!</button></a>
+<% else %>
+  <a href='/login'><button>Login</button></a>
+  <a href='/register'><button>Register</button></a>
+<% end %>
+
+<% if session[:user_id] %>
+  <h4>Items on Sale</h4>
+    <% @items.each do |item| %>
+      <% if item.seller_id == session[:user_id] %>
+        <%= item.name %></br>
+      <% end %>
+    <% end %>
+
+  <h4>Leading Bids</h4>
+    <% @items.each do |item| %>
+      <% if item.bidder_id == session[:user_id] && item.end > session[:date_now] %>
+        <%= item.name %></br>
+      <% end %>
+    <% end %>
+
+  <h4>Won</h4>
+    <% @items.each do |item| %>
+      <% if item.bidder_id == session[:user_id] && item.end <= session[:date_now] %>
+        <%= item.name %></br>
+      <% end %>
+    <% end %>
+
+<% end %>
+</body>
