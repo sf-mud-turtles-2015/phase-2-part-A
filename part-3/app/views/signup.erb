@@ -1,0 +1,20 @@
+
+<!-- Create New User -->
+
+<div class = "login">
+  <h3>Sign up</h3>
+  <!-- error message helper-->
+    <%= error_message(@errors) %>
+
+    <!-- signup_form partial -->
+  <form method="post" action="/user">
+    <input type="text" name="user[user_name]" placeholder="User Name">
+    <br><br>
+    <input type="password" name="user[password]" placeholder="Password">
+    <br><br>
+    <input type="submit" value="create">
+  </form>
+</div>
+
+<hr>
+

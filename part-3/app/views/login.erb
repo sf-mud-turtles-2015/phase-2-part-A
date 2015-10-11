@@ -1,0 +1,16 @@
+
+<div class = "login">
+  <h3>Login</h3>
+
+  <%= error_message(@errors) %>
+
+  <form method="post" action="/login">
+    <input type="text" name="user_name" placeholder="User Name">
+    <br><br>
+    <input type="password" name="password" placeholder="Password">
+    <br><br>
+    <input type="submit" value="Login">
+  </form>
+  <a href="/signup>Dont have an account?</a>
+</div>
+
