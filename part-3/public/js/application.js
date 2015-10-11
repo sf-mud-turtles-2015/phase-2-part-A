@@ -1,7 +1,20 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('.bid').submit(function(e) {
+    e.preventDefault();
+    var user_id = $('form').attr("id")
+    var item_id = $('h2').attr("class")
+    var data = $(this).serialize();
+    alert("Thank you for your bid. Good luck!");
+    $.ajax({
+      // user id, item id
+      url: "/users/" + user_id + "/items/" + item_id + "/bid",
+      method: 'post',
+      data: data
+    })
+    .done(function(response) {
+      console.log(response)
+      var bid = JSON.parse(response)
+      $('ul').parent().append('<ul class="bid">' + bid.bidder + ', ' + bid.amount + '</ul>');
+    })
+  });
 });

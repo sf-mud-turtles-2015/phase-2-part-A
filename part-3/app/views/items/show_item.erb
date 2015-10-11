@@ -1,0 +1,26 @@
+<h1 class="user"><%= User.find(session[:user_id]).email %>'s page</h1>
+<h2 class="<%= @item.id %>">Details of item: <%= @item.title %> </h2>
+<%= @item.description %>
+<h4>Current number of bidders: <%= @bidders %></h4>
+<h4>Bidding details</h4>
+<li>
+  <% @item.bids.each do |bid| %>
+  <ul class="bid"><%= User.find(bid.user_id).email %>: <%= bid.amount %>
+  </ul>
+  <% end %>
+</li>
+
+<% if session[:user_id] %>
+  <h1>Enter a bid amount:</h1>
+  <form id="<%= session[:user_id] %>" class="bid" action="/users/<%= session[:user_id] %>/items/<%= @item.id%>/bid" method="post">
+    <!-- <input type="hidden" name="method" value="put"> -->
+    <input type="number" name="b" placeholder="bid amount" value="">
+    <input type="submit" value="Place bid">
+  </form>
+<% else %>
+  <a href="/">To place a bid please login or register</a>
+<% end %>
+
+<h1
+
+
