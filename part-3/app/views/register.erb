@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<% if @errors %>
+  <% @errors.each do |message| %>
+  <%= message %>
+  <% end %>
+  <% end %>
+<form method="post" action "/register">
+  Username:<br>
+  <input type="text" name="user[username]">
+  <br>
+  Password:<br>
+  <input type="password" name="user[password]">
+<input type="submit" value="Enter">
+</form>
+
+<a href="/login">Already Have an account? Login here</a>
+
+</body>
+</html>

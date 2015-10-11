@@ -1,0 +1,15 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+
+<% @items.each do |item| %>
+<a href="/items/<%= item.id %>"><%= item.name %></a> <br>
+Auction ends at <%= item.auction_end %> <br><br>
+<% end %>
+
+
+</body>
+</html>
