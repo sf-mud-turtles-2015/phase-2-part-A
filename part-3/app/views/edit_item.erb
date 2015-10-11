@@ -8,6 +8,7 @@
 <hr>
 
 <!-- If the user created this item they can edit AND the user cannot be nil -->
+<!-- Helper method for the session checks would be nice... -->
 <% if session[:user_id] == @item.user_id && session[:user_id] != nil %>
 
   <h3>Edit <%= @item.name %></h3>

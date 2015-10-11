@@ -44,8 +44,10 @@ post '/login' do
     redirect '/'
   else
     # was getting an error with this....
-    # @errors = @user.errors.messages
-    erb :signup
+    # puts "X" * 100
+    # p @errors
+    # "incorrect username or password"
+    erb :login
   end
 end
 

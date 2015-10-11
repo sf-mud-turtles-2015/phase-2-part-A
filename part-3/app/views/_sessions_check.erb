@@ -1,0 +1,15 @@
+
+<nav>
+  <% if session[:user_id] != nil %>
+  <h2>Ebay</h2>
+
+    <a href="/items/all">Home</a>
+    <a href="/profile/<%= session[:user_id] %>">View profile</a>
+    <a href="/logout">Logout</a>
+
+  <% else %>
+    <a href="/items/all">Home</a>
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+  <% end %>
+</nav>

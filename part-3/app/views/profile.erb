@@ -1,4 +1,5 @@
-<h1>Welcome <%= @user.user_name %> </h1>
+
+<h1 class="profile_h1">Welcome <%= @user.user_name %> </h1>
 
 <div class = "new_item">
   <h3>Sell New item</h3>
@@ -8,38 +9,42 @@
 
 </div>
 
+<div class= "wrap">
 <!-- Items you have won -->
-<h4> Items you have won!</h4>
- <% @bid_items.each do |bid| %>
-    <li> <%= bid.item.find_max(session[:user_id]) %> </li>
- <% end %>
+  <h4> Items you have won!</h4>
+   <% @bid_items.each do |bid| %>
+      <li> <%= bid.item.find_max(session[:user_id]) %> </li>
+   <% end %>
+</div>
 
 <!-- Items you have bid on -->
-<h4>Items you bid on</h4>
+<div class= "wrap">
+  <h4>Items you bid on</h4>
 
-  <% @bid_items.each do |bid| %>
-    <li><a href="/item/<%= bid.item.id %>"> <%= bid.item.name %> </a>-- For: $<%= bid.amount %></li>
+    <% @bid_items.each do |bid| %>
+      <li class= "bid_li"><a class = "bid_item" href="/item/<%= bid.item.id %>"> <%= bid.item.name %> </a>For: $<%= bid.amount %></li>
+    <% end %>
+</div>
+
+<div class= "wrap">
+  <h4>Your Items for sale</h4>
+
+  <% @items.each do |item| %>
+    <div class = "sale">
+      <!-- item name -->
+        <li><%= item.name %></li>
+
+        <!-- Update Item -->
+        <a href="/item/<%= item.id %>">Update</a>
+
+        <!-- delete Item -->
+        <form method="post" action="/item/<%= item.id %>">
+          <input type= "hidden" name="_method" value="delete">
+          <input type="submit" value="delete">
+        </form>
+      </div>
   <% end %>
+</div>
 
-<h4>Your Items for sale</h4>
-
-<% @items.each do |item| %>
-  <div class="all_items" style= "border: 2px solid black">
-  <!-- item name -->
-    <%= item.name %>
-
-    <!-- Update Item -->
-    <a href="/item/<%= item.id %>">Update</a>
-
-    <!-- delete Item -->
-    <form method="post" action="/item/<%= item.id %>">
-      <input type= "hidden" name="_method" value="delete">
-      <input type="submit" value="delete">
-    </form>
-  </div>
-
-  <br><br>
-
-<% end %>
 
 

@@ -6,6 +6,7 @@ enable :sessions
 get '/profile/:id' do
   @user = User.find(params[:id])
   @items = Item.where(user_id: params[:id])
+  #dont think i need these but not going to test it...
   @bid_items = Bid.where(user_id: session[:user_id])
   @all_bids = Bid.all
 

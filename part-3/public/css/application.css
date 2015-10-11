@@ -1,0 +1,229 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+
+/********************
+ Nav BAR
+ **********************/
+nav {
+  box-shadow: 0 8px 6px -6px black;
+  overflow: auto;
+  width: 100%;
+  min-height: 80px;
+}
+
+nav h2 {
+  display: inline-block;
+  line-height: 45px;
+  margin-left: 20px;
+  font-size: 2em;
+}
+
+nav a {
+  min-width: 120px;
+  text-align: center;
+  display: inline-block;
+  padding: 15px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  float: right;
+  margin: 20px;
+  border: 2px solid black;
+}
+
+nav a:hover {
+  background-color: white;
+  color:black;
+}
+
+/********************************************************************/
+
+
+/********************************************************************/
+/* Homgepage */
+/********************************************************************/
+
+
+
+.list {
+  width: 35%;
+  margin: 0 auto;
+  text-align:  center;
+  font-size: 1.5em;
+  padding: 60px 20px;
+}
+
+.list h1 {font-size: 1.3 rem;}
+
+.list a {
+  display: block;
+  padding: 10px;
+  background-color: DarkGray;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.list a:hover {
+  background-color: black;
+}
+
+
+/*******************************
+Profile
+*******************************/
+.profile_h1 {
+  text-align: left;
+}
+
+.new_item {
+  margin: 0 auto;
+  width: 80%;
+  border-bottom: 2px solid black;
+}
+
+.new_item h3 {
+  text-align: center;
+  font-size: 24px;
+}
+
+.new_item form {
+  margin-bottom: 50px;
+  width: 100%;
+  text-align: center;
+
+}
+.new_item input {
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  /*width: 15%;*/
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+.wrap {
+  width: 32%;
+  overflow: auto;
+  float: left;
+  min-height: 400px;
+  margin-left: 20px;
+  margin-top: 20px;
+
+  text-align: center;
+}
+
+.wrap h4 {
+  font-size: 33px;
+  margin-top: 15px;
+  color: black;
+}
+.wrap a {
+  font-size: 20px;
+}
+
+.wrap li {
+  font-size: 20px;
+}
+
+.sale {
+  width: 30%;
+  padding: 10px;
+  background-color: gray;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.bid_item {
+  display: block;
+  padding: 15px;
+  background-color: black;
+  width: 30%;
+  color: white;
+  margin: 0 auto;
+}
+
+.bid_item:hover {
+  background-color: gray;
+}
+
+.bid_li {
+  border-bottom: 2px solid black;
+  padding-bottom: 20px;
+}
+
+/*****************************
+Login
+******************************/
+
+.login{
+  margin-top: 100px;
+  max-width: 30%;
+  margin: 0 auto;
+  background-color: gray;
+}
+
+.login h3 {
+  padding-top: 20px;
+  color:white;
+  text-align: center;
+  margin-top: 20%;
+  font-size: 3em;
+
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+               0px 8px 13px rgba(0,0,0,0.1),
+               0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.login form {
+  /*width: 100%;*/
+  padding-bottom: 20px;
+}
+
+.login input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  margin-top: 10px;
+  width: 70%;
+
+box-shadow: 0px 10px 15px -6px rgba(0,0,0,0.75);
+}
+
+.login input[type="submit"] {
+  border: none;
+  padding: 15px;
+  background-color: white;
+  color: gray;
+  margin-top: 20px;
+  width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

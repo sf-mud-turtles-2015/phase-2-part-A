@@ -1,10 +1,9 @@
 
-<div class = "signup">
+<div class = "login">
   <h3>Login</h3>
-  <% if @errors %>
-      <%= @errors %>
-    <% else %>
-    <% end %>
+
+  <%= error_message(@errors) %>
+
   <form method="post" action="/login">
     <input type="text" name="user_name" placeholder="User Name">
     <br><br>
@@ -12,6 +11,6 @@
     <br><br>
     <input type="submit" value="Login">
   </form>
-  <a href="/signup">Dont have an account?</a>
+  <a href="/signup>Dont have an account?</a>
 </div>
 
