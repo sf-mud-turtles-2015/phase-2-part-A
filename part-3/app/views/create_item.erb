@@ -1,0 +1,17 @@
+<p>Create New Item</p>
+
+<%if session[:id]%>
+<form action="/items/new" method="post">
+  Name:<br>
+  <input type="text" name="name" value="">
+  <br>
+  Auction Start Date<br>
+  <input type="text" name="start_date" placeholder="YYYY-MM-DD"><br>
+  Auction End Date<br>
+  <input type="text" name="end_date" placeholder="YYYY-MM-DD"><br>
+  <input type="submit" value="Add Item">
+</form>
+<%else%>
+<p>Login before creating new item</p>
+<%end%>
+
