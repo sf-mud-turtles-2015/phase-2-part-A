@@ -74,5 +74,6 @@ end
 get '/profile' do
   @user = User.find(session[:user_id])
   @items = Item.all
+  @bids = Bid.all
   erb :profile
 end

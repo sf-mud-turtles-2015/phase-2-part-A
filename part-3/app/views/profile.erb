@@ -18,7 +18,6 @@
   </form>
 
 <h3>Your items for sale</h3>
-<br>
 <% @items.each do |item| %>
   <% if @user.id == item.user_id %>
     <a href="/<%= item.id %>"><%= item.name %></a>, in category: <%= item.category %>, for sale by <%= item.user.username %>
@@ -29,11 +28,11 @@
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="DELETE">
   <% end %>
+  <br><br>
+
 <% end %>
 
-<br><br><br>
 <h3>All items for sale</h3>
-<br>
 <% @items.each do |item| %>
   <% if @user.id == item.user_id %>
     <a href="/<%= item.id %>"><%= item.name %></a>
@@ -42,6 +41,12 @@
   <% end %>, in category: <%= item.category %>, for sale by <%= item.user.username %>
   <br>
 <% end %>
+<br><br>
+
+<h3>Items you've bid on</h3>
 <br>
+<% Bid.where(user_id: session[:user_id]).find_each do |bid| %>
+  <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
+<% end %>
 </body>
 </html>

@@ -12,6 +12,9 @@
       <input placeholder="End date" type="date" name="end_date" value="<%= @item.end_date %>">
       <input type="submit">
     </form>
+    <br>
+    Current number of bidders: <%= @item.bids.length %>
+    <br><br>
 <% else %>
 
 Name: <%= @item.name %>
@@ -20,5 +23,19 @@ Category: <%= @item.category %>
 Minimum Bid: <%= @item.minimum_bid %>
 Start date: <%= @item.start_date %>
 End date: <%= @item.end_date %>
+Current number of bidders: <%= @item.bids %>
+<br>
+<% end %>
 
+Place bid:
+<form action="/bid/<%= @item.id %>" method="post">
+  <input placeholder="Bid value" name="value">
+  <input type="submit" value="Place Bid">
+</form>
+
+<%= @placed_text %>
+
+<h3> Current bids on item </h3>
+<% Bid.where(item_id: @item.id).find_each do |bid| %>
+  <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
 <% end %>

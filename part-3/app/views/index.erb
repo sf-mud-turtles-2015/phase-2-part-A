@@ -8,11 +8,8 @@
   </div>
   <h2> All items for sale </h2>
   <% @items.each do |item| %>
-    <% if session[:user_id] == item.user_id %>
       <a href="/<%= item.id %>"><%= item.name %></a>
-    <% else %>
-      <%= item.name %>
-    <% end %>, in category: <%= item.category %>, for sale by <%= item.user.username %>
+      <%= item.name %>, in category: <%= item.category %>, for sale by <%= item.user.username %>
   <br>
 <% end %>
 </body>
