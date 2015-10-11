@@ -1,6 +1,7 @@
 post '/items' do
-  item = Item.new(params[:item])
-  p item
+  user = User.find(session[:user_id])
+  item = Item.create(title: params[:title], detail: params[:detail], condition: params[:condition], start_date: params[:start_date], end_date: params[:end_date], user_id: user.id)
+  redirect "/users/#{ user.id }"
 end
 
 get '/items/:id' do
@@ -14,14 +15,23 @@ get '/items/:id' do
   end
 end
 
+get '/items/:id/delete' do
+  item = Item.find(params[:id])
+  user = item.user
+  item.destroy
+  erb :"/users/profile_page", locals: {user: user}
+end
+
+post '/items/:id/bids' do
+  user = User.find(session[:user_id])
+  bid = Bid.create(amount: params[:amount], user_id: user.id, item_id: params[:id])
+  redirect "items/#{params[:id]}"
+end
+
 get '/bids/:id' do
   bidded_item = Item.find(params[:id])
   current_user = User.find(session[:user_id])
-  p "%" * 100
-  p bidded_item.user #user who posted the item
-  p current_user  # active user
-  p "%" * 100
-  erb :"items/update_delete_item"
+  erb :"items/update_delete_item", locals: {bidded_item: bidded_item, current_user: current_user}
 end
 
 

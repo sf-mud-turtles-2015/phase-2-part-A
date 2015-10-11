@@ -39,7 +39,8 @@ end
 
 get '/home' do
   user = User.find(session[:user_id])
-  erb :home, locals: {user: user}
+  items = Item.all
+  erb :home, locals: {user: user, items: items}
 end
 
 get '/users/:id' do
