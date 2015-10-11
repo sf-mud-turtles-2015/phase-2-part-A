@@ -1,8 +1,8 @@
 # Caveat! Some parts of this application may be broken since I implemented bids with
 # custom foreign keys (i.e. user_id became owner_id) and I may have missed updating some
 # instances referencing user_id before time ran out. Known to do: implement bidding using
-# already-created models and migrations (although I didn't have time to test/polish)
 
+# already-created models and migrations (although I didn't have time to test/polish)
 get '/' do
   @available_items = Item.where("close >= ?", Date.today)
   erb :index
@@ -18,6 +18,7 @@ end
 
 post '/confirm_register' do
   @user = User.new(params[:registration])
+  @errors = @user.errors.messages
   if @user.save
     session_setter(@user)
     redirect '/'
@@ -32,6 +33,7 @@ post '/session' do # Where a login posts
     session_setter(@user)
     redirect '/'
   else
+    @errors = "Email or password invalid"
     erb :login
   end
 end
@@ -39,6 +41,8 @@ end
 get '/profile' do
   if session[:owner_id]
     @items = Item.all
+    @inactive_items = Item.where("close <= ?", Date.today)
+    @my_bids = Bid.where(bidder_id: session[:owner_id])
     erb :profile
   else
     erb :restricted
@@ -80,6 +84,13 @@ delete '/items/:id' do
   @item = Item.find(params[:id])
   @item.destroy
   redirect '/profile'
+end
+
+post '/items/:id/new_bid' do
+  @item = Item.find(params[:id])
+  Bid.create(bidder_id: session[:owner_id], item_id: params[:id], amount: params[:amount])
+  @item_update
+  erb :item
 end
 
 get '/logout' do

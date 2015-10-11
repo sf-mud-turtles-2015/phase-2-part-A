@@ -17,4 +17,21 @@
     <% end %>
   </ul>
 
-  <h3><a href='items/new'>Add a new item</a></h3>
+  <h3><a href='items/new'>Add a new item for bidding</a></h3>
+
+  <h3>My bids</h3> <!-- Display my bids -->
+  <% @my_bids.each do |bid| %>
+    <li>You bid $<%= bid.amount%> on <%=bid.item.title%></li>
+  <% end %> <!-- Display my bids -->
+
+<!-- Test that my won items works using Harold's bid on "a new book" (inactive item, maximum bid by current user) -->
+
+  <h3>My won items:</h3>
+  <% @my_bids.each do |bid| %>
+    <%if Bid.where(item_id: bid.item.id).maximum(:amount) == bid.amount%>
+      <%@winning_item = Item.find(bid.item.id)%>
+      <% if @winning_item.close < Date.today %>
+        <%= @winning_item.title %><br>
+      <% end %>
+    <% end %>
+  <% end %>

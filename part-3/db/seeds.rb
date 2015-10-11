@@ -20,3 +20,8 @@ Item.create(title: "A blue dress", description: "Ohhhh blue", open: "2015-12-01 
 
 Item.create(title: "Some socks", description: "You probably don't want these socks they're stinky", open: "2015-04-01 14:30:00", close: "2015-04-05 14:30:00", owner_id: 4)
 Item.create(title: "Phone with a shattered screen", description: "RIP iPhone", open: "2015-04-01 14:30:00", close: "2015-04-05 14:30:00", owner_id: 5)
+
+Bid.create(bidder_id: 2, item_id: 1, amount: 20)
+Bid.create(bidder_id: 3, item_id: 1, amount: 40)
+Bid.create(bidder_id: 4, item_id: 1, amount: 45)
+Bid.create(bidder_id: 5, item_id: 1, amount: 15)

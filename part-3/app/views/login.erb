@@ -1,10 +1,8 @@
-<% if @user && @user.errors.any? %>
+<% if @errors %>
   <div class="errors">
-  <% @user.errors.full_messages.each do |message| %>
-    <div><%= message%></div>
-  <% end %>
+    <div><%= @errors%></div>
   </div>
-<% end %> <!-- TO DO: errors not displaying -->
+<% end %>
 
 <h3>Log in to your existing account below</h3>
 <br>

@@ -4,6 +4,10 @@
 <% end %>
 
 <h2>Active items</h2>
-<% @available_items.each do |item| %>
-  <li><a href='/items/<%=item.id%>'><%= item.title %></a></li>
+<% if @available_items.empty? %>
+  <%= "No items currently active" %>
+<% else %>
+  <% @available_items.each do |item| %>
+    <li><a href='/items/<%=item.id%>'><%= item.title %></a></li>
+  <% end %>
 <% end %>

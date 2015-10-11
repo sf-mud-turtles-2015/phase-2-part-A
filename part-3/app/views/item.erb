@@ -1,6 +1,26 @@
 <h1><%= @item.title %><br><br></h1>
 
-<%= @item.description%><br><br>
+<%= @item.description%><br>
+
+<p>There are <strong><%= @item.bids.count %></strong> bids.</p>
+
+<% if session[:owner_id] %>
+  <%if @item_update %>
+    <h2>Thank you for your bid. Good luck!</h2>
+  <% else %>
+    <p>Place a new bid:</p><br>
+
+    <form action='/items/<%= @item.id %>/new_bid' method='post'>
+      <label for="amount">Bid Amount</label>
+      <input type='text' name='amount'>
+
+      <input type='submit' name="Place bid">
+    <form><br><br>
+  <% end %>
+<% else %>
+  <p> To place a bid please <a href='/login'>login</a> or <a href='/register'>register</a></p>
+<% end %>
+
 
 This auction starts <%= @item.open %><br>
 This auction closes <%= @item.close %><br><br>

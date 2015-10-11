@@ -3,8 +3,8 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :title
       t.string :description
-      t.datetime :open
-      t.datetime :close
+      t.date :open
+      t.date :close
 
       t.integer :owner_id
     end
