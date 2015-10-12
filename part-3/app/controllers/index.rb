@@ -1,11 +1,8 @@
 require 'date'
-
 enable :sessions
 
 get '/' do
-
   if current_user
-
     redirect '/index'
   else
     redirect '/login'
@@ -13,14 +10,14 @@ get '/' do
 end
 
 get '/login' do
- @items = Item.all
-
+  @items_avail = Item.where("stop_date >= ? AND start_date <= ?", Date.today, Date.today)
   erb :login
 end
 
 get '/index' do
   if current_user
-    @items = Item.where("stop_date < ? AND start_date >= ?", true, Date.today)
+    @bidable_items = Item.where("stop_date >= ? AND start_date <= ? AND user_id != ?", Date.today, Date.today, current_user.id.to_s)
+    @past_items = Item.where("stop_date < ?", Date.today)
     erb :index
   else
     redirect '/login'
@@ -29,12 +26,12 @@ end
 
 post '/index' do
   @user = User.find_by(username: params[:username])
-  if @user && user.password == params[:password]
-    session[:user_id] = user.id
-
-    erb :index
+  if @user && @user.password == params[:password]
+    session[:user_id] = @user.id
+    redirect '/index'
   else
     @errors = "Username or Password is incorrect"
+    @items_avail = Item.where("stop_date >= ? AND start_date <= ?", Date.today, Date.today)
     erb :login
   end
 end
@@ -44,31 +41,26 @@ get '/logout' do
   redirect '/login'
 end
 
-
 get '/register' do
-
   erb :register
 end
 
 post '/register' do
  user = User.new(params[:user])
-
   if user.save
-   redirect '/login'
-
+    redirect '/login'
   else
-    puts '*' * 100
-    p user.errors
-    @errors = user.errors.full_messages
 
+    @errors = user.errors.full_messages.join(", ")
     erb :register
   end
 end
 
 get '/profile' do
   if current_user
-  @items = Item.where(user_id: current_user.id)
-  erb :profile
+    @items = Item.where(user_id: current_user.id)
+
+    erb :profile
   else
     redirect '/login'
   end
@@ -83,9 +75,13 @@ get '/add_item' do
 end
 
 post '/add_item' do
-  Item.create(name: params[:name], cost: params[:cost], description: params[:description], start_date: params[:start_date], stop_date: params[:stop_date], user_id: session[:user_id])
-
-  redirect  '/profile'
+  current_user.items.new(params[:item])
+  if current_user.save
+    redirect  '/profile'
+  else
+   p @errors = current_user.errors.full_messages
+    erb :add_item
+  end
 end
 
 get '/items/:item_id' do
@@ -104,10 +100,9 @@ end
 
 put '/items/:item_id' do
   if current_user
-  item = Item.find(params[:item_id])
-
-  item.update(params[:item])
-  redirect '/profile'
+    item = Item.find(params[:item_id])
+    item.update(params[:item])
+    redirect '/profile'
   else
     redirect '/login'
   end
@@ -119,6 +114,10 @@ delete '/items/:item_id' do
   redirect '/profile'
 end
 
+post '/items/:item_id/bid' do
+  current_user.bids.create(amount: params[:amount],item_id: params[:item_id] )
+  redirect "/items/#{params[:item_id]}"
+end
 
 
 

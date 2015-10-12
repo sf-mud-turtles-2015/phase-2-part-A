@@ -1,7 +1,7 @@
-<h1>Login Page</h1>
+<h2>Login</h2>
 
 <% if @errors %>
-<%= @errors %>
+  <%= @errors %>
 <% end %>
 <form method="post" action="/index">
   <input type="text" name="username" placeholder="Username">
@@ -13,19 +13,11 @@
 <hr>
 <h3>Log in to participate!</h3>
 <h1>Auctioned Items</h1>
- <% @items.each do |item| %>
-<li><label for="name">Name:</label>
-    <%= item.name %>
-    <br>
-    <label for="Cost">Cost:</label>
-    <%= item.cost %>
-    <br>
-    <label for="descriptioin">Description:</label>
-    <%= item.description %>
-    <br>
-    <label for="start_date">Start Date:</label>
-    <%= item.start_date %>
-    <br>
-    <label for="stop_date">Stop Date:</label>
-    <%= item.stop_date %></li>
+<%if @items_avail%>
+  <h3>Open Items</h3>
+  <% @items_avail.each do |item| %>
+      <%= erb :_item_detail, locals: {item: item} %>
+      <br>
+      <br>
   <% end %>
+<% end %>

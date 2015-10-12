@@ -1,5 +1,7 @@
-  <%= @item.name %></a>
-    <br>
+
+
+  <div>
+    <h3><%= @item.name %></h3>
     <label for="Cost">Cost:</label>
     <%= @item.cost %>
     <br>
@@ -10,7 +12,27 @@
     <%= @item.start_date %>
     <br>
     <label for="stop_date">Stop Date:</label>
-    <%= @item.stop_date %></li>
+    <%= @item.stop_date %>
+    <br>
      <label for="stop_date">Created By:</label>
     <%= @item.user.username %>
-<!-- This is where I would add a button for the bids and display the number of bids for this item. I would have added here also a form to submit a bid and add a confirmation page to say that the bid was accepted. -->
+    <br>
+    <br>
+    <label for="bidders">Number of bids: </label>
+    <%= @item.bids.count%>
+    <br>
+    <% if @item.bids.exists?(user_id: current_user.id) %>
+        <h3>Thank you for your bid. Good luck!</h3>
+    <% else %>
+        <form method="post" action="/items/<%=@item.id%>/bid">
+        <label for="bid_amount">Bid: </label>
+        <input type="text" name="amount" placeholder="Bid Amount">
+        <input type="submit" value="Place Bid">
+        </form>
+    <% end %>
+    <br>
+
+</div>
+
+
+

@@ -5,31 +5,37 @@
 <ol>
 <% if @items %>
   <% @items.each do |item| %>
-  <a href="/items/<%=item.id%>/edit">Edit</a>
-    <li><label for="name">Name:</label>
-    <%= item.name %>
-    <br>
-    <label for="Cost">Cost:</label>
-    <%= item.cost %>
-    <br>
-    <label for="descriptioin">Description:</label>
-    <%= item.description %>
-    <br>
-    <label for="start_date">Start Date:</label>
-    <%= item.start_date %>
-    <br>
-    <label for="stop_date">Stop Date:</label>
-    <%= item.stop_date %></li>
-
+    <a href="/items/<%=item.id%>/edit">Edit</a>
+    <li>
+      <%= erb :_item_detail, locals: {item: item}%>
+    </li>
     <form method="post" action="/items/<%=item.id%>">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
     </form>
+    <br>
+    <div>
+    <label for="bid_count">Bid Count:</label>
+    <%=item.bids.count%>
+    <br>
+    <% if item.bids.count > 0 %>
+        <% item.bids.each do |bid|%>
+          <label for="username">Bidder:</label>
+          <%= bid.user.username%>
+          <br>
+          <label for="amount">Bid Amount:</label>
+          <%= bid.amount%>
+          <br>
+        <% end %>
+    <% else %>
+      <h3>No bids yet</h3>
+    <% end %>
+    </div>
+
     <br>
     <br>
   <% end %>
 <%else%>
-
   <h4>No items</h4>
 <% end %>
 </ol>

@@ -1,16 +1,24 @@
 
 <h1>Add Item</h1>
 <div>
+    <% if @errors%>
+    <%= @errors%>
+    <% end %>
   <form method="post" action="/add_item">
-    <input type="text" name="name" placeholder="Name">
+    <label for="name">Name: </label>
+    <input type="text" name="item[name]" placeholder="Name">
     <br>
-    <input type="text" name="cost" placeholder="Cost">
+    <label for="name">Cost: </label>
+    <input type="text" name="item[cost]" placeholder="Cost">
     <br>
-    <input type="text" name="description" placeholder="Description">
+    <label for="name">Description: </label>
+    <input type="text" name="item[description]" placeholder="Description">
     <br>
-    <input type="text" name="start_date" placeholder="YYYY-MM-DD">
+    <label for="name">Start Date: </label>
+    <input type="text" name="item[start_date]" placeholder="YYYY-MM-DD">
     <br>
-    <input type="text" name="stop_date" placeholder="YYYY-MM-DD">
+    <label for="name">Stop Date: </label>
+    <input type="text" name="item[stop_date]" placeholder="YYYY-MM-DD">
     <br>
     <input type="submit" value="Add Item">
   </form>
