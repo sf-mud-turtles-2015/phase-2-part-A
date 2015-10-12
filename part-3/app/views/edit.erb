@@ -1,0 +1,18 @@
+<div class="container">
+
+  <form action="/items/<%= @item.id %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    Item name:
+    <input type="text" name="item[title]" value="<%= @item.title %>">
+    Description:
+    <input type="text" name="item[description]" value="<%= @item.description %>">
+    Start bid date:
+    <input type="date" name="item[start_bid]" value="<%= @item.start_bid%>">
+    End bid date:
+    <input type="date" name="item[end_bid]" value="<%= @item.end_bid %>">
+    Initial price:
+    <input type="text" name="item[initial_price]" value="<%= @item.initial_price %>">
+    <input type="submit" value="Update this auction post">
+  </form>
+
+</div>

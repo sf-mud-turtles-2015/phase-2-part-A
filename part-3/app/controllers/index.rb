@@ -22,7 +22,6 @@ post '/login' do
   end
 end
 
-
 ##### REGISTER #####
 get '/register' do
 
@@ -49,17 +48,34 @@ post '/logout' do
   redirect '/'
 end
 
-##### PROFILE PAGE #####
+##### PROFILE PAGE / LIST OF MY ITEMS #####
 
 get '/profile' do
 
   @user = User.find_by(email: session[:email])
-  @all_owned_items = @user
+  @all_owned_items = @user.items
 
   erb :profile
 end
 
-##### ITEM PAGE #####
+##### AUCTION ITEMS #####
+
+get '/items/new' do
+
+  # p session[:email]
+  @user = User.find_by(email: session[:email])
+
+  erb :new
+end
+
+post '/items' do
+
+  @user = User.find_by(email: session[:email])
+  new_item = Item.create!(params[:item])
+  @user.items << new_item
+
+  redirect '/'
+end
 
 get '/items/:id' do
 
@@ -71,23 +87,21 @@ get '/items/:id' do
   erb :item
 end
 
-##### AUCTION ITEMS #####
+get '/items/:id/edit' do
 
-get '/auction_item' do
-
-  # p session[:email]
-  @user = User.find_by(email: session[:email])
-
-  erb :auction_item
+  # p params
+  @item = Item.find(params[:id])
+  owner_id = @item.user_id
+  @user = User.find(owner_id)
+  @owner = User.find(owner_id)
+  erb :edit
 end
 
-post '/auction_item' do
+put '/items/:id' do
 
-  @user = User.find_by(email: session[:email])
-  # p params
-  Item.create!(params[:item])
-
-  redirect '/'
+  update_item = Item.find(params[:id])
+  update_item.update(params[:item])
+  redirect "/items/:id"
 end
 
 ##### SET BIDS #####
@@ -95,8 +109,7 @@ end
 post '/set_bid' do
 
   @user = User.find_by(email: session[:email])
-  p params
 
-  redirect '/auction_item'
+  redirect '/profile'
 
 end
