@@ -1,0 +1,9 @@
+<!-- index.erb -->
+<div class="container">
+<h1>Auction House</h1>
+	<ul><% @items.each do |item| %>
+		<li><h2>Name: <%= item.name %></h2></li>
+		<li>Description: <%= item.description %></li>
+	<% end %>
+	</ul>	
+</div>

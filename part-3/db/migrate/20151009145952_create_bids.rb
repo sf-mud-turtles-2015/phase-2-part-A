@@ -1,7 +1,7 @@
 class CreateBids < ActiveRecord::Migration
   def change
   	create_table :bids do |t|
-  		t.integer :amount
+  		t.integer :offer
   		
   		t.references :bidable, polymorphic: true, index: true
 

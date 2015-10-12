@@ -3,6 +3,7 @@ class CreateItems < ActiveRecord::Migration
   	create_table :items do |t|
   		t.string :name
   		t.string :description
+  		#t.integer:starting_price
   		
   		t.references :user
 
