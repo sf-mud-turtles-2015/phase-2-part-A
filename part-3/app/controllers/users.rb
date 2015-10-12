@@ -30,7 +30,7 @@ end
 
 post '/users/login' do
   @user = User.find_by(username: params[:username])
-  if @user.password == params[:password]
+  if @user && @user.password == params[:password]
     auth_login(@user)
     redirect "/"
   else
@@ -42,6 +42,7 @@ get '/users/:id' do
   @user = User.find(session[:user_id])
   @items = Item.all
   @bids = Bid.where(user_id: session[:user_id])
+
 
   erb :'/users/profile'
 end

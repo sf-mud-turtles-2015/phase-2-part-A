@@ -9,4 +9,10 @@ helpers do
     @current_user ||= User.find(session[:user_id])
   end
 
+  def item_has_bid?(item)
+    if item.bid
+      true
+    end
+    false
+  end
 end

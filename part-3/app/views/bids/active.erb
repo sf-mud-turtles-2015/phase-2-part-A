@@ -2,9 +2,13 @@
 
 <ul>
   <% @items.each do |item|  %>
-    <li>
-      <a href="/items/<%= item.id %>"><%= item.description %></a>
-      <p>Current Bid: <%= item.bids.last.amount %></p>
-    </li>
+      <li>
+        <a href="/items/<%= item.id %>"><%= item.description %></a>
+        <% if item.bids != [] %>
+          <p>Current Bid: <%= item.bids.last.amount %></p>
+        <% else %>
+          <p>No Bids For This Item</p>
+        <% end %>
+      </li>
   <% end %>
 </ul>

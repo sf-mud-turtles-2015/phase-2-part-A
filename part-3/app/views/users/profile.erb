@@ -33,10 +33,11 @@
 
 <h3>Won Bids</h3>
 
-<ul>
-  <% @items.each do |item| %>\
-    <% if item.bids.last == session[:user_id] && item.end_time <= Time.now %>
-      <li><a href="/items/<%= bid.item_id %>"><%= bid.item_id %></a></li>
+
+  <ul>
+    <% @items.each do |item| %>\
+      <% if item.bids.last.user_id == session[:user_id] && item.end_time <= Time.now %>
+        <li><a href="/items/<%= item.id %>"><%= item.id %></a></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>

@@ -6,6 +6,7 @@ end
 
 post '/bids' do
   bid = Bid.create(params[:bid])
+  bid.update(user_id: session[:user_id])
 
   redirect 'users/profile'
 end
