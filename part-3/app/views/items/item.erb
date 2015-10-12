@@ -1,0 +1,17 @@
+<h3><%= @item.name %></h3>
+
+<p><%= @item.description %></p>
+
+
+<% if not session[:user_id] %>
+  <p>Please Log In/Register to bid</p>
+<% end %>
+
+
+<% if session[:user_id] && @item.start_time < Time.now && @item.end_time > Time.now %>
+  <form method="post" action="/bids">
+    <input placeholder="Bid Amount" name="bid[amount]" type="text">
+    <input name="bid[item_id]" type="hidden" value="<%= @item.id %>">
+    <input type="submit" value="Submit Bid">
+  </form>
+<% end %>

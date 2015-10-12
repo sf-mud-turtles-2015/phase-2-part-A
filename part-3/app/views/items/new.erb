@@ -1,0 +1,11 @@
+<h3>Create A New Item</h3>
+
+<form method="post" action="/items">
+  <input placeholder="Item Name" name="item[name]" type="text">
+  <input placeholder="Item Description" name="item[description]" type="text">
+  <input placeholder="Start Time YYYY-MM-DD HH:MM:SS" name="item[start_time]" type="text">
+  <input placeholder="End Time YYYY-MM-DD HH:MM:SS" name="item[end_time]" type="text">
+  <input type="hidden" name="item[user_id]" value="<%= session[:user_id] %>">
+  <input type="submit" value="Create">
+</form>
+
