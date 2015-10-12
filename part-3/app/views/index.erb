@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+
+<!-- link to user's  hompage -->
+
+
+<% @items.each do |item| %>
+<% if item.auction_end - item.auction_begin > 0 %>
+<%= item.name %>
+<% end %>
+<% end %>
+
+Welcome to the auction place. This is the root directory in index.erb
+
+<!-- If user is logged in-->
+</body>
+</html>
