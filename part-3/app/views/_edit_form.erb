@@ -1,12 +1,14 @@
+<!-- Edit Form... -->
+
 <form method="post" action="/item/<%= @item.id %>">
   <input type="hidden" name="_method" value="put">
-  <input type="text" name="item[name]" placeholder="Name">
+  <input type="text" name="item[name]" placeholder="Name" value="<%= @item.name %>">
     <br><br>
-  <input type="text" name="item[description]" placeholder="Description">
+  <input type="text" name="item[description]" placeholder="Description" value="<%= @item.description %>">
     <br><br>
-  <input type="datetime-local" name="item[start_date]" placeholder="YYY-MM-DD">
+  <input type="datetime-local" name="item[start_date]" placeholder="YYY-MM-DD" value="<%= @item.start_date %>">
     <br><br>
-  <input type="datetime-local" name="item[end_date]" placeholder="YYY-MM-DD">
+  <input type="datetime-local" name="item[end_date]" placeholder="YYY-MM-DD" value="<%= @item.end_date%>">
     <br><br>
   <input type = "submit" value="Edit Item">
       <br><br>

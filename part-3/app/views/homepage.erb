@@ -8,7 +8,7 @@
     <% if (@time > item.start_date.to_i) &&
       (@time < item.end_date.to_i) %>
 
-      <li><a href="/item/<%= item.id %>"> <%= item.name %> -by: NAME NEEDED </a></li>
+      <li><a href="/item/<%= item.id %>"> <%= item.name %> -by: <%= item.user.user_name %> </a></li>
     <% end %>
   <% end %>
 </div>

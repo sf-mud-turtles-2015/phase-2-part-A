@@ -29,6 +29,7 @@ post '/user' do
       session[:user_id] = @user.id
       redirect '/items/all'
     else
+      # when the validation fails message is stored in errors.messages, the @errors is just a var...
       @errors = @user.errors.messages
 
       erb :signup
@@ -45,8 +46,10 @@ post '/login' do
   else
     # was getting an error with this....
     # puts "X" * 100
-    # p @errors
-    # "incorrect username or password"
+
+    #has no relation to the @errors above just a var!
+    @errors = "incorrect username or password"
+
     erb :login
   end
 end
@@ -56,8 +59,8 @@ get '/items/all' do
   @item = Item.all
   #to_i is so i can compare time
   # Time.now seems to be off for about 25k...
+  # thought I could subtract 25k but it does not work....
   @time = Time.now.to_i
-  @time -= 30000
 
   erb :homepage
 end

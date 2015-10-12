@@ -9,7 +9,7 @@
 
 <!-- If the user created this item they can edit AND the user cannot be nil -->
 <!-- Helper method for the session checks would be nice... -->
-<% if session[:user_id] == @item.user_id && session[:user_id] != nil %>
+<% if logged_in?(@item)  %>
 
   <h3>Edit <%= @item.name %></h3>
     <!-- Partial for Edit form... -->
@@ -17,7 +17,7 @@
 
     <% else%>
 
-      <% if session[:user_id] != nil && session[:user_id] != @item.user_id %>
+      <% if !logged_in?(@item) %>
 
         <!-- user is logged in and can bid -->
         <h3>Looks like you can bid on this item</h3>
