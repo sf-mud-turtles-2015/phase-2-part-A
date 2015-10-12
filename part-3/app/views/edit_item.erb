@@ -7,8 +7,9 @@
 
 <hr>
 
-<!-- If the user created this item they can edit AND the user cannot be nil -->
-<!-- Helper method for the session checks would be nice... -->
+<!-- method name on line 12 is wrong. its does not check logged in but 
+Checkes to see if item has the same user_id as the person logged in, if so they can edit NOT bid -->
+
 <% if logged_in?(@item)  %>
 
   <h3>Edit <%= @item.name %></h3>
@@ -19,7 +20,7 @@
 
       <% if !logged_in?(@item) %>
 
-        <!-- user is logged in and can bid -->
+        <!-- If the user did not create this item they can bid on it... -->
         <h3>Looks like you can bid on this item</h3>
 
         <form method="post" action="/bid/item/<%= @item.id %>">
