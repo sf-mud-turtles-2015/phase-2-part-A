@@ -28,15 +28,25 @@ get '/create_user' do
   erb :new_user
 end
 
-# DID NOT GET TO IMPLEMENT THIS
 post '/create_user' do
-  user = User.new(params[:user])
-
+  user = User.new(params)
   if user.save
-    # handle the happy path
-    redirect '/login'
+    session[:user_id] = user.id
+    redirect "/profile/#{user.id}"
   else
     @errors = user.errors.messages
     erb :new_user
   end
-end
+ end
+
+
+
+
+
+
+
+
+
+
+
+

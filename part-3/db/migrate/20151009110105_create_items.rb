@@ -10,4 +10,5 @@ class CreateItems < ActiveRecord::Migration
         t.boolean :active, default: true
       end
   end
+
 end

@@ -14,4 +14,8 @@ has_many :items
     self.password_hash = @password
   end
 
+  validates :username, presence: true, uniqueness: true
+  validates :password_hash, presence: true, length: {minimum: 6}
+
+
 end

@@ -1,13 +1,26 @@
-<%@item_list.each do |item|%>
+
+
+<h1>ACTIVE ITEMS </h1>
+<%@items_active.each do |item|%>
+<hr>
+  <li><a href="items/<%=item.id%>"><%=item.name%></a></li>
+  <li>BIDDING STARTED AT $<%=item.price.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,")%></li>
+  <li>BID COUNT :<%=item.bids.count%></li>
+  <li>CURRENT BID: $ <%=item.bids.maximum('price').to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,")%></li>
+  <li>END DATE :<%=item.end_date%></li>
+  <li><%=(item.end_date - Date.today).to_i%> DAYS LEFT</li>
+<%end%>
+<hr>
+
+<h1>INACTIVE ITEMS</h1>
+<%@items_inactive.each do |item|%>
 <hr>
   <li><a href="items/<%=item.id%>"><%=item.name%></a></li>
   <li>BIDDING STARTED AT :<%=item.price%></li>
   <li>BID COUNT :<%=item.bids.count%></li>
-  <li>CURRENT BID: <%=item.bids.maximum('price')%></li>
-  <li>START DATE: <%=item.start_date%></li>
-  <li>END DATE :<%=item.end_date%></li>
+  <li>WINNING BID:$ <%=item.bids.maximum('price').to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,")%></li>
+  <li>THIS AUCTION IS CURRENTLY OVER</li>
 <%end%>
-
 
 
 <a href="/item/new">Want to add your own Item for Auction!!</a>

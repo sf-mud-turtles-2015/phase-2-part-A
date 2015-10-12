@@ -1,0 +1,24 @@
+<%if @errors %>
+  <h2>ERRORS with your bid </h2>
+  <h2><%@errors.each do |key, value|%></h2>
+        <%=key.to_s%>
+        <%=value.to_s%>
+        <br>
+      <%end%>
+<%end%>
+
+<ul>
+  <form action="/items/<%=@item_to_edit.id%>/edit" method="post">
+    <input type="hidden" , name="_method",  value="put">
+    <li>NAME: <input type="text" name="name" value="<%=@item_to_edit.name%>"></li>
+    <hr>
+    <li>STARTING BID: <input type="text" name="price" value="<%=@item_to_edit.price%>"></li>
+    <hr>
+    <li>DESCRIPTION: <input type="textarea" name="description" value="<%=@item_to_edit.description%>"></li>
+    <hr>
+    <li>END DATE: <input type="date" name="end_date" value="<%=@item_to_edit.end_date%>"></li>
+    <input type="hidden" name="item_id" value="<%=@item_to_edit.id%>">
+    <hr>
+    <input type="submit" value="Submit">
+  </form>
+</ul>

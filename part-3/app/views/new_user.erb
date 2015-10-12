@@ -1,4 +1,8 @@
-<form action="/login" method='post'>
+<h2>Fill out the fields below to begin your bidding!!!</h2>
+
+<br>
+<%=@errors.values.join(' and ')%><h2
+<form action="/create_user" method='post'>
   User Name:<br>
   <input type="text" name="username" placeholder="User Name">
   <br>
@@ -7,6 +11,4 @@
   <br><br>
   <input type="submit" value="Submit">
 </form>
-<hr>
-<br>
-NOT A USER ? CREATE A NEW ACCOUNT <a href="/create_user">HERE</a>
+
