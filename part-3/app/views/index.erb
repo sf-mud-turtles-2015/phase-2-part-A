@@ -1,0 +1,11 @@
+<h2 class='page-headers'> Current Active Items </h2>
+<hr>
+<div class = 'container'>
+  <div class='item-container'>
+    <% @items.each do |item|  %>
+      <% if item.start_date.past? == true && item.end_date.past? == false  %>
+        <a class='item-link hvr-float' href="../items/<%= item.id %>"><%= item.name %></a>
+      <% end %>
+    <% end %>
+  </div>
+</div>

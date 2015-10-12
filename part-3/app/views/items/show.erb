@@ -1,0 +1,32 @@
+<h1 class='page-headers'> <%= @item.name %> </h1>
+
+<div class='container'>
+  <% if session[:bid] == 1 %>
+    <h4 class='page-headers'>Thank you for your bid. Good luck!</h4>
+    <% session[:bid] = 0 %>
+  <% end %>
+
+  <div>
+    <p> <b>Description:</b> <%= @item.description %> </p>
+    <p> <b>Auction Start Date:</b> <%= @item.start_date %> </p>
+    <p> <b>Auction End Date:</b> <%= @item.end_date %> </p>
+    <p> <b>Current total number of bidders:</b> <%= @number_bidders %> </p>
+  </div>
+
+
+
+  <% if session[:id] == nil %>
+
+    <p> To place a bid please <a href="/users/login">login</a> or <a href="/users/new">register</a>. </p>
+
+  <% elsif session[:id] != @item.user_id && @item.end_date.past? == false %>
+
+    <div>
+      <form action='<%= @item.id %>/bids/new' method='post'>
+        <input type='text' name='bid_amount' placeholder='Bid Amount'>
+        <input type='submit' value='Place Bid'>
+      </form>
+    </div>
+
+  <% end %>
+</div>

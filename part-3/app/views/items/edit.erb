@@ -1,0 +1,14 @@
+<div class='container'>
+  <h1 class='page-headers'> Edit your item </h1>
+
+  <form action='/items/<%= @item.id %>' method='post'>
+    <input class='input-field' type='hidden' name='_method' value='put'>
+    <input class='input-field' name="name" type="text" value="<%= @item.name %>"><br>
+    <textarea class='input-field' name= "description"><%= @item.description %></textarea><br>
+    <input class='input-field' name= "start_date" type="datetime" value="<%= @item.start_date %>"><br>
+    <input class='input-field' name= "end_date" type="datetime" value="<%= @item.end_date %>"><br>
+    <input  class='submit-button' type="Submit" value="Edit item">
+    <br>
+  </form>
+
+</div>

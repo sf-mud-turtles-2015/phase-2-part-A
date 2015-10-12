@@ -1,0 +1,61 @@
+<div class='container'>
+  <h2 class='page-headers'> Your items </h2>
+  <div class='your-items'>
+
+
+    <% @your_items.each do |item| %>
+     <a class='your-items' href="../items/<%= item.id %>"><%= item.name %></a>
+
+      <% if item.user_id == session[:id] && item.end_date.past? == false %>
+
+        <form class='your-items' action='../items/update/<%= item.id %>' method='get'>
+          <input class='text-button' type='submit' value='Edit'>
+        </form>
+
+        <form class='your-items' action='../items/<%= item.id %>' method='post'>
+          <input type='hidden' name='_method' value='delete'>
+          <input class='text-button' type='submit' value='Delete'>
+        </form>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+
+  <hr>
+  <div class='form-island'>
+    <h2 class='page-headers'>Add an item</h2>
+    <form action='../items' method='post'>
+      <input class='input-field' name="name" type="text" placeholder="Name of item">
+      <br>
+      <textarea class='input-field' name= "description" placeholder="Description"></textarea>
+      <br>
+      <input class='input-field' name= "start_date" type="datetime" placeholder="YYYY-MM-DD">
+      <br>
+      <input class='input-field' name= "end_date" type="datetime" placeholder="YYYY-MM-DD">
+      <br>
+      <input class='submit-button' type="Submit" value="Add item">
+      <br>
+    </form>
+  </div>
+  <hr>
+
+  <div class='all-items'>
+    <h2 class='page-headers'> All items </h2>
+    <div class='item-container'>
+      <% @items.each do |item| %>
+        <a class='item-link hvr-float' href="../items/<%= item.id %>"><%= item.name %></a>
+      <% end %>
+    </div>
+  <div>
+
+  <hr>
+
+  <h2 class='page-headers'>Your win history</h2>
+
+  <div class='item-container'>
+    <% @won_items.each do |won_item| %>
+      <a class='item-link hvr-float' href="../items/<%= won_item.id %>"><%= won_item.name %></a>
+    <% end %>
+  </div>
+
+</div>

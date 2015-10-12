@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
   -->
   <link rel="stylesheet" href="/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+  <!-- Add hover.css animation "framework"? -->
+  <link href="/css/hover.css" rel="stylesheet" media="all">
   <!--
     application.css is where you put your styles
   -->
@@ -15,9 +19,22 @@
   <script src="/js/jquery.js"></script>
   <script src="/js/application.js"></script>
 
-  <title></title>
+  <title>ePay</title>
 </head>
 <body>
+
+  <div class='nav-bar'>
+    <a href="/"><span class='web-name'>ePay</span></a>
+    <a class='nav-links' href="/index">Home</a>
+    <% if session[:id] %>
+      <a class='nav-links' href="/users/profile">Profile</a>
+      <a class='nav-links' href="/users/logout">Logout</a>
+    <% else %>
+      <a class='nav-links' href="/users/new">Register</a>
+      <a class='nav-links' href="/users/login">Login</a>
+    <% end %>
+    <hr>
+  </div>
   <%= yield %>
 </body>
 </html>
