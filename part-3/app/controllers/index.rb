@@ -84,6 +84,7 @@ get '/items/:id' do
   @item = Item.find(params[:id])
   owner_id = @item.user_id
   @owner = User.find(owner_id)
+  @all_bids = @item.bids
   erb :item
 end
 
@@ -107,8 +108,9 @@ end
 ##### DESTROY ITEMS #####
 
 delete '/items/:id' do
-  p "*" * 20
-  p params[:id]
+
+  # p "*" * 20
+  # p params[:id]
   delete_item = Item.find(params[:id])
   Item.find(delete_item).destroy
   redirect '/'
@@ -118,9 +120,12 @@ end
 
 put '/set_bid' do
 
- # @user = User.find_by(email: session[:email])
-  p "*" * 20
-  p params
-  bid_item = Item.find(params[:item_id])
-  redirect "/items/#{params[:item_id]}"
+  # p "*" * 20
+  item = params[:bid][:item_id]
+  bid = params[:bid][:price]
+  user = User.find_by(email: session[:email])
+  # bidable_item = Bid.where(params[:bid]).first
+  Bid.create(user_id: user.id, item_id: item, bid_price: bid)
+
+  redirect "/items/#{params[:bid][:item_id]}"
 end
