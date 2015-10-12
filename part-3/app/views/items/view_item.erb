@@ -1,0 +1,21 @@
+<h3><%= item.title %></h3>
+  <ul>
+    <li><strong>Posted by:</strong> <%= item.user.username %></li>
+    <li><strong>Posted on:</strong> <%= item.end_date %></li>
+    <li><strong>Condition:</strong> <%= item.condition %></li>
+    <li><strong>Details: </strong><%= item.detail %></li>
+  </ul>
+<% if item.user.id == session[:user_id] %>
+  <a href="/items/<%= item.id %>/delete">delete this item</a>
+<% end %>
+
+<h3>Make a bid</h3>
+<form method="post" action="/items/<%= item.id %>/bids">
+  <input type="text" placeholder="amount" name="amount">
+  <input type="submit" value="make bid">
+</form>
+
+<h3>Bidders: </h3>
+<% item.bids.each do |bid| %>
+<a href="/users/<%= bid.user.id %>"><%= bid.user.username %></a><br>
+<% end %>

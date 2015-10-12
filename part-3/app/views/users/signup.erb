@@ -1,0 +1,16 @@
+<% if @form_error %>
+  <%= @form_error %>
+<% end %>
+
+<form method="post" action="/users/signup" id="login_form">
+  <% if @user.errors[:username].any? %>
+  <div><%= @user.errors[:username].first %></div>
+  <% end %>
+    <input name="username" placeholder="username" type="text">
+
+  <% if @user.errors[:password].any? %>
+  <div><%= @user.errors[:password].first %></div>
+    <% end %>
+    <input name="password" placeholder="password" type="password"><br>
+  <input type="submit" value="Sign up!">
+</form>
