@@ -80,9 +80,9 @@ end
 get '/items/:id' do
 
   # p params
+  @user = User.find_by(email: session[:email])
   @item = Item.find(params[:id])
   owner_id = @item.user_id
-  @user = User.find(owner_id)
   @owner = User.find(owner_id)
   erb :item
 end
@@ -102,6 +102,16 @@ put '/items/:id' do
   update_item = Item.find(params[:id])
   update_item.update(params[:item])
   redirect "/items/#{update_item.id}"
+end
+
+##### DESTROY ITEMS #####
+
+delete '/items/:id' do
+  p "*" * 20
+  p params[:id]
+  delete_item = Item.find(params[:id])
+  Item.find(delete_item).destroy
+  redirect '/'
 end
 
 ##### SET BIDS #####

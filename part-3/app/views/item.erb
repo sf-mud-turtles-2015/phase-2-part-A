@@ -9,16 +9,21 @@
     <li>Owner: <%= @owner.name %></li>
   </ul>
 
-<% if current_user %>
+<% if current_user && @user != @owner %>
   <form action="/set_bid" method="post">
     <input type="hidden" name="_method" value="put">
-    <input type="hidden" name="item_id" value="<%= @item.id%>">
+    <input type="hidden" name="item_id" value="<%= @item.id %>">
     <input type="submit" value="Place bid!">
   </form>
 <% end %>
 
 <% if @owner.items.include?(@item) %>
-  <a href="/items/<%= @item.id %>/edit">EDIT</a>
+  <button><a href="/items/<%= @item.id %>/edit">Edit</a></button>
+
+  <form action="/items/<%= @item.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
 <% end %>
 
 </div>
