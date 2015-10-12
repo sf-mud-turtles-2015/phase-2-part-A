@@ -1,0 +1,10 @@
+<h1>Edit an Submit Changes</h1>
+
+<form method="post" action="/update/<%= @item.id %>">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="item_title" value="<%=@item.item_title%>"<br>
+  <input type="text" name="item_description" value="<%= @item.item_description %>"><br>
+  <input type="date" name="start_date" value="<%= Time.at(@item.start_date).to_s.slice(0..9) %>"><br>
+  <input type="date" name="end_date" value="<%= Time.at(@item.end_date).to_s.slice(0..9) %>"<br>
+  <input type = "submit" value="Submit">
+</form

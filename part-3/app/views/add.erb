@@ -1,0 +1,15 @@
+
+<% if session[:id] %>
+  <h1>Add a new item for Auction</h1>
+  <form method="post" action="/add">
+    <input type="text" name="item_title" placeholder="Title">
+    <input type="text-area" name="item_description" placeholder="Description"><br>
+    <input type="date" name="start_date" placeholder="Starting Date">
+    <input type="date" name="end_date" placeholder="Ending Date">
+    <input type="hidden" name="id" value="<%=session[:id]%>">
+    <input type="submit" value="List Item">
+  </form>
+<%else%>
+  <h1>You need to be logged in to list an item!</h1>
+  <a href="/login">Login</a>
+<%end%>

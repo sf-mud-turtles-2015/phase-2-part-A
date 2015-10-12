@@ -1,0 +1,23 @@
+<% if session[:id] %>
+
+  <h1> Enter your Bid</h1>
+
+  <% if @message %>
+    <p><%=@message%></p>
+    <a href="/profile">Profile Page</a>
+  <%end%>
+
+  <form action="/bid/<%=@item.id%>" method="post">
+    Item: <%=@item[:item_title]%><br>
+    Description: <%=@item[:item_description]%><br><br>
+    Total number of bids so far :<%=@bid[0]%><br>
+    Place a bid amount higher than $<%=@bid[1]%><br><br>
+    <input type="number" name="bid_amount" value="">
+    <input type="submit" value="Place Bid">
+  </form>
+
+<% else %>
+
+    <h1>You need to logged in to Bid!</h1><a href="/login">login</a>
+
+<%end%>
