@@ -1,25 +1,31 @@
-<div class="container">
+<div>
 
-<% if session[:id] == nil%>
- To place a bid please logon or register:
- <a href="/logon">Logon</a>
-<a href="/register">Register</a>
-<% end %>
-
-<% if session[:id]%>
-  <form method="post" action="/logout">
-    <input type="submit" value="Logout">
-  </form>
-  <a href="/profile">User Profile Page</a>
-<% end %>
-
-<ul>
-  <% @items.each do |q| %>
-    <li>
-      Item: <%= q.item_title %><br>
-    </li>
+  <% if session[:id] == nil%>
+    To place a bid please logon or register:
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+    <ul>
+      <% @items.each do |q| %>
+        <li>
+          Item: <%= q.item_title %><br>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
-</ul>
+
+  <% if session[:id]%>
+    <a href="/logout">Log Out</a>
+    <a href="/profile">User Profile Page</a>
+    <ul>
+      <br>
+      <% @items.each do |q| %>
+        <li>
+          Item: <a href="/bid/<%=q.id%>"><%= q.item_title %><br></a>
+          Description: <%= q.item_description %>
+        </li><br>
+      <% end %>
+    </ul>
+  <% end %>
 
 </div>
 

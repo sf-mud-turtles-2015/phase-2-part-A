@@ -10,13 +10,16 @@ class User < ActiveRecord::Base
   end
 
   def password=(new_password)
-    if new_password.length <= 6
-      return nil
-    else
-      @password = Password.create(new_password)
-      self.password_hash = @password
-    end
+    @password = Password.create(new_password)
+    self.password_hash = @password
   end
 
+
+  #returns an array of item objects, bids for a user
+  def user_bids
+    @bid_on_items = []
+    self.bids.each{|bid| @bid_on_items << Item.find(bid.item_id)}
+    @bid_on_items
+  end
 
 end

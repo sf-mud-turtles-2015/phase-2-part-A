@@ -1,15 +1,12 @@
-<p> Hello Please Login: </p>
+<h1> Enter Name and Password to Login: </h1>
 
 <% if @errors %>
-<p><%=@errors%></p>
+  <p><%=@errors%></p>
+  <a href="/register">Register</a><br>
 <%end%>
 
 <form action="/login" method="post">
-  User Name:<br>
-  <input type="text" name="name" value="">
-  <br>
-  Password:<br>
-  <input type="password" name="password" value="">
-  <br><br>
-  <input type="submit" value="Submit">
+  User Name: <input type="text" name="name" placeholder="Name" value="">
+  Password: <input type="password" name="password" placeholder="Password" value="">
+  <input type="submit" value="Login">
 </form>

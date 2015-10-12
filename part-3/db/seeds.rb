@@ -1,64 +1,45 @@
 
 require 'faker'
-
+USERS = 3
+BIDS = 5
+ITEMS = 10
 #create 20 users
-20.times do
+USERS.times do
   user = User.create!(
     name: Faker::Name.name,
-    email: Faker::Internet.email,
     password: "mj1212mj")
-  # active items not won
-  5.times do
+
+
+  #create active items with start_date before today and end_date after
+  ITEMS.times do
     Item.create!(
-      item_title: Faker::Team.name,
-      item_description: Faker::Lorem.characters(30) ,
-      won:  false,
-      active: true,
-      start_date: Faker::Time.backward(14, :evening),
-      end_date: Faker::Time.forward(10, :morning),
-      user_id: rand(20))
-    #create bids for active items
-    10.times do
+      item_title: "ACTIVE should be seen in home page",
+      item_description:  Faker::Lorem.characters(60),
+      start_date: Time.utc(2010, 1 ,1,20,15,1).to_i,
+      end_date: Time.utc(2015, 12 ,1,20,15,1).to_i,
+      user_id: rand(1..USERS))
+
+    BIDS.times do
       Bid.create!(
-      user_id: rand(20),
-      item_id: rand(20),
-      price: rand(10..100))
+      user_id: rand(1..USERS),
+      item_id: rand(1..ITEMS),
+      bid_amount: rand(100))
     end
   end
-  #create won items
-  5.times do
+  #create non active as end_date is in the past
+  ITEMS.times do
     Item.create!(
-      item_title: Faker::Team.name,
-      item_description:  Faker::Lorem.characters(30),
-      won:  true,
-      active: false,
-      start_date: Faker::Time.backward(14, :evening),
-      end_date: Faker::Time.forward(23, :morning),
-      user_id: rand(20))
+      item_title: "NOT ACTIVE and WON should not be seen in home page",
+      item_description:  Faker::Lorem.characters(60),
+      start_date: Time.utc(2010, 1 ,1,20,15,1).to_i,
+      end_date: Time.utc(2011, 1 ,1,20,15,1).to_i,
+      user_id: rand(1..USERS))
 
-    5.times do
+    BIDS.times do
       Bid.create!(
-      user_id: rand(20),
-      item_id: rand(20),
-      price: rand(10..100))
-    end
-  end
-  #create won false and not active
-  5.times do
-    Item.create!(
-      item_title: Faker::Team.name,
-      item_description:  Faker::Lorem.characters(30),
-      won:  false,
-      active: false,
-      start_date: Faker::Time.backward(14, :evening),
-      end_date: Faker::Time.backward(3, :morning),
-      user_id: rand(20))
-
-    5.times do
-      Bid.create!(
-      user_id: rand(20),
-      item_id: rand(20),
-      price: rand(10..100))
+      user_id: rand(1..USERS),
+      item_id: rand(1..ITEMS),
+      bid_amount: rand(30))
     end
   end
 end

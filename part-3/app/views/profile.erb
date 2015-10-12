@@ -1,1 +1,52 @@
-<a href="/add">List Item for Auction</a>
+<% if session[:id] == @user.id && session != nil %>
+
+  <h1>Welcome  <%= @user.name.capitalize %>! </h1>
+  <a href="/add">List an Item for Auction</a>
+
+  <% if @user_items.length == 0 %>
+    <h2>You have no items listed yet!</h2>
+  <% else %>
+    <h2>All of your items</h2>
+      <ul>
+        <% @user_items.each do |item| %>
+          <li>Item : <%= item.item_title %></li>
+          <form method='post' action="/delete/<%=item.id%>">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete">
+          </form>
+          <form method='get' action="/update/<%=item.id%>">
+            <input type="submit" value="Update">
+          </form>
+        <% end  %>
+      </ul>
+  <% end %>
+
+  <% if @user_bids.length == 0 %>
+    <h2>You have not bid on anything yet!</h2>
+  <% else %>
+     <h2>These are your bids:</h2>
+      <ul>
+        <% @user_bids.each do |bid| %>
+          <li>Item : <%= bid.item_title %> </li>
+        <% end  %>
+      </ul>
+  <% end %>
+
+
+ <% if @user_wins.length == 0 %>
+    <h2>You have not won any auction yet!</h2>
+  <% else %>
+    <h2>These are your winning bids:</h2>
+      <ul>
+        <% @user_wins.each do |win| %>
+          <li>Item : <%= win.item_title %> </li>
+        <% end  %>
+      </ul>
+  <% end %>
+
+<%else%>
+
+  <h1>You need to be logged on to view your profile!</h1>
+  <a href="/login">Login</a>
+
+<%end%>
