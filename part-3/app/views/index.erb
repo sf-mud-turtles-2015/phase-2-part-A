@@ -1,0 +1,47 @@
+
+<h1>Welcome <%=current_user.username%> !</h1>
+
+<a href="/profile">Profile</a>
+
+<h3>Bid on the these open items!</h3>
+<%if @bidable_items %>
+  <% @bidable_items.each do |item| %>
+    <% if !item.bids.exists?(user_id: current_user.id) %>
+      <li>
+        <%= erb :_item_detail_w_link, locals: {item: item}%>
+      </li>
+      <br>
+      <br>
+    <% end %>
+  <% end %>
+
+  <h3>Pending bid items</h3>
+  <% @bidable_items.each do |item| %>
+    <% if item.bids.exists?(user_id: current_user.id) %>
+      <li>
+        <%= erb :_item_detail_w_link, locals: {item: item}%>
+      </li>
+      <br>
+      <br>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+
+<h3>Won items</h3>
+
+<% @past_items.each do |item| %>
+  <% if item.bids.order(:amount).first %>
+    <% if item.bids.order(:amount).first.user_id == current_user.id %>
+      <li>
+        <%= erb :_item_detail_w_link, locals: {item: item}%>
+      </li>
+      <br>
+      <br>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+

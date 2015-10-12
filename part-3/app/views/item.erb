@@ -1,0 +1,38 @@
+
+
+  <div>
+    <h3><%= @item.name %></h3>
+    <label for="Cost">Cost:</label>
+    <%= @item.cost %>
+    <br>
+    <label for="descriptioin">Description:</label>
+    <%= @item.description %>
+    <br>
+    <label for="start_date">Start Date:</label>
+    <%= @item.start_date %>
+    <br>
+    <label for="stop_date">Stop Date:</label>
+    <%= @item.stop_date %>
+    <br>
+     <label for="stop_date">Created By:</label>
+    <%= @item.user.username %>
+    <br>
+    <br>
+    <label for="bidders">Number of bids: </label>
+    <%= @item.bids.count%>
+    <br>
+    <% if @item.bids.exists?(user_id: current_user.id) %>
+        <h3>Thank you for your bid. Good luck!</h3>
+    <% else %>
+        <form method="post" action="/items/<%=@item.id%>/bid">
+        <label for="bid_amount">Bid: </label>
+        <input type="text" name="amount" placeholder="Bid Amount">
+        <input type="submit" value="Place Bid">
+        </form>
+    <% end %>
+    <br>
+
+</div>
+
+
+

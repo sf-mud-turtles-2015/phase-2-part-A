@@ -1,0 +1,45 @@
+<h1><%= current_user.username%>'s Profile</h1>
+<a href="/add_item">Add Item</a>
+<br>
+<br>
+<ol>
+<% if @items %>
+  <% @items.each do |item| %>
+    <a href="/items/<%=item.id%>/edit">Edit</a>
+    <li>
+      <%= erb :_item_detail, locals: {item: item}%>
+    </li>
+    <form method="post" action="/items/<%=item.id%>">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+    </form>
+    <br>
+    <div>
+    <label for="bid_count">Bid Count:</label>
+    <%=item.bids.count%>
+    <br>
+    <% if item.bids.count > 0 %>
+        <% item.bids.each do |bid|%>
+          <label for="username">Bidder:</label>
+          <%= bid.user.username%>
+          <br>
+          <label for="amount">Bid Amount:</label>
+          <%= bid.amount%>
+          <br>
+        <% end %>
+    <% else %>
+      <h3>No bids yet</h3>
+    <% end %>
+    </div>
+
+    <br>
+    <br>
+  <% end %>
+<%else%>
+  <h4>No items</h4>
+<% end %>
+</ol>
+
+
+
+

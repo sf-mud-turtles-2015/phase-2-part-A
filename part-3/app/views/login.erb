@@ -1,0 +1,23 @@
+<h2>Login</h2>
+
+<% if @errors %>
+  <%= @errors %>
+<% end %>
+<form method="post" action="/index">
+  <input type="text" name="username" placeholder="Username">
+  <input type="password" name="password" placeholder="Password">
+  <input type="submit" value="Login">
+</form>
+
+<a href="/register">Need to register?</a>
+<hr>
+<h3>Log in to participate!</h3>
+<h1>Auctioned Items</h1>
+<%if @items_avail%>
+  <h3>Open Items</h3>
+  <% @items_avail.each do |item| %>
+      <%= erb :_item_detail, locals: {item: item} %>
+      <br>
+      <br>
+  <% end %>
+<% end %>
