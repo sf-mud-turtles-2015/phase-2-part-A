@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
@@ -18,6 +18,14 @@
   <title></title>
 </head>
 <body>
+  <img src="http://t10.deviantart.net/CtXLCsmrqOye0cjTWIyrL4kloMw=/300x200/filters:fixed_height(100,100):origin()/pre09/8a82/th/pre/i/2015/125/e/9/the_ebay_parody_by_dfksone-d1ms7fk.png">
+  <br>
+  <%if session[:user_id] != nil %>
+      <a href="/profile/<%=session[:user_id]%>">HOME</a>
+      <a href="/items">BIDS</a>
+      <a href="/logout">LOGOUT</a>
+    <%end%>
+<hr>
   <%= yield %>
 </body>
 </html>

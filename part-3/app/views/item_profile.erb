@@ -1,0 +1,37 @@
+  <li>name<%=@item.name%></li>
+  <li>description: <%=@item.description%></li>
+  <li>Current bid: $ <%=@item.bids.maximum('price').to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,")%></li>
+  <li>bid count: <%=@item.bids.count%></li>
+  <li>starting price: <%=@item.price%></li>
+  <li>start_date: <%=@item.start_date%></li>
+  <li>end date <%=@item.end_date%></li>
+
+<br>
+<HR>
+
+
+<%if @item.active == true  %>
+<%=(@item.end_date - Date.today).to_i%> DAYS LEFT
+  <h1>ADD YOUR BID HERE </h1>
+ <%if @errors %>
+  <h2>ERRORS with your bid </h2>
+  <h2><%@errors.each do |key, value|%></h2>
+        <%=key.to_s%>
+        <%=value.to_s%>
+        <br>
+      <%end%>
+<%end%>
+<br>
+  <form action="/<%=@item.id%>/bid/new" method="post">
+      PRICE : <input type="text" name="price">
+      <input type="hidden" name="item_id" value="<%=@item.id%>">
+      <input type="submit" value="Submit">
+  </form>
+<%else%>
+
+<h1>THIS AUCTION IS CURRENTLY CLOSED</h1>
+<h1>THE WINNING BID WAS <%=@item.bids.maximum('price')%> </h1>
+<%end%>
+
+
+
