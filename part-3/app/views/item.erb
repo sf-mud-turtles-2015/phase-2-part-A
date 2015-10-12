@@ -11,7 +11,8 @@
 
 <% if current_user %>
   <form action="/set_bid" method="post">
-    <input type="hidden" value="<%= @user.id %>">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="item_id" value="<%= @item.id%>">
     <input type="submit" value="Place bid!">
   </form>
 <% end %>

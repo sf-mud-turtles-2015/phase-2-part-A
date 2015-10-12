@@ -101,15 +101,16 @@ put '/items/:id' do
 
   update_item = Item.find(params[:id])
   update_item.update(params[:item])
-  redirect "/items/:id"
+  redirect "/items/#{update_item.id}"
 end
 
 ##### SET BIDS #####
 
-post '/set_bid' do
+put '/set_bid' do
 
-  @user = User.find_by(email: session[:email])
-
-  redirect '/profile'
-
+ # @user = User.find_by(email: session[:email])
+  p "*" * 20
+  p params
+  bid_item = Item.find(params[:item_id])
+  redirect "/items/#{params[:item_id]}"
 end
