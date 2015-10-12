@@ -47,7 +47,7 @@
 <h3>Items you've bid on</h3>
 <br>
 <% Bid.where(user_id: session[:user_id]).find_each do |bid| %>
-  <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
+  <%= bid.user.username %> bid $<%= bid.value %> on <%= item.name %><br>
 <% end %>
 </body>
 </html>
