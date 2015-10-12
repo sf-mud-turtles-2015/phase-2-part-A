@@ -1,0 +1,19 @@
+<html>
+<head>
+  Welcome to your homepage
+
+Your username is <%= @user.username %>
+Your session is <%= session[:user_id] %>
+
+<% @items.each do |item| %><br><br>
+<%= item.name %><br>
+<% end %>
+<br><br><br>
+  <title></title>
+</head>
+<body>
+    <a href="/users/homepage/items/new">Would you like to add an item?</a> <br><br><br>
+
+
+</body>
+</html>
