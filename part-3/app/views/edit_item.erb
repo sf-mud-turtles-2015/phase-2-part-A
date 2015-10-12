@@ -1,0 +1,38 @@
+<h3>Name: <%= @item.name %> </h3>
+<p>Description: <%= @item.description %> </p>
+<p>Date Start: <%= @item.start_date %> </p>
+<p>Date End: <%= @item.end_date %> </p>
+<!-- Active record method .cont to count the # of bids... -->
+<p>Current number of bids placed: <%= @item.bids.count  %> </p>
+
+<hr>
+
+<!-- method name on line 12 is wrong. its does not check logged in but 
+Checkes to see if item has the same user_id as the person logged in, if so they can edit NOT bid -->
+
+<% if logged_in?(@item)  %>
+
+  <h3>Edit <%= @item.name %></h3>
+    <!-- Partial for Edit form... -->
+      <%= erb :_edit_form %>
+
+    <% else%>
+
+      <% if !logged_in?(@item) %>
+
+        <!-- If the user did not create this item they can bid on it... -->
+        <h3>Looks like you can bid on this item</h3>
+
+        <form method="post" action="/bid/item/<%= @item.id %>">
+          <input type="hidden" name="bid[user_id]" value="<%= session[:user_id] %>">
+          <input type="hidden" name="bid[item_id]" value="<%= @item.id %>">
+          <input type="text" name="bid[amount]">
+          <input type="submit" value="Place Bid">
+        </form>
+
+        <% else %>
+          <a href="/login">Please login to bid</a>
+
+      <% end %>
+
+  <% end %>
