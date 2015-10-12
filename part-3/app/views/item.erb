@@ -1,0 +1,40 @@
+<div class="container">
+
+  <h2>Item Info</h2>
+  <ul>
+    <li>Item: <%= @item.title %></li>
+    <li>Description: <%= @item.description %></li>
+    <li>Bidding start date: <%= @item.start_bid %></li>
+    <li>Bidding end date: <%= @item.end_bid %></li>
+    <li>Starting price: $<%= @item.initial_price %></li>
+    <li>Owner: <%= @owner.name %></li>
+  </ul>
+
+  <h2>All Bids</h2>
+  <% @all_bids.each do |bid| %>
+  <ul>
+    <li>
+      Bid amount: <%= bid.bid_price %> | Bidder: <%= bid.user.name %>
+    </li>
+  </ul>
+  <% end %>
+
+<% if current_user && @user != @owner %>
+  <form action="/set_bid" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="bid[item_id]" value="<%= @item.id %>">
+    <input type="number" name="bid[price]" placeholder="Your bid">
+    <input type="submit" value="Place bid!">
+  </form>
+<% end %>
+
+<% if @owner.items.include?(@item) %>
+  <button><a href="/items/<%= @item.id %>/edit">Edit</a></button>
+
+  <form action="/items/<%= @item.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+<% end %>
+
+</div>

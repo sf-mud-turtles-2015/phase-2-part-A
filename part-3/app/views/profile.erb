@@ -1,0 +1,11 @@
+<div class="container">
+
+  <!-- <%= @user.name %> -->
+  <%@all_owned_items.each do |item| %>
+  <ul>
+    <li><a href="/items/<%= item.id %>"><%= item.title %></a></li>
+  </ul>
+  <% end %>
+  <a href="/items/new">Create new auction post</a>
+
+</div>

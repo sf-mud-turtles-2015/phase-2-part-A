@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
@@ -15,8 +15,34 @@
   <script src="/js/jquery.js"></script>
   <script src="/js/application.js"></script>
 
-  <title></title>
+  <title>Steven's Auction App</title>
 </head>
+<header>
+  <h1>
+    Steve's Auction App
+  </h1>
+   <% if session[:email] %>
+    <h1>
+      Welcome back <%= session[:email] %>
+    </h1>
+    <h2>
+      <a href="/profile">Your Profile</a>
+    </h2>
+    <form method="post" action="/logout">
+      <input type="submit" value="Logout">
+    </form>
+
+  <% else %>
+    <form method="post" action="/login">
+      <input type="text" name="user[email]" placeholder="email">
+      <input type="password" name="user[password]" placeholder="password">
+      <input type="submit" value="Login">
+    </form>
+    <h3>or <a href="/register">Register</a></h3>
+  <% end %>
+  <h2><a href="/">Auction Home</a></h2>
+</header>
+
 <body>
   <%= yield %>
 </body>
