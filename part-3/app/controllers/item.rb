@@ -32,6 +32,7 @@ delete '/items/:id' do
   @item = Item.find(params[:id])
   @user = User.find(session[:user_id])
   if @item.user_id == @user.id
+    @item.bids.each(&:destroy) # Destroy associated bids when an item is destroyed.
     @item.destroy
   end
   redirect '/profile'

@@ -1,4 +1,4 @@
-<div>
+<div class="register">
   <h1>Register</h1>
 
   <form action="/new" method="post">
@@ -8,10 +8,10 @@
       <%= @errors[:username] %>
     <% end %>
     <br><br>
-    <input placeholder="Password" type="password" name="password_hash">
+    <input placeholder="Password" type="password" name="password">
     <br>
     <% if @errors %>
-      <%= @errors[:password_hash] %>
+      <%= @errors[:password] %>
     <% end %>
     <br>
     <input type="submit">

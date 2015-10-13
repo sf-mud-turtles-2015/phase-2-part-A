@@ -27,9 +27,10 @@
     <br>
     <form action="/items/<%= item.id %>" method="post">
       <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="DELETE">
+      <input type="submit" value="DELETE"><br>
+    </form>
   <% end %>
-  <br><br>
+
 
 <% end %>
 
@@ -46,8 +47,8 @@
 
 <h3>Items you've bid on</h3>
 <br>
-<% Bid.where(user_id: session[:user_id]).find_each do |bid| %>
-  <%= bid.user.username %> bid $<%= bid.value %> on <%= item.name %><br>
+<% @user.bids.each do |bid| %>
+  <%= bid.user.username %> bid $<%= bid.value %> on <%= bid.item.name %><br>
 <% end %>
 </body>
 </html>

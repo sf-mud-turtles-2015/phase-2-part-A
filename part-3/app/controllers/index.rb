@@ -29,7 +29,7 @@ get '/new' do
 end
 
 post '/new' do
-  @user = User.create({username: params[:username], password: params[:password_hash]})
+  @user = User.create({username: params[:username], password: params[:password]})
   session[:username] = @user.username
   session[:user_id] = @user.id
   if @user.errors.any?
@@ -51,7 +51,7 @@ end
 
 post '/login' do
   @user = User.find_by_username(params[:username])
-  if @user != nil && @user.password == params[:password_hash]
+  if @user != nil && @user.password == params[:password]
     session[:user_id] = @user.id
     session[:username] = @user.username
     redirect '/profile'

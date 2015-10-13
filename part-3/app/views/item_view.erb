@@ -1,20 +1,7 @@
 <h1>Item View</h1>
 
 <% if @user.id == @item.user_id %>
-
-  <h3>Edit your item for auction</h3>
-    <form action="/items/<%= @item.id %>" method="post">
-      <input type="hidden" name="_method" value="put">
-      <input placeholder="Item name" name="name" value="<%= @item.name %>">
-      <input placeholder="Category" name="category" value="<%= @item.category %>">
-      <input placeholder="Minimum Bid" type="number" name="minimum_bid" value="<%= @item.minimum_bid %>">
-      <input placeholder="Start date" type="date" name="start_date" value="<%= @item.start_date %>">
-      <input placeholder="End date" type="date" name="end_date" value="<%= @item.end_date %>">
-      <input type="submit">
-    </form>
-    <br>
-    Current number of bidders: <%= @item.bids.length %>
-    <br><br>
+  <%= erb :item_admin %>
 <% else %>
 
 Name: <%= @item.name %><br>
@@ -38,7 +25,7 @@ Place bid:
 <% if @item.bids.where(user_id: @user.id).blank? %>
     You haven't bid on this item!
 <% else %>
-  <% Bid.where(item_id: @item.id).find_each do |bid| %>
+  <% @item.bids.find_each do |bid| %>
     <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
   <% end %>
 <% end %>
@@ -46,7 +33,7 @@ Place bid:
 <h3> Highest/Winning bid </h3>
 
 <% if @item.bids.length > 0 %>
-  <%= Item.last.bids.order("value DESC").first.user.username %> bid $ <%= Item.last.bids.order("value DESC").first.value %>
+  <%= @item.bids.order("value DESC").first.user.username %> bid $ <%= @item.bids.order("value DESC").first.value %>
 <% else %>
     There are no bids on this item!
 <% end %>

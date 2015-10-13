@@ -1,7 +1,30 @@
+div, h1, h2, h3, body {
+	text-align: center;
+}
+
+h1,h2,h3{
+	background-color: #FF33CC;
+}
+
 .top_bar_links {
   float: right;
 }
 
 header {
+  float: left; 
   font-size: 20px;
+  background-color: #839194;
+}
+
+.register, .login {
+	margin: 0 auto;
+	width: 300px;
+	background-color: #0099FF;
+}
+
+
+.item_admin {
+	margin: 0 auto;
+	background-color: #0099FF;
+	width:300px;
 }
