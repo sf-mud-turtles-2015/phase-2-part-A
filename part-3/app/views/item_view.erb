@@ -1,0 +1,39 @@
+<h1>Item View</h1>
+
+<% if @user.id == @item.user_id %>
+  <%= erb :item_admin %>
+<% else %>
+
+Name: <%= @item.name %><br>
+For sale by: <%= @item.user.username %><br>
+Category: <%= @item.category %><br>
+Minimum Bid: <%= @item.minimum_bid %><br>
+Start date: <%= @item.start_date %><br>
+End date: <%= @item.end_date %><br>
+Current number of bidders: <%= @item.bids.length %>
+<br><br>
+<% end %>
+
+Place bid:
+<form action="/bid/<%= @item.id %>" method="post">
+  <input placeholder="Bid value" name="value">
+  <input type="submit" value="Place Bid">
+</form>
+
+<h3> Current bids on item </h3>
+
+<% if @item.bids.where(user_id: @user.id).blank? %>
+    You haven't bid on this item!
+<% else %>
+  <% @item.bids.find_each do |bid| %>
+    <%= bid.user.username %> bid $<%= bid.value %> on <%= p bid.item.name %><br>
+  <% end %>
+<% end %>
+
+<h3> Highest/Winning bid </h3>
+
+<% if @item.bids.length > 0 %>
+  <%= @item.bids.order("value DESC").first.user.username %> bid $ <%= @item.bids.order("value DESC").first.value %>
+<% else %>
+    There are no bids on this item!
+<% end %>
