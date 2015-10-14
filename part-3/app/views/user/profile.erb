@@ -36,7 +36,12 @@
   <h3>Items you've bid on</h3>
   <div class="your_bids">
     <% @user.bids.each do |bid| %>
-      <%= bid.user.username %> bid $<%= bid.value %> on <a href="/items/<%= bid.item.id %>"><%= bid.item.name %></a><br>
+      <%= bid.user.username %> bid $<%= bid.value %> on 
+      <% if @user.id == bid.user_id %>
+        <a href="/items/<%= bid.item.id %>"><%= bid.item.name %></a><br>
+      <% else %>
+        <%= bid.item.name %><br>
+      <% end %>  
     <% end %>
   </div>
   <h3>All items for sale</h3>

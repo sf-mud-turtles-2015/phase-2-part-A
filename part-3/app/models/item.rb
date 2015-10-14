@@ -1,6 +1,9 @@
 class Item < ActiveRecord::Base
-  has_many :bids
   belongs_to :user
+
+  has_many :auction_bids, class_name: "Bid"
+  belongs_to :auction_participant, class_name: "User", foreign_key: 'user_id'
+
 
   validates :name, presence:true
   validates :category, presence: true

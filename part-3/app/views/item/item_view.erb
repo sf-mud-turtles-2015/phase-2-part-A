@@ -10,7 +10,7 @@
 	Minimum Bid: <%= @item.minimum_bid %><br>
 	Start date: <%= @item.start_date %><br>
 	End date: <%= @item.end_date %><br>
-	Current number of bidders: <%= @item.bids.length %>
+	Current number of bidders: <%= @item.auction_bids.length %>
 </div>
 <% end %>
 <div class="place_bid">
@@ -21,18 +21,17 @@
 		</form>
 </div>
 <h3> Current bids on item </h3>
-	<% if @item.bids.where(user_id: @user.id).blank? %>
-	    You haven't bid on this item!
-	<% else %>
-	  <% @item.bids.find_each do |bid| %>
-	    <%= bid.user.username %> bid $<%= bid.value %> on <a href="/items/<%= bid.item.id %>"><%= bid.item.name %></a><br>
-		<% end %>
+	<% if @item.auction_bids.where(user_id: @user.id).blank? %>
+	    <strong>You haven't bid on this item!</strong><br>
 	<% end %>
+	  <% @item.auction_bids.find_each do |bid| %>
+	    <%= bid.user.username %> bid $<%= bid.value %> on <strong><%= bid.item.name %></strong><br>
+	  <% end %>
 
 <h3> Highest/Winning bid </h3>
 
-<% if @item.bids.length > 0 %>
-  <%= @item.bids.order("value DESC").first.user.username %> bid $ <%= @item.bids.order("value DESC").first.value %>
+<% if @item.auction_bids.length > 0 %>
+  <%= @item.auction_bids.order("value DESC").first.user.username %> bid $ <%= @item.auction_bids.order("value DESC").first.value %>
 <% else %>
     There are no bids on this item!
 <% end %>
