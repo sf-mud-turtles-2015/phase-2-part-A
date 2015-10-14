@@ -6,10 +6,10 @@
   <h3>Add an item for auction</h3>
     <% if @errors %>
       <div class="errors">
-       ERRORS: <br>
-       Name: <%= @errors[:name] %> <br>
-       Category: <%=  @errors[:category] %> <br>
-       Minimum Bid: <%=  @errors[:minimum_bid] %> <br>
+       Error on adding item: <br>
+       Name <%= @errors[:name][0] %> <br>
+       Category <%=  @errors[:category][0] %> <br>
+       Minimum Bid <%=  @errors[:minimum_bid][0] %> <br>
       </div>
     <% end %>
     <form action="/items" method="post">
@@ -24,7 +24,7 @@
     <% @items.each do |item| %>
       <% if @user.id == item.user_id %>
         <div class="your_items">
-          <a href="/items/<%= item.id %>"><%= item.name %></a>, in category: <%= item.category %>, for sale by <%= item.user.username %>
+          <a href="/items/<%= item.id %>"><%= item.name %></a>, in <em><%= item.category %></em>, for sale by <%= item.user.username %>
           <br>
           <form action="/items/<%= item.id %>" method="post">
             <input type="hidden" name="_method" value="delete">
@@ -51,7 +51,7 @@
         <a href="/items/<%= item.id %>"><%= item.name %></a>
       <% else %>
         <%= item.name %>
-      <% end %>, in category: <%= item.category %>, for sale by <%= item.user.username %><br>
+      <% end %>, in <em><%= item.category %></em>, for sale by <%= item.user.username %><br>
     <% end %>
   </div>
 </body>

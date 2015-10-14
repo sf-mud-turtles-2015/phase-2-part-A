@@ -20,11 +20,22 @@ h1,h2,h3, h4{
 header {
 	float: left; 
 	font-size: 20px;
-	background-color: #000000;
+	background-color: #FF00FF;
 	color: #FFFFFF;
 	top: 7px;
     position: relative;
     left: 7px;
+}
+
+.errors{
+	color: red;
+	font-style: bold;
+
+}
+
+form {
+	font-size: 0.8em;
+
 }
 
 .register, .login {
@@ -42,4 +53,8 @@ header {
 	background-color: #0099FF;
 	width:300px;
 	border: #000000 solid 5px;
+
+.all_items {
+	text-align: left;
+}
 }

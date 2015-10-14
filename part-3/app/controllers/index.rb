@@ -1,11 +1,8 @@
-require 'sinatra'
-require 'pry-byebug'
 enable :sessions
 
 # Route to sign_up page if not logged in or if session id is nil
 before do
-  unless session || ['/login', '/new_user'].include?(["REQUEST_PATH"])
-    binding.pry
+  unless session[:user_id] || ['/login', '/new_user'].include?(request.env["REQUEST_PATH"])
     redirect '/login'
   end
 end
