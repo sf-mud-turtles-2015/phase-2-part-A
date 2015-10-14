@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title>Blind Auction Homepage</title>
+</head>
+<body>
+  <div>
+    <h1>Welcome!</h1>
+  </div>
+  <h2> All items for sale </h2>
+  	<!-- <div class="all_items"> -->
+<% @items.each do |item| %>
+<a href="/items/<%= item.id %>"><strong><%= item.name %></strong></a> : in <em><%= item.category %></em> : for sale by <%= item.user.username %><br>
+<% end %>
+	<!-- </div> -->
+</body>
+</html>

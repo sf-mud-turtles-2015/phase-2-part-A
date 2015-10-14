@@ -1,0 +1,15 @@
+<div class="item_admin">
+  <h3>Edit your item for auction</h3>
+    <form action="/items/<%= @item.id %>" method="post">
+      <input type="hidden" name="_method" value="put">
+      <input placeholder="Item name" name="name" value="<%= @item.name %>">
+      <input placeholder="Category" name="category" value="<%= @item.category %>">
+      <input placeholder="Minimum Bid" type="number" name="minimum_bid" value="<%= @item.minimum_bid %>">
+      <input placeholder="Start date" type="date" name="start_date" value="<%= @item.start_date %>">
+      <input placeholder="End date" type="date" name="end_date" value="<%= @item.end_date %>"><br>
+      <input type="submit">
+    </form>
+    <br>
+    Current number of bidders: <%= @item.auction_bids.length %>
+    <br><br>
+</div>

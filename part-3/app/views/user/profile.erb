@@ -1,0 +1,58 @@
+<html>
+<head>
+  <title>Profile Page</title>
+</head>
+<body>
+  <h3>Add an item for auction</h3>
+    <% if @errors %>
+      <div class="errors">
+       Error on adding item: <br>
+       Name <%= @errors[:name][0] %> <br>
+       Category <%=  @errors[:category][0] %> <br>
+       Minimum Bid <%=  @errors[:minimum_bid][0] %> <br>
+      </div>
+    <% end %>
+    <form action="/items" method="post">
+      <input placeholder="Item name" name="name">
+      <input placeholder="Category" name="category">
+      <input placeholder="Minimum Bid" type="number" name="minimum_bid">
+      <input placeholder="Start date" type="date" name="start_date">
+      <input placeholder="End date" type="date" name="end_date">
+      <input type="submit">
+    </form>
+  <h3>Your items for sale</h3>
+    <% @items.each do |item| %>
+      <% if @user.id == item.user_id %>
+        <div class="your_items">
+          <a href="/items/<%= item.id %>"><%= item.name %></a>, in <em><%= item.category %></em>, for sale by <%= item.user.username %>
+          <br>
+          <form action="/items/<%= item.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="DELETE"><br>
+          </form>
+        </div>
+      <% end %>
+    <% end %>
+  <h3>Items you've bid on</h3>
+  <div class="your_bids">
+    <% @user.bids.each do |bid| %>
+      <%= bid.user.username %> bid $<%= bid.value %> on 
+      <% if @user.id == bid.user_id %>
+        <a href="/items/<%= bid.item.id %>"><%= bid.item.name %></a><br>
+      <% else %>
+        <%= bid.item.name %><br>
+      <% end %>  
+    <% end %>
+  </div>
+  <h3>All items for sale</h3>
+  <div class="all_items">
+    <% @items.each do |item| %>
+      <% if @user.id == item.user_id %>
+        <a href="/items/<%= item.id %>"><%= item.name %></a>
+      <% else %>
+        <%= item.name %>
+      <% end %>, in <em><%= item.category %></em>, for sale by <%= item.user.username %><br>
+    <% end %>
+  </div>
+</body>
+</html>
