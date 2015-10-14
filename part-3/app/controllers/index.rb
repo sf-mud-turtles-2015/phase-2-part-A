@@ -1,10 +1,12 @@
 require 'sinatra'
+require 'pry-byebug'
 enable :sessions
 
 # Route to sign_up page if not logged in or if session id is nil
 before do
-  unless session[:user_id] != nil && @user != nil
-     erb :sign_up
+  unless session || ['/login', '/new_user'].include?(["REQUEST_PATH"])
+    binding.pry
+    redirect '/login'
   end
 end
 
@@ -12,7 +14,7 @@ get '/' do
   redirect '/items'
 end
 
-# homepage
+# homepage / items main page
 get '/items' do
   if session[:user_id] != nil # workaround for a bug where logout crashed
     @items = Item.all
@@ -24,11 +26,11 @@ get '/items' do
 end
 
 # register page
-get '/new' do
-  erb :sign_up
+get '/new_user' do
+  erb :'user/sign_up'
 end
 
-post '/new' do
+post '/new_user' do
   @user = User.create({username: params[:username], password: params[:password]})
   session[:username] = @user.username
   session[:user_id] = @user.id
@@ -38,7 +40,7 @@ post '/new' do
     session[:username] = nil
     session[:user_id] = nil
     session.clear
-    erb :sign_up
+    erb :'user/sign_up'
   else
     redirect '/'
   end
@@ -46,7 +48,7 @@ end
 
 # login page
 get '/login' do
-  erb :login
+  erb :'user/login'
 end
 
 post '/login' do
@@ -57,7 +59,7 @@ post '/login' do
     redirect '/profile'
   else
     @errors = "Sorry, invalid password or user."
-    erb :login
+    erb :'user/login'
   end
 end
 
@@ -75,5 +77,5 @@ get '/profile' do
   @user = User.find(session[:user_id])
   @items = Item.all
   @bids = Bid.all
-  erb :profile
+  erb :'user/profile'
 end

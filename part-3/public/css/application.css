@@ -1,30 +1,45 @@
-div, h1, h2, h3, body {
+div, h1, h2, h3, h4, body {
 	text-align: center;
+	background-color: #FFFFCC;
 }
 
-h1,h2,h3{
+h1,h2,h3, h4{
 	background-color: #FF33CC;
 }
 
 .top_bar_links {
-  float: right;
+	float: right;
+	font-style: bold;
+	top: 7px;
+    position: relative;
+    right: 7px;
+    font-style: bold;
+    background-color: #FF33CC;
 }
 
 header {
-  float: left; 
-  font-size: 20px;
-  background-color: #839194;
+	float: left; 
+	font-size: 20px;
+	background-color: #000000;
+	color: #FFFFFF;
+	top: 7px;
+    position: relative;
+    left: 7px;
 }
 
 .register, .login {
+	top: 100px;
+	position: relative;
 	margin: 0 auto;
 	width: 300px;
 	background-color: #0099FF;
+	border: #000000 solid 5px;
 }
 
 
-.item_admin {
+.item_admin, .item_info {
 	margin: 0 auto;
 	background-color: #0099FF;
 	width:300px;
+	border: #000000 solid 5px;
 }

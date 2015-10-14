@@ -22,7 +22,7 @@
     <% if session[:username] %>
       Welcome, <a href="/profile"><%= session[:username] %></a>!
       <% else %>
-      <a href="/new">Register</a> |
+      <a href="/new_user">Register</a> |
     <% end%>
     <% if session[:username] %>
       <a href="/logout">Log out</a> |

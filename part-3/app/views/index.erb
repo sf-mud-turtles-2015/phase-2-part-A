@@ -7,10 +7,10 @@
     <h1>Welcome!</h1>
   </div>
   <h2> All items for sale </h2>
-  <% @items.each do |item| %>
-      <a href="/<%= item.id %>"><%= item.name %></a>
-      <%= item.name %>, in category: <%= item.category %>, for sale by <%= item.user.username %>
-  <br>
+  	<!-- <div class="all_items"> -->
+<% @items.each do |item| %>
+<a href="/items/<%= item.id %>"><strong><%= item.name %></strong></a> : in <em><%= item.category %></em> : for sale by <%= item.user.username %><br>
 <% end %>
+	<!-- </div> -->
 </body>
 </html>

@@ -1,8 +1,8 @@
 # Item View
-get '/:id' do
+get '/items/:id' do
   @user = User.find(session[:user_id])
   @item = Item.find(params[:id])
-  erb :item_view
+  erb :'item/item_view'
 end
 
 # Item Creation
@@ -14,7 +14,7 @@ post '/items' do
   if @item.errors.any?
     @errors = @item.errors.messages
   end
-  erb :profile
+  erb :'user/profile'
 end
 
 # Item Update
